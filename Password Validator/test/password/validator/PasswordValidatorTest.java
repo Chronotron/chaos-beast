@@ -40,7 +40,7 @@ public class PasswordValidatorTest {
 		System.out.println("main");
 		String[] args = null;
 		//PasswordValidator.main(args);
-		// TODO review the generated test code and remove the default call to fail.
+		// TODO:PAP - actual assertions once code is written
 		Assert.assertEquals(0, 0);
 	}
 
