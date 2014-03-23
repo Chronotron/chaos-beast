@@ -31,6 +31,7 @@ public class PasswordValidatorTest {
 
 	@After
 	public void tearDown() {
+		SetUserInput("");
 	}
 
 	/**
