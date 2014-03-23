@@ -1,27 +1,50 @@
 package password.validator;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class PasswordValidator {
+
+	// Constants
+	public static String ERROR_UNDER_MIN = "";
+
+	public static int MIN_PASSWORD_LENGTH = 8;
+
+	// Properties
+	public static ArrayList<String> ValidationErrors;
 
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+		ResetErrors();
 		DisplayPasswordRequirements();
 		String password = PromptForPassword();
 		ValidatePassword(password);
 	}
 
-	// Helper Methods
+	// Public Methods
 	private static void DisplayPasswordRequirements() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		// TODO:PAP - display password requirements
 	}
 
 	private static String PromptForPassword() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
 	}
 
 	private static void ValidatePassword(String password) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ValidatePasswordLength(password);
+	}
+
+	private static void ValidatePasswordLength(String password) {
+		if (password.length() < MIN_PASSWORD_LENGTH) {
+			ValidationErrors.add(ERROR_UNDER_MIN);
+		}
+	}
+
+	private static void ResetErrors() {
+		ValidationErrors = new ArrayList();
 	}
 
 }
