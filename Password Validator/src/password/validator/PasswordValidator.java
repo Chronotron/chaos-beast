@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class PasswordValidator {
 
 	// Constants
-	public static String ERROR_UNDER_MIN = "";
+	public static String ERROR_UNDER_MIN = "- Invalid Password. Must be at least 8 characters.";
 
 	public static int MIN_PASSWORD_LENGTH = 8;
 
