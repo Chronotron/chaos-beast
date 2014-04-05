@@ -14,53 +14,71 @@ import org.junit.Test;
  */
 public class PasswordValidatorTest {
 
-	public PasswordValidatorTest() {
-	}
+    public PasswordValidatorTest() {
+    }
 
-	@BeforeClass
-	public static void setUpClass() {
-	}
+    @BeforeClass
+    public static void setUpClass() {
+    }
 
-	@AfterClass
-	public static void tearDownClass() {
-	}
+    @AfterClass
+    public static void tearDownClass() {
+    }
 
-	@Before
-	public void setUp() {
-	}
+    @Before
+    public void setUp() {
+    }
 
-	@After
-	public void tearDown() {
-		SetUserInput("");
-	}
+    @After
+    public void tearDown() {
+        SetUserInput("");
+        PasswordValidator.ValidationErrors = null;
+    }
 
-	/**
-	 * Test of main method, of class PasswordValidator.
-	 */
-	@Test
-	public void testMain_UnderMinLength() {
-		// setup
-		String shortPassword = "1234567";
-		SetUserInput(shortPassword);
-		String[] args = null;
+    /**
+     * Test of main method, of class PasswordValidator.
+     */
+    @Test
+    public void testMain_UnderMinLength() {
+        // setup
+        String shortPassword = "1234567";
+        SetUserInput(shortPassword);
+        String[] args = null;
 
-		// pre-conditions
-		Assert.assertTrue(shortPassword.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
-		Assert.assertNull(PasswordValidator.ValidationErrors);
+        // pre-conditions
+        Assert.assertTrue(shortPassword.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
+        Assert.assertNull(PasswordValidator.ValidationErrors);
 
-		// execute
-		PasswordValidator.main(args);
-		
+        // execute
+        PasswordValidator.main(args);
 
-		// post conditions
-		Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
-		Assert.assertEquals(PasswordValidator.ValidationErrors.get(0), PasswordValidator.ERROR_UNDER_MIN);
-	}
+        // post conditions
+        Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
+        Assert.assertEquals(PasswordValidator.ValidationErrors.get(0), PasswordValidator.ERROR_UNDER_MIN);
+    }
 
-	// Helper Methods
-	private void SetUserInput(String userInput) {
-		ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
-		System.setIn(testStream);
-	}
+    @Test
+    public void testMain_PerfectPassword() {
+        // setup
+        String shortPassword = "abcd1234";
+        SetUserInput(shortPassword);
+        String[] args = null;
+
+        // pre-conditions
+        Assert.assertTrue(shortPassword.length() >= PasswordValidator.MIN_PASSWORD_LENGTH);
+        Assert.assertNull(PasswordValidator.ValidationErrors);
+
+        // execute
+        PasswordValidator.main(args);
+
+        // post conditions
+        Assert.assertEquals(0, PasswordValidator.ValidationErrors.size());
+    }
+
+    // Helper Methods
+    private void SetUserInput(String userInput) {
+        ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testStream);
+    }
 
 }
