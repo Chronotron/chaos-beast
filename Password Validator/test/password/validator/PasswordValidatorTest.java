@@ -42,7 +42,6 @@ public class PasswordValidatorTest {
 		// setup
 		String shortPassword = "1234567";
 		SetUserInput(shortPassword);
-		System.out.println("main - Password Under Min Length");
 		String[] args = null;
 
 		// pre-conditions
@@ -51,6 +50,7 @@ public class PasswordValidatorTest {
 
 		// execute
 		PasswordValidator.main(args);
+		
 
 		// post conditions
 		Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
@@ -62,4 +62,5 @@ public class PasswordValidatorTest {
 		ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(testStream);
 	}
+
 }

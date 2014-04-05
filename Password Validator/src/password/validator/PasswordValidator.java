@@ -1,6 +1,7 @@
 package password.validator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class PasswordValidator {
@@ -17,15 +18,22 @@ public class PasswordValidator {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		ResetErrors();
 		DisplayPasswordRequirements();
-		String password = PromptForPassword();
-		ValidatePassword(password);
+			ResetErrors();
+			String password = PromptForPassword();
+			ValidatePassword(password);
 	}
 
-	// Public Methods
+	// Helper Methods
 	private static void DisplayPasswordRequirements() {
 		// TODO:PAP - display password requirements
+	}
+
+	private static void PresentErrors() {
+		Iterator<String> iterator = ValidationErrors.iterator();
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
 	}
 
 	private static String PromptForPassword() {
@@ -33,18 +41,22 @@ public class PasswordValidator {
 		return scanner.nextLine();
 	}
 
+	private static void ResetErrors() {
+		ValidationErrors = new ArrayList();
+	}
+
 	private static void ValidatePassword(String password) {
 		ValidatePasswordLength(password);
+
+		if(ValidationErrors.size() > 0) {
+			PresentErrors();
+		}
 	}
 
 	private static void ValidatePasswordLength(String password) {
 		if (password.length() < MIN_PASSWORD_LENGTH) {
 			ValidationErrors.add(ERROR_UNDER_MIN);
 		}
-	}
-
-	private static void ResetErrors() {
-		ValidationErrors = new ArrayList();
 	}
 
 }
