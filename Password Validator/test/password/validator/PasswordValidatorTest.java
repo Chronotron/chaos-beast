@@ -31,7 +31,7 @@ public class PasswordValidatorTest {
 
 	@After
 	public void tearDown() {
-		SetUserInput("");
+		setUserInput("");
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class PasswordValidatorTest {
 	public void testMain_UnderMinLength() {
 		// setup
 		String shortPassword = "1234567";
-		SetUserInput(shortPassword);
+		setUserInput(shortPassword);
 		System.out.println("main - Password Under Min Length");
 		String[] args = null;
 
@@ -58,7 +58,7 @@ public class PasswordValidatorTest {
 	}
 
 	// Helper Methods
-	private void SetUserInput(String userInput) {
+	private void setUserInput(String userInput) {
 		ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(testStream);
 	}

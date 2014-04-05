@@ -44,7 +44,7 @@ public class PasswordValidator {
 	}
 
 	private static void ResetErrors() {
-		ValidationErrors = new ArrayList();
+		ValidationErrors = new ArrayList<>();
 	}
 
 }
