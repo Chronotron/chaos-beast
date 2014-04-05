@@ -50,11 +50,30 @@ public class PasswordValidatorTest {
 
 		// execute
 		PasswordValidator.main(args);
-		
 
 		// post conditions
 		Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
 		Assert.assertEquals(PasswordValidator.ValidationErrors.get(0), PasswordValidator.ERROR_UNDER_MIN);
+	}
+
+	@Test
+	public void testMain_DoesNotContaintEnoughDigits() {
+		// setup
+		String notEnoughDigits = "abcdefghi";
+		SetUserInput(notEnoughDigits);
+		String[] args = null;
+
+		// pre-conditions
+		// TODO:PAP - figure this out
+//		Assert.assertTrue(notEnoughDigits.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
+		Assert.assertNull(PasswordValidator.ValidationErrors);
+
+		// execute
+		PasswordValidator.main(args);
+
+		// post conditions
+		Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
+		Assert.assertEquals(PasswordValidator.ValidationErrors.get(0), PasswordValidator.ERROR_INVALID_DIGITS);
 	}
 
 	// Helper Methods
