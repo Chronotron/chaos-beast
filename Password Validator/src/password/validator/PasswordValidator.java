@@ -1,7 +1,6 @@
 package password.validator;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +20,6 @@ public class PasswordValidator {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		ResetErrors();
 		DisplayPasswordRequirements();
 		ResetErrors();
 		String password = PromptForPassword();
@@ -34,11 +32,10 @@ public class PasswordValidator {
 	}
 
 	private static void PresentErrors() {
-		Iterator<String> iterator = ValidationErrors.iterator();
-		while(iterator.hasNext()) {
-			System.out.println(iterator.next());
-		}
-	}
+        for (String validationError : ValidationErrors) {
+            System.out.println(validationError);
+        }
+    }
 
 	private static String PromptForPassword() {
 		Scanner scanner = new Scanner(System.in);
@@ -46,8 +43,8 @@ public class PasswordValidator {
 	}
 
 	private static void ResetErrors() {
-		ValidationErrors = new ArrayList();
-	}
+        ValidationErrors = new ArrayList<>();
+    }
 
 	private static void ValidatePassword(String password) {
 		ValidatePasswordLength(password);
@@ -64,16 +61,18 @@ public class PasswordValidator {
 		}
 	}
 
-	private static void ShowUserSomeGarbage() {
-		
-	}
-
 	private static void ValidatePasswordDigits(String password) {
-		String digits = "[0-9]{2,}";
-		Pattern digitsPattern = Pattern.compile(digits);
+        String digits = "[0-9]";
+        Pattern digitsPattern = Pattern.compile(digits);
 		Matcher matcher = digitsPattern.matcher(password);
-		if(!matcher.matches()){
-			ValidationErrors.add(ERROR_INVALID_DIGITS);
+
+        int matches = 0;
+        while (matcher.find()) {
+            matches++;
+        }
+
+        if (matches < 2) {
+            ValidationErrors.add(ERROR_INVALID_DIGITS);
 		}
 	}
 
