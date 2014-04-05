@@ -29,10 +29,11 @@ public class PasswordValidatorTest {
 	public void setUp() {
 	}
 
-	@After
-	public void tearDown() {
-		setUserInput("");
-	}
+    @After
+    public void tearDown() {
+        setUserInput("");
+        PasswordValidator.ValidationErrors = null;
+    }
 
 	/**
 	 * Test of main method, of class PasswordValidator.
