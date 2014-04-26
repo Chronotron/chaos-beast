@@ -1,6 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        File file = new File("output.txt");
+        if(file.exists()) {
+            file.delete();
+        }
+        FileWriter writer = new FileWriter(file, true);
+
         boolean[] lockers = new boolean[100];
         for (int i = 0; i < lockers.length; i++) {
             lockers[i] = false;
@@ -21,6 +32,10 @@ public class Main {
 
         }
 
-        for(boolean locker : lockers) System.out.println(locker);
+        for(boolean locker : lockers){
+            String openClosed = locker ? "open" : "closed";
+            writer.write(String.format("Locker is %s\n", openClosed));
+        }
+        writer.close();
     }
 }
