@@ -1,11 +1,15 @@
 package password.validator;
 
-import org.junit.*;
-
 import java.io.ByteArrayInputStream;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 /**
- *
  * @author Chrontron2
  */
 public class PasswordValidatorTest {
@@ -27,23 +31,26 @@ public class PasswordValidatorTest {
 
     @After
     public void tearDown() {
-        setUserInput("");
+        SetUserInput("");
         PasswordValidator.ValidationErrors = null;
     }
 
+    /**
+     * Test of main method, of class PasswordValidator.
+     */
     @Test
     public void testMain_UnderMinLength() {
         // setup
         String shortPassword = "1234567";
-        setUserInput(shortPassword);
-        System.out.println("Test Password Under Min Length");
+        SetUserInput(shortPassword);
+        String[] args = null;
 
         // pre-conditions
         Assert.assertTrue(shortPassword.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
-		// execute
-        PasswordValidator.main(null);
+        // execute
+        PasswordValidator.main(args);
 
         // post conditions
         Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
@@ -54,16 +61,21 @@ public class PasswordValidatorTest {
     public void testMain_DoesNotContaintEnoughDigits() {
         // setup
         String notEnoughDigits = "abcdefghi";
-        setUserInput(notEnoughDigits);
+        SetUserInput(notEnoughDigits);
+        String[] args = null;
 
         // pre-conditions
-        // TODO:PAP - figure this out
-//		Assert.assertTrue(notEnoughDigits.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
+        int count = 0;
+        for (int i = 0, len = notEnoughDigits.length(); i < len; i++) {
+            if (Character.isDigit(notEnoughDigits.charAt(i))) {
+                count++;
+            }
+        }
+        Assert.assertTrue(count < PasswordValidator.MIN_PASSWORD_DIGITS);
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
         // execute
-        System.out.println("Test Not Enough Digits");
-        PasswordValidator.main(null);
+        PasswordValidator.main(args);
 
         // post conditions
         Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
@@ -71,27 +83,26 @@ public class PasswordValidatorTest {
     }
 
     @Test
-    public void testMain_PerfectPassword() {
+    public void testMain_AlphaNumeric() {
         // setup
-        String shortPassword = "abcd1234";
-        setUserInput(shortPassword);
+        String symbolPassword = "abcd1234!";
+        SetUserInput(symbolPassword);
+        String[] args = null;
 
         // pre-conditions
-        Assert.assertTrue(shortPassword.length() >= PasswordValidator.MIN_PASSWORD_LENGTH);
+        Assert.assertFalse(symbolPassword.matches("[A-Za-z0-9]*"));
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
-        // execut
-        System.out.println("Test Valid Password");
-
-        PasswordValidator.main(null);
+        // execute
+        PasswordValidator.main(args);
 
         // post conditions
-        Assert.assertEquals(0, PasswordValidator.ValidationErrors.size());
+        Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
     }
 
-	// Helper Methods
-	private void setUserInput(String userInput) {
-		ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
-		System.setIn(testStream);
-	}
+    // Helper Methods
+    private void SetUserInput(String userInput) {
+        ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testStream);
+    }
 }

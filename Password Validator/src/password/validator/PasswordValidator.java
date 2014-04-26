@@ -11,6 +11,7 @@ public class PasswordValidator {
 	public static String ERROR_UNDER_MIN = "- Invalid Password. Must be at least 8 characters.";
 	public static String ERROR_INVALID_DIGITS = "- Invalid Password. Must have at least 2 digits.";
 
+    public static int MIN_PASSWORD_DIGITS = 2;
 	public static int MIN_PASSWORD_LENGTH = 8;
 
 	// Properties
@@ -71,7 +72,7 @@ public class PasswordValidator {
             matches++;
         }
 
-        if (matches < 2) {
+        if (matches < MIN_PASSWORD_DIGITS) {
             ValidationErrors.add(ERROR_INVALID_DIGITS);
 		}
 	}
