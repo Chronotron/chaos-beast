@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
-
 public class MainTest {
 
     private File outputFile;
@@ -25,14 +23,11 @@ public class MainTest {
 
     @Test
     public void testMain() throws Exception {
-        // setup
-        Main test = new Main();
-
         // pre-conditions
         Assert.assertFalse(outputFile.exists());
 
         // execute
-        test.main(null);
+        Main.main(null);
 
         // post conditions
         Assert.assertTrue(outputFile.exists());

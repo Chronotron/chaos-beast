@@ -43,14 +43,13 @@ public class PasswordValidatorTest {
         // setup
         String shortPassword = "1234567";
         SetUserInput(shortPassword);
-        String[] args = null;
 
         // pre-conditions
         Assert.assertTrue(shortPassword.length() < PasswordValidator.MIN_PASSWORD_LENGTH);
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
         // execute
-        PasswordValidator.main(args);
+        PasswordValidator.main(null);
 
         // post conditions
         Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
@@ -58,11 +57,10 @@ public class PasswordValidatorTest {
     }
 
     @Test
-    public void testMain_DoesNotContaintEnoughDigits() {
+    public void testMain_DoesNotContainEnoughDigits() {
         // setup
         String notEnoughDigits = "abcdefghi";
         SetUserInput(notEnoughDigits);
-        String[] args = null;
 
         // pre-conditions
         int count = 0;
@@ -75,7 +73,7 @@ public class PasswordValidatorTest {
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
         // execute
-        PasswordValidator.main(args);
+        PasswordValidator.main(null);
 
         // post conditions
         Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
@@ -87,19 +85,33 @@ public class PasswordValidatorTest {
         // setup
         String symbolPassword = "abcd1234!";
         SetUserInput(symbolPassword);
-        String[] args = null;
 
         // pre-conditions
         Assert.assertFalse(symbolPassword.matches("[A-Za-z0-9]*"));
         Assert.assertNull(PasswordValidator.ValidationErrors);
 
         // execute
-        PasswordValidator.main(args);
+        PasswordValidator.main(null);
 
         // post conditions
         Assert.assertEquals(1, PasswordValidator.ValidationErrors.size());
     }
 
+    @Test
+    public void testMain_ValidPassword() {
+        // setup
+        String symbolPassword = "abcd1234";
+        SetUserInput(symbolPassword);
+
+        // pre-conditions
+        Assert.assertNull(PasswordValidator.ValidationErrors);
+
+        // execute
+        PasswordValidator.main(null);
+
+        // post conditions
+        Assert.assertEquals(0, PasswordValidator.ValidationErrors.size());
+    }
     // Helper Methods
     private void SetUserInput(String userInput) {
         ByteArrayInputStream testStream = new ByteArrayInputStream(userInput.getBytes());

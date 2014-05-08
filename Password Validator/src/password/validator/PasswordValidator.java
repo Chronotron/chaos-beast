@@ -9,6 +9,7 @@ public class PasswordValidator {
 
 	// Constants
 	public static String ERROR_UNDER_MIN = "- Invalid Password. Must be at least 8 characters.";
+    public static String ERROR_INVALID_CHARACTERS = "- Invalid Password. Cannot contain special characters";
 	public static String ERROR_INVALID_DIGITS = "- Invalid Password. Must have at least 2 digits.";
 
     public static int MIN_PASSWORD_DIGITS = 2;
@@ -27,9 +28,13 @@ public class PasswordValidator {
 		ValidatePassword(password);
 	}
 
-	// Helper Methods
+    // Helper Methods
 	private static void DisplayPasswordRequirements() {
-		// TODO:PAP - display password requirements
+		System.out.println("Please enter a valid password.");
+        System.out.println("   - Must be at least 8 characters.");
+        System.out.println("   - Must have at least 2 digits");
+        System.out.println("   - Cannot contain any special characters");
+        System.out.println();
 	}
 
 	private static void PresentErrors() {
@@ -50,11 +55,25 @@ public class PasswordValidator {
 	private static void ValidatePassword(String password) {
 		ValidatePasswordLength(password);
 		ValidatePasswordDigits(password);
+        ValidatePasswordCharacters(password);
 
 		if(ValidationErrors.size() > 0) {
 			PresentErrors();
-		}
+		} else {
+            System.out.println("The password is valid");
+        }
+        System.out.println();
 	}
+
+    private static void ValidatePasswordCharacters(String password) {
+        String digits = "[A-Za-z0-9]*";
+        Pattern digitsPattern = Pattern.compile(digits);
+        Matcher matcher = digitsPattern.matcher(password);
+
+        if (!matcher.matches()) {
+            ValidationErrors.add(ERROR_INVALID_CHARACTERS);
+        }
+    }
 
 	private static void ValidatePasswordLength(String password) {
 		if (password.length() < MIN_PASSWORD_LENGTH) {
