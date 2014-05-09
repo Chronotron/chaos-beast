@@ -66,11 +66,11 @@ public class PasswordValidator {
 	}
 
     private static void ValidatePasswordCharacters(String password) {
-        String digits = "[A-Za-z0-9]*";
-        Pattern digitsPattern = Pattern.compile(digits);
+        String invalid = "[^A-Za-z0-9]";
+        Pattern digitsPattern = Pattern.compile(invalid);
         Matcher matcher = digitsPattern.matcher(password);
 
-        if (!matcher.matches()) {
+        if (matcher.find()) {
             ValidationErrors.add(ERROR_INVALID_CHARACTERS);
         }
     }
