@@ -1,7 +1,7 @@
 /***************************************************
  * DeveloperNames.java
  * Paul Parker
- * <p/>
+ *
  * Prints a list of first names and last names of
  * each individual in the development department and then
  * creates a random full name
@@ -52,8 +52,8 @@ public class DeveloperNames {
         printNames(lastNames, "Last Names");
 
         // get random names from array
-        firstNameIndex = (int) (Math.random() * firstNames.length + 1);
-        lastNameIndex = (int) (Math.random() * lastNames.length + 1);
+        firstNameIndex = (int) (Math.random() * firstNames.length);
+        lastNameIndex = (int) (Math.random() * lastNames.length);
 
         // print a divider
         System.out.println("*****************************");
