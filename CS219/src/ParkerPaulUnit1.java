@@ -53,14 +53,16 @@ public class ParkerPaulUnit1 {
      * @param arrayName        name of the array to display
      */
     private static void searchArray(int[] arrayToSearch, int valueToSearchFor, String arrayName) {
-        Boolean found = false;
-        int currentIndex = 0;
+        Boolean found = false; // track if value is ever found
+        int currentLocation = 1; // track location since it is a requirement to use a foreach instead of a for loop
+
+        // required foreach loop to search the array and output information if value is found
         for (int value : arrayToSearch) {
             if (value == valueToSearchFor) {
-                System.out.printf("Search Value: %1$d found at location: %2$d in the %3$s%n", valueToSearchFor, currentIndex, arrayName);
+                System.out.printf("Search Value: %1$d found at location: %2$d in the %3$s%n", valueToSearchFor, currentLocation, arrayName);
                 found = true;
             }
-            currentIndex++;
+            currentLocation++;
         }
 
         if(!found) {
