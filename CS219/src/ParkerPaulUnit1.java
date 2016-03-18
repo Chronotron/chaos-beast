@@ -4,19 +4,19 @@ import java.util.Scanner;
 /***************************************************
  * ParkerPaulUnit1.java
  * Paul Parker
- * <p/>
+ *
  * Prints unsorted and sorted arrays of random numbers
  * and asks user for number to search for
  ****************************************************/
 public class ParkerPaulUnit1 {
     public static void main(String[] args) {
-        int[] unsortedArray; // array to hold unsorted random numbers
-        int[] arrayCopy; // copy of the unsorted array
         int arrayLength = 10; // length of arrays for this exercise
-        int minNumber = 1; // lower bound of random number
         int maxNumber = 20; // upper bound of random number
-        Scanner scanner; // scanner for receiving user input
+        int minNumber = 1; // lower bound of random number
         int numberToSearchFor; // number to be entered by user to search for
+        int[] arrayCopy; // copy of the unsorted array
+        int[] unsortedArray; // array to hold unsorted random numbers
+        Scanner scanner; // scanner for receiving user input
 
         // initialize the array with random numbers
         unsortedArray = new int[arrayLength];
