@@ -18,7 +18,7 @@ public class ParkerPaulUnit2 {
         Random random = new Random(); // random number generator
         Scanner scanner; // scanner for receiving user input
 
-        // initialize the array with random numbers
+        // initialize the list with random numbers
         unsortedArrayList = new ArrayList<Integer>();
         for (int i = 0; i < itemCount; i++) {
             unsortedArrayList.add(random.nextInt(maxNumber) + minNumber);
