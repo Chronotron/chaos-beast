@@ -41,8 +41,12 @@ public class ParkerPaulUnit2 {
         numberToSearchFor = scanner.nextInt();
 
         // search each array and output results
-        searchArrayList(unsortedArrayList, numberToSearchFor, "unsorted list");
-        searchArrayList(arrayListCopy, numberToSearchFor, "sorted list");
+        boolean found = searchArrayList(unsortedArrayList, numberToSearchFor, "unsorted list");
+
+        // search sorted list if found in unsorted list
+        if (found) {
+            searchArrayList(arrayListCopy, numberToSearchFor, "sorted list");
+        }
     }
 
     /**
@@ -52,7 +56,7 @@ public class ParkerPaulUnit2 {
      * @param valueToSearchFor  value to find in arrayListToSearch
      * @param arrayListName     name of the ArrayList to display
      */
-    private static void searchArrayList(ArrayList<Integer> arrayListToSearch, int valueToSearchFor, String arrayListName) {
+    private static boolean searchArrayList(ArrayList<Integer> arrayListToSearch, int valueToSearchFor, String arrayListName) {
         Boolean found = false; // track if value is ever found
         int currentLocation = 1; // track location since we are iterating a list
 
@@ -66,7 +70,9 @@ public class ParkerPaulUnit2 {
         }
 
         if (!found) {
-            System.out.printf("Search Value: %1$d was not found in the %2$s%n", valueToSearchFor, arrayListName);
+            System.out.printf("Search Value: %1$d was not found%n", valueToSearchFor);
         }
+
+        return found;
     }
 }
