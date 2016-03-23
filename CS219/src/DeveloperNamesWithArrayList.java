@@ -29,6 +29,10 @@ public class DeveloperNamesWithArrayList {
         promptForNames(firstNames, "Add new first names. Enter 'NEXT' to continue");
         promptForNames(lastNames, "Add new last names. Enter 'NEXT' to continue");
 
+        // print entered names
+        printNames(firstNames, "Your First Names");
+        printNames(lastNames, "Your Last Names");
+
         // get random index for the list
         firstNameIndex = random.nextInt(firstNames.size());
         lastNameIndex = random.nextInt(lastNames.size());
