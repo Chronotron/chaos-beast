@@ -25,8 +25,10 @@ public class AccessPermissionsExample {
      * @param departmentBeingAccessed department being accessed
      */
     private static void testAccess(ArrayList<Access> accessRights, String userDepartment, String departmentBeingAccessed) {
-        if (testAllAccess(accessRights) || (testOwnAccess(accessRights) && userDepartment.compareToIgnoreCase(departmentBeingAccessed) == 0)) {
-
+        if (testAllAccess(accessRights) || (testOwnAccess(accessRights) && testSameDepartment(userDepartment, departmentBeingAccessed))) {
+            System.out.printf("The user with department %1$s has access to %2$s%n", userDepartment, departmentBeingAccessed);
+        } else {
+            System.out.printf("The user with department %1$s does not have access to %2$s%n", userDepartment, departmentBeingAccessed);
         }
     }
 
