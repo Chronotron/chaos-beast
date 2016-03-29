@@ -78,6 +78,7 @@ public class AccessPermissionsExample {
      * @return whether the access list has all department access
      */
     private static boolean testAllAccess(ArrayList<Access> accessRights) {
+        System.out.println("Testing if user user has access to all departments");
         boolean hasAllAccess = accessRights.contains(Access.AllDepartments); // if user has all access
         if (hasAllAccess) {
             System.out.println("User had all access to departments and no further validation required");
@@ -86,6 +87,7 @@ public class AccessPermissionsExample {
     }
 
     private static boolean testSameDepartment(Departments userDepartment, Departments departmentBeingAccessed) {
+        System.out.println("Testing if user department and the department being accessed are the same");
         boolean isSameDepartment = userDepartment == departmentBeingAccessed; // department matches
         if (isSameDepartment) {
             System.out.println("User did not have all access but does have own access and the department is the same");
@@ -98,6 +100,7 @@ public class AccessPermissionsExample {
      * @return whether user has access to own department
      */
     private static boolean testOwnAccess(ArrayList<Access> accessRights) {
+        System.out.println("Testing if user can access their own department");
         boolean hasOwnAccess = accessRights.contains(Access.OwnDepartment); // if user has own access
         if (!hasOwnAccess) {
             System.out.println("User does not have access to own department no further validation required");
