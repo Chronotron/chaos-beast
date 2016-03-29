@@ -13,8 +13,8 @@ public class AccessPermissionsExample {
         ArrayList<Access> ownDepartmentRights = new ArrayList<Access>(); // contains only own department access
         ArrayList<Access> allAndOwnDepartmentRights = new ArrayList<Access>(); // contains both all and own department access
         ArrayList<Access> noRights = new ArrayList<Access>(); // contains no access rights
-        String research = "Research";
-        String development = "Development";
+        Departments research = Departments.Research; // convenience for getting Departments.Research
+        Departments development = Departments.Development; // convenience for getting Departments.Development
 
         // load access lists
         allDepartmentsRights.add(Access.AllDepartments);
@@ -65,7 +65,7 @@ public class AccessPermissionsExample {
      * @param userDepartment          department of the user
      * @param departmentBeingAccessed department being accessed
      */
-    private static void testAccess(ArrayList<Access> accessRights, String userDepartment, String departmentBeingAccessed) {
+    private static void testAccess(ArrayList<Access> accessRights, Departments userDepartment, Departments departmentBeingAccessed) {
         if (testAllAccess(accessRights) || (testOwnAccess(accessRights) && testSameDepartment(userDepartment, departmentBeingAccessed))) {
             System.out.printf("The user with department %1$s has access to %2$s%n", userDepartment, departmentBeingAccessed);
         } else {
@@ -85,8 +85,8 @@ public class AccessPermissionsExample {
         return hasAllAccess;
     }
 
-    private static boolean testSameDepartment(String userDepartment, String departmentBeingAccessed) {
-        boolean isSameDepartment = userDepartment.compareToIgnoreCase(departmentBeingAccessed) == 0; // department matches
+    private static boolean testSameDepartment(Departments userDepartment, Departments departmentBeingAccessed) {
+        boolean isSameDepartment = userDepartment == departmentBeingAccessed; // department matches
         if (isSameDepartment) {
             System.out.println("User did not have all access but does have own access and the department is the same");
         }
@@ -110,5 +110,12 @@ public class AccessPermissionsExample {
      */
     private enum Access {
         AllDepartments, OwnDepartment
+    }
+
+    /**
+     * Enum describing departments
+     */
+    private enum Departments {
+        Research, Development
     }
 }
