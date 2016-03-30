@@ -37,8 +37,8 @@ public class ParkerPaulUnit3 {
     private static String formatBinary(char c) {
         String unformattedBinary = Integer.toString((int)c, 2); // unformatted binary
         int leftSide = Integer.parseInt(unformattedBinary.substring(0, 4), 10);
-        int rightside = Integer.parseInt(unformattedBinary.substring(4), 10);
-        return String.format("%04d %04d", leftSide, rightside);
+        int rightSide = Integer.parseInt(unformattedBinary.substring(4), 10);
+        return String.format("%04d %04d", leftSide, rightSide);
     }
 
 }
