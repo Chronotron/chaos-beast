@@ -33,7 +33,7 @@ public class ParkerPaulUnit3 {
     private static String getBinaryFormat(char c) {
         String padding = "00000000"; // padding for string
         String unpaddedBinary = Integer.toString((int) c, 2); // unpadded binary
-        String paddedBinary = (padding + unpaddedBinary).substring(unpaddedBinary.length());
+        String paddedBinary = (padding + unpaddedBinary).substring(unpaddedBinary.length()); // binary with padding
         String leftSide = paddedBinary.substring(0, 4); // left side of formatted string
         String rightSide = paddedBinary.substring(4); // right side of formatted string
         return String.format("%s %s", leftSide, rightSide);
