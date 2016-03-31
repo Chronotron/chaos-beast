@@ -44,7 +44,7 @@ public class ParkerPaulUnit3 {
      * @return returns a formatted hex string derived from c
      */
     private static String getHexFormat(char c) {
-        return String.format("%X", (int) c);
+        return Integer.toString((int) c, 16).toUpperCase();
     }
 
 }
