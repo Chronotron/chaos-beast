@@ -21,6 +21,7 @@ public class ParkerPaulUnit3 {
         System.out.println();
         System.out.printf("%1$-9s%2$-9s%3$-9s%4$-9s%5$-18s%6$-5s%n", "Lower", "Upper", "Initial", "ASCII", "Binary", "Hex");
 
+        // print information about each character
         for (char c : userInput.toCharArray()) {
             System.out.printf("%1$-9s%2$-9s%3$-9s%4$-9d%5$-18s%6$-5s%n", Character.toLowerCase(c), Character.toUpperCase(c), c, (int) c, getBinaryFormat(c), getHexFormat(c));
         }
