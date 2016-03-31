@@ -15,30 +15,36 @@ public class ParkerPaulUnit3 {
         // initialize scanner and receive input
         scanner = new Scanner(System.in);
         System.out.print("Please enter a string of any length: ");
-        // TODO:PAP - don't leave this
-//        userInput = scanner.nextLine();
+        userInput = scanner.nextLine();
 
-        userInput = "asdf";
         // print table header
         System.out.println();
         System.out.printf("%1$-9s%2$-9s%3$-9s%4$-9s%5$-18s%6$-5s%n", "Lower", "Upper", "Initial", "ASCII", "Binary", "Hex");
 
         for (char c : userInput.toCharArray()) {
-            // TODO:PAP - hex formatting
-            System.out.printf("%1$-9s%2$-9s%3$-9s%4$-9d%5$-18s%6$-5s%n",  Character.toLowerCase(c), Character.toUpperCase(c), c, (int)c, formatBinary(c), c);
+            System.out.printf("%1$-9s%2$-9s%3$-9s%4$-9d%5$-18s%6$-5s%n", Character.toLowerCase(c), Character.toUpperCase(c), c, (int) c, getBinaryFormat(c), getHexFormat(c));
         }
     }
 
     /**
-     *
      * @param c character to format to binary
      * @return returns a formatted binary string derived from c like '0001 0001'
      */
-    private static String formatBinary(char c) {
-        String unformattedBinary = Integer.toString((int)c, 2); // unformatted binary
-        int leftSide = Integer.parseInt(unformattedBinary.substring(0, 4), 10); // left side of formatted string
-        int rightSide = Integer.parseInt(unformattedBinary.substring(4), 10); // right side of formatted string
-        return String.format("%04d %04d", leftSide, rightSide);
+    private static String getBinaryFormat(char c) {
+        String padding = "00000000"; // padding for string
+        String unpaddedBinary = Integer.toString((int) c, 2); // unpadded binary
+        String paddedBinary = (padding + unpaddedBinary).substring(unpaddedBinary.length());
+        String leftSide = paddedBinary.substring(0, 4); // left side of formatted string
+        String rightSide = paddedBinary.substring(4); // right side of formatted string
+        return String.format("%s %s", leftSide, rightSide);
+    }
+
+    /**
+     * @param c character to format to hex
+     * @return returns a formatted hex string derived from c
+     */
+    private static String getHexFormat(char c) {
+        return String.format("%X", (int) c);
     }
 
 }
