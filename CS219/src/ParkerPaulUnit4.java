@@ -14,8 +14,7 @@ public class ParkerPaulUnit4 {
 
             ParkerPaulFox foxy = new ParkerPaulFox();
 
-            ArrayList<ParkerPaulChicken> chickens =
-                    new ArrayList<ParkerPaulChicken>();
+            ArrayList<ParkerPaulChicken> chickens = new ArrayList<ParkerPaulChicken>();
             chickens.clear();
             chickens.add(new ParkerPaulChicken());
             chickens.add(new ParkerPaulChicken());
