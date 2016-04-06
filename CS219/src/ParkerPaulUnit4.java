@@ -8,24 +8,24 @@ import java.util.ArrayList;
  ****************************************************/
 public class ParkerPaulUnit4 {
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
 
-        for(int count=0; count<10; count++)  {
+        for (int count = 0; count < 10; count++) {
 
             ParkerPaulFox foxy = new ParkerPaulFox();
 
-            ArrayList< ParkerPaulChicken > chickens =
+            ArrayList<ParkerPaulChicken> chickens =
                     new ArrayList<ParkerPaulChicken>();
             chickens.clear();
             chickens.add(new ParkerPaulChicken());
-            chickens.add(new ParkerPaulChicken ());
-            chickens.add(new ParkerPaulChicken ());
+            chickens.add(new ParkerPaulChicken());
+            chickens.add(new ParkerPaulChicken());
             chickens.get(0).setSex(true);
             chickens.get(1).setSex(false);
             chickens.get(2).setSex(false);
 
-            while (chickens.size() >1 && chickens.size() < 10) {
-                for (ParkerPaulChicken c:chickens) c.grow();
+            while (chickens.size() > 1 && chickens.size() < 10) {
+                for (ParkerPaulChicken c : chickens) c.grow();
                 foxy.grow();
 
                 ParkerPaulChicken.mate(chickens);
