@@ -10,6 +10,7 @@ import java.util.Random;
 public class ParkerPaulFox extends ParkerPaulAnimal {
 
     private Random random; // random number generator
+    private double weightInChickens; // weight in chickens eat in a lifetime
 
     //********************
 
@@ -17,6 +18,7 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
         random = new Random();
         setAge(random.nextInt((900 - 400) + 1) + 400);
         setWeight(random.nextInt((60 - 30) + 1) + 30);
+        weightInChickens = 0.00;
     }
 
     //********************
@@ -44,6 +46,14 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
         chickens.remove(chicken);
     }
 
+    /**
+     * gets the weight in chickens eaten in a lifetime
+     * @return returns weight in chickens eaten in a lifetime as a double
+     */
+    public double getWeightInChickens() {
+        return weightInChickens;
+    }
+
     //region Helper Methods
 
     private boolean canCatchChicken() {
@@ -52,6 +62,7 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
     }
 
     private void fattenUp(double weight) {
+        weightInChickens += weight;
         setWeight(getWeight() + weight);
     }
 

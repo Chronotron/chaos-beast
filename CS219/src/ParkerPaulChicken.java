@@ -16,6 +16,7 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         Random random = new Random();
         setAge(1);
         setSex(random.nextInt(2) == 0);
+        setWeight(1.00);
     }
 
     //********************

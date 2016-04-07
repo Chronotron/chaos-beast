@@ -38,10 +38,12 @@ public class ParkerPaulUnit4 {
 
             }
 
+            // output results
             if (chickens.size() >= 10) {
-
+                System.out.printf("Chickens win - Chicken Population: %1$d%n", chickens.size());
+            } else {
+                System.out.printf("Fox wins - Fox Weight (in chickens): %1$.2f%n", foxy.getWeightInChickens());
             }
-            System.out.println();
 
         } // end of for
 
