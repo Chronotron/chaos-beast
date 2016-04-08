@@ -45,7 +45,7 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
         ParkerPaulChicken chicken = chickens.get(random.nextInt(chickens.size()));
         fattenUp(chicken.getWeight());
         chickens.remove(chicken);
-    }
+    } // end of eat
 
     /**
      * gets the weight in chickens eaten in a lifetime
@@ -53,19 +53,19 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
      */
     public double getWeightInChickens() {
         return weightInChickens;
-    }
+    } // end of getWeightInChickens
 
     //region Helper Methods
 
     private boolean canCatchChicken() {
         int chance = random.nextInt(100) + 1; // chance a chicken is caught
         return chance <= 70;
-    }
+    } // end of canCatchChicken
 
     private void fattenUp(double weight) {
         weightInChickens += weight;
         setWeight(getWeight() + weight);
-    }
+    } // end of fattenUp
 
     //endregion
 

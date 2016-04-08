@@ -27,7 +27,7 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         double weightIncrease = currentWeight * 0.01; // 1% of the current weight
         setWeight(currentWeight + weightIncrease);
         super.grow();
-    }
+    } // end of grow
 
     public static void mate(ArrayList<ParkerPaulChicken> chickens) {
         Random chickenGenerator = new Random(); // random number generator for generating chickens
@@ -46,13 +46,13 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         for (int i = 0; i < chickenGenerator.nextInt(5); i++) {
             chickens.add(new ParkerPaulChicken());
         }
-    }
+    } // end of mate
 
     //region Helper Methods
 
     private static boolean isChickenOldEnoughToMate(ParkerPaulChicken chicken) {
         return chicken.getAge() > 1;
-    }
+    } // end of isChickenOldEnoughToMate
 
     private static boolean isMatingSuccessful(ArrayList<ParkerPaulChicken> chickens) {
         ArrayList<ParkerPaulChicken> secondList; // list for selecting second chicken from
@@ -75,7 +75,7 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         // second chicken isn't old enough or is the same gender as the first
         return !(!isChickenOldEnoughToMate(secondChicken) || (secondChicken.getSex() == initialChicken.getSex()));
 
-    } // end method isMatingSuccessful
+    } // end of isMatingSuccessful
 
     // endregion
 

@@ -15,6 +15,8 @@ public class ParkerPaulUnit4 {
             ParkerPaulFox foxy = new ParkerPaulFox(); // fox that hunts chickens
 
             ArrayList<ParkerPaulChicken> chickens = new ArrayList<ParkerPaulChicken>(); // chickens that multiply
+
+            // initialize chickens collection
             chickens.clear();
             chickens.add(new ParkerPaulChicken());
             chickens.add(new ParkerPaulChicken());
@@ -23,7 +25,7 @@ public class ParkerPaulUnit4 {
             chickens.get(1).setSex(false);
             chickens.get(2).setSex(false);
 
-            // cycle until there are not chickens or the chickens overwhelm the fox
+            // cycle until there are no chickens or the chickens overwhelm the fox
             while (chickens.size() > 1 && chickens.size() < 10) {
 
                 // grow all animals
