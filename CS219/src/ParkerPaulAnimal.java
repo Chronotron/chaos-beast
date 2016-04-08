@@ -14,7 +14,7 @@ public class ParkerPaulAnimal {
 
     public ParkerPaulAnimal() {
         age = 1;
-    }
+    } // end constructor
 
     //**************************************
 
@@ -54,4 +54,4 @@ public class ParkerPaulAnimal {
         this.weight = weight;
     }
 
-} // end ParkerPaulAnimal class
+} // end class ParkerPaulAnimal

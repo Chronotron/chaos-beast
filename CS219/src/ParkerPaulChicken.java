@@ -17,7 +17,7 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         setAge(1);
         setSex(random.nextInt(2) == 0);
         setWeight(1.00);
-    }
+    } // end constructor
 
     //********************
 
@@ -78,8 +78,8 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         }
 
         return true;
-    }
+    } // end isMatingSuccessful method
 
     // endregion
 
-} // end ParkerPaulChicken class
+} // end class ParkerPaulChicken
