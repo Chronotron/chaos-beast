@@ -57,7 +57,7 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
     //region Helper Methods
 
     private boolean canCatchChicken() {
-        int chance = random.nextInt(71); // chance a chicken is caught
+        int chance = random.nextInt(100) + 1; // chance a chicken is caught
         return chance <= 70;
     }
 
