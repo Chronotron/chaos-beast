@@ -41,6 +41,7 @@ public class ParkerPaulFox extends ParkerPaulAnimal {
             return;
         }
 
+        // select a chicken to eat and update weight and collection of chickens
         ParkerPaulChicken chicken = chickens.get(random.nextInt(chickens.size()));
         fattenUp(chicken.getWeight());
         chickens.remove(chicken);

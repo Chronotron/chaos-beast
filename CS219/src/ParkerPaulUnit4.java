@@ -36,7 +36,7 @@ public class ParkerPaulUnit4 {
                 // hunt chickens
                 foxy.eat(chickens);
 
-            }
+            } // end of while
 
             // output results
             if (chickens.size() >= 10) {

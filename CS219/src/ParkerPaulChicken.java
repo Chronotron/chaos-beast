@@ -13,7 +13,7 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
     //********************
 
     public ParkerPaulChicken() {
-        Random random = new Random();
+        Random random = new Random(); // random for determining gender
         setAge(1);
         setSex(random.nextInt(2) == 0);
         setWeight(1.00);
@@ -73,12 +73,9 @@ public class ParkerPaulChicken extends ParkerPaulAnimal {
         secondChicken = secondList.get(chickenSelector.nextInt(secondList.size()));
 
         // second chicken isn't old enough or is the same gender as the first
-        if(!isChickenOldEnoughToMate(secondChicken) || (secondChicken.getSex() == initialChicken.getSex())) {
-            return false;
-        }
+        return !(!isChickenOldEnoughToMate(secondChicken) || (secondChicken.getSex() == initialChicken.getSex()));
 
-        return true;
-    } // end isMatingSuccessful method
+    } // end method isMatingSuccessful
 
     // endregion
 
