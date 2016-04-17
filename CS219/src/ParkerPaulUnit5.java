@@ -24,12 +24,14 @@ public class ParkerPaulUnit5 {
 
     //region Boat Output methods
 
-    private static void printBoatInfo(ParkerPaulBoat taxable) {
-        System.out.println("TODO");
+    private static void printBoatInfo(ParkerPaulBoat taxable, int count) {
+        System.out.printf("%1$-25s%2$17.2f%3$10d%4$31.2f%n", count + " " + taxable.getDescription(), taxable.getFootage(), taxable.getNumberOfCabins(), taxable.getTax());
     }
 
     private static void printBoatHeader() {
-        System.out.println("TODO");
+        printDivider();
+        System.out.printf("%1$-25s%2$17s%3$10s%4$31s%n", "# Description", "Footage", "#Cabins", "Taxes");
+        printDivider();
     }
 
     private static void printBoatTable(ArrayList<ParkerPaulTaxable> taxables) {
@@ -48,7 +50,7 @@ public class ParkerPaulUnit5 {
                 maxTaxes = Math.max(maxTaxes, tax);
                 count++;
                 // print info for item
-                printBoatInfo((ParkerPaulBoat) taxable);
+                printBoatInfo((ParkerPaulBoat) taxable, count);
             }
         }
         printFooter(totalTaxes, minTaxes, maxTaxes, count);
@@ -58,12 +60,14 @@ public class ParkerPaulUnit5 {
 
     //region Building Output methods
 
-    private static void printBuildingInfo(ParkerPaulBuilding taxable) {
-        System.out.println("TODO");
+    private static void printBuildingInfo(ParkerPaulBuilding taxable, int count) {
+        System.out.printf("%1$-25s%2$10.2f%3$9.2f%4$19.2f%5$10d%6$10.2f%n", count + " " + taxable.getDescription(), taxable.getArea(), taxable.getUnitPrice(), taxable.getDwellingArea(), taxable.getNumberOfStories(), taxable.getTax());
     }
 
     private static void printBuildingHeader() {
-        System.out.println("TODO");
+        printDivider();
+        System.out.printf("%1$-25s%2$10s%3$9s%4$19s%5$10s%6$10s%n", "# Description", "Area (sqf)", "$/sqf", "Dwell.Area(sqf)", "#Stories", "Taxes");
+        printDivider();
     }
 
     private static void printBuildingTable(ArrayList<ParkerPaulTaxable> taxables) {
@@ -82,7 +86,7 @@ public class ParkerPaulUnit5 {
                 maxTaxes = Math.max(maxTaxes, tax);
                 count++;
                 // print info for item
-                printBuildingInfo((ParkerPaulBuilding) taxable);
+                printBuildingInfo((ParkerPaulBuilding) taxable, count);
             }
         }
         printFooter(totalTaxes, minTaxes, maxTaxes, count);
@@ -145,30 +149,35 @@ public class ParkerPaulUnit5 {
         System.out.println();
     }
 
-    private static void printDivider() {
-        System.out.println("---------------------------------------------------------------------------------------");
-    }
-
     /**
      * @param selection selection for determining type
      * @param index     index in the collection initialization
      * @return ParkerPaulTaxable
      */
     private static ParkerPaulTaxable getRandomTaxable(int selection, int index) {
+        index += 1;
         if (selection < 20) {
             return new ParkerPaulBoat("ParkerPaulBoat " + index, getNumberBetween(10, 50), getNumberBetween(1, 4));
         } else if (selection < 60) {
-            return new ParkerPaulTerrain(getFraction(), getNumberBetween(0, 200), "ParkerPaulTerrain " + index, getNumberBetween(100, 10000), getNumberBetween(10, 1000));
+            return new ParkerPaulTerrain(getFraction(0, 1000, 3), getNumberBetween(0, 200), "ParkerPaulTerrain " + index, getArea(), getPrice());
         } else {
-            return new ParkerPaulBuilding(getNumberBetween(100, 10000), getNumberBetween(1, 4), "ParkerPaulBuild " + index, getNumberBetween(100, 10000), getNumberBetween(10, 1000));
+            return new ParkerPaulBuilding(getNumberBetween(100, 10000), getNumberBetween(1, 4), "ParkerPaulBuilding " + index, getArea(), getPrice());
         }
+    }
+
+    private static double getArea() {
+        return getFraction(10000, 1000000, 2);
     }
 
     /**
      * @return fractional double from 0.000 to 1.000
      */
-    private static double getFraction() {
-        return (double) getNumberBetween(0, 1000) / 1000.00;
+    private static double getFraction(int min, int max, int precision) {
+        double multiplier = 1; // multiplier for fraction
+        for (int i = 0; i < precision; i++) {
+            multiplier *= 10.00;
+        }
+        return (double) getNumberBetween(min, max) / multiplier;
     }
 
     /**
@@ -179,6 +188,14 @@ public class ParkerPaulUnit5 {
     private static int getNumberBetween(int min, int max) {
         Random random = new Random(); // random number generator
         return random.nextInt((max + 1) - min) + min;
+    }
+
+    private static double getPrice() {
+        return getFraction(1000, 100000, 2);
+    }
+
+    private static void printDivider() {
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
 } // end class ParkerPaulUnit5
