@@ -11,7 +11,7 @@ public class ParkerPaulUnit5 {
     public static void main(String[] args) {
         ArrayList<ParkerPaulTaxable> taxables = new ArrayList<ParkerPaulTaxable>(); // collection of taxables
 
-        // initialize array
+        // initialize list
         for (int i = 0; i < 20; i++) {
             taxables.add(getRandomTaxable(getNumberBetween(1, 100), i));
         }
