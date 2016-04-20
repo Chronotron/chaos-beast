@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * <p>
  * Demonstrates the concept of Polymorphism
  ****************************************************/
-public class PolymorphismDiscussion {
+public class PolyMorphismDiscussion {
     public static void main(String[] args) {
         NullPlumbus nullPlumbus = new NullPlumbus(); // standard null plumbus created as such
         IPlumbus nameBrandPlumbus = new NameBrandPlumbus("The Original Plumbus", 5.99); // plumbus interface created as a NameBrandPlumbus
