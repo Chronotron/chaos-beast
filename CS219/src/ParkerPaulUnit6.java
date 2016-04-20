@@ -8,7 +8,7 @@ import java.util.Scanner;
  ****************************************************/
 public class ParkerPaulUnit6 {
     public static void main(String[] args) {
-        String userInput = ""; // user input
+        String userInput = ""; // input from the user
         String quitCode = "q"; // code for quitting program
         Scanner scanner = new Scanner(System.in); // scanner for user input
         ParkerPaulTime time; // time object for display
