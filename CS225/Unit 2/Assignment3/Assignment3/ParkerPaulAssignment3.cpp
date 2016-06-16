@@ -13,6 +13,8 @@ int main()
 	{
 		cout << "Enter sales in dollars (-1 to end): ";
 		cin >> weeklySales;
-		cout << "Salary is: $" << weeklySalary + (weeklySales * commissionPercent) << endl;
+		if(weeklySales != -1) {
+			cout << "Salary is: $" << weeklySalary + (weeklySales * commissionPercent) << endl;
+		}
 	} // end while
 }
