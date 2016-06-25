@@ -17,7 +17,7 @@ int main()
 	while (exitSignal != "exit")
 	{
 		calcWealth();
-		cout << "any key to continue or 'exit' to exit" << endl;
+		cout << "type anything to continue or 'exit' to exit" << endl;
 		cin >> exitSignal;
 		cin.clear();
 	}
