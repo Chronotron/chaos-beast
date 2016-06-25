@@ -12,6 +12,7 @@ long promptPleaseEnterLong(string);
 
 int main()
 {
+	printBanner();
 	string exitSignal = "";
 	while (exitSignal != "exit")
 	{
@@ -33,14 +34,39 @@ void calcWealth()
 	cout << message << endl;
 }
 
-bool isRich(int age, long cashOnhand, int numberOfDependents, long amountOwed)
+bool isRich(int age, long cashOnHand, int numberOfDependents, long amountOwed)
 {
-	return 0;
+	long richThreshold = 1000000;
+	long trueCashValue = cashOnHand - amountOwed;
+	if(numberOfDependents <= 0 && trueCashValue >= richThreshold)
+	{
+		return true;
+	}
+
+	if(age < 40)
+	{
+		trueCashValue -= numberOfDependents * 150000;
+	}
+	else if (age > 40 && age <= 50)
+	{
+		trueCashValue -= numberOfDependents * 75000;
+	}
+	else
+	{
+		trueCashValue -= numberOfDependents * 25000;
+	}
+
+	return trueCashValue >= richThreshold;
 }
 
 void printBanner()
 {
-
+	cout << "-------***************-------" << endl;
+	cout << "-------* ARE         *-------" << endl;
+	cout << "-------*    YOU      *-------" << endl;
+	cout << "-------*       RICH? *-------" << endl;
+	cout << "-------***************-------" << endl;
+	cout << endl;
 }
 
 int promptPleaseEnterInt(string prompt)
