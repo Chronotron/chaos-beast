@@ -19,9 +19,9 @@ int main()
 	int sales [5][4];
 	populateSales(sales, 5);
 	printSales(sales, 5);
-	cout << "done" << endl;
-	string whatevs;
-	cin >> whatevs;
+    cout << endl << "Press enter to exit";
+    string accept;
+    getline(cin, accept);
 	return 0;
 }
 
@@ -87,6 +87,7 @@ void populateSales(int sales[5][4], int rows)
 
 void printSales(const int sales[5][4], int rows)
 {
+    cout << "      ------ Monthly Sales ------      " << endl << endl;
 	int columnTotals [4] = {0, 0, 0, 0};
     cout << "            SP1   SP2   SP3   SP4  Tot." << endl;
 	for (int i = 0; i < rows; i++)
