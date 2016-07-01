@@ -1,7 +1,5 @@
 
 #include <iostream>
-#include <stdio.h>
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -11,8 +9,8 @@ using namespace std;
 vector<vector<int>> generateSalesSlips();
 int getSalesFor(int, int, const vector<vector<int>>);
 void insertSales(vector<vector<int>> &, int, size_t, size_t);
-void populateSales(int[][4], int);
-void printSales(const int[][4], int);
+void populateSales(int[5][4], int);
+void printSales(const int[5][4], int);
 
 #pragma endregion
 
@@ -73,7 +71,7 @@ void insertSales(vector<vector<int>> &salesSlips, int id, size_t count, size_t o
 	}
 }
 
-void populateSales(int sales[][4], int rows)
+void populateSales(int sales[5][4], int rows)
 {
 	vector<vector<int>> salesSlips = generateSalesSlips();
 	for (int i = 0; i < rows; i++)
@@ -87,7 +85,7 @@ void populateSales(int sales[][4], int rows)
 	}
 }
 
-void printSales(const int sales[][4], int rows)
+void printSales(const int sales[5][4], int rows)
 {
 	int columnTotals [4] = {0, 0, 0, 0};
 	for (int i = 0; i < rows; i++)
