@@ -88,8 +88,10 @@ void populateSales(int sales[5][4], int rows)
 void printSales(const int sales[5][4], int rows)
 {
 	int columnTotals [4] = {0, 0, 0, 0};
+    cout << "            SP1   SP2   SP3   SP4  Tot." << endl;
 	for (int i = 0; i < rows; i++)
 	{
+        cout << " Product " << (i + 1);
 		int rowTotal = 0;
 		for (int j = 0; j < 4; j++) 
 		{
@@ -101,10 +103,15 @@ void printSales(const int sales[5][4], int rows)
 
 		cout << " " << rowTotal << endl;
 	}
+    cout << "    Total:";
+    int grandTotal = 0;
 	for (int k = 0; k < 4; k++)
 	{
-		printf("%*d ", 5, columnTotals[k]);
+        int columnTotal = columnTotals[k];
+        grandTotal += columnTotal;
+        printf("%*d ", 5, columnTotal);
 	}
+    cout << " " << grandTotal;
 	cout << endl;
 }
 
