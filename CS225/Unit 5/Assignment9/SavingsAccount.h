@@ -7,8 +7,6 @@
 
 
 class SavingsAccount {
-    // static data member annualInterestRate
-    // static member function modifyInterestRate
 public:
     SavingsAccount(double);
     double calculateMonthlyInterest();
