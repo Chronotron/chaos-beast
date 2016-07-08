@@ -34,8 +34,8 @@ int main() {
 }
 
 void reportCylinder(Cylinder cylinder) {
-    cout << resetiosflags(ios::fixed);
     cout << "The cylinder with a radius of " << cylinder.getRadius() << " and height of " <<
     cylinder.getHeight() << " has a surface area of:  " << fixed << setprecision(2) << cylinder.getSurfaceArea() <<
     endl;
+    cout << resetiosflags(ios::fixed); // restore output stream state
 }
