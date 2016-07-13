@@ -4,21 +4,60 @@
 
 #include "RationalNumber.h"
 #include <cstdlib>
+#include <sstream>
 
 int gcd(int, int);
 
 RationalNumber::RationalNumber(int numerator, int denominator) {
-    this->numerator = numerator;
-    this->denominator = denominator != 0 ? abs(denominator) : 1;
+    setDenominator(denominator);
+    setNumerator(numerator);
     simplify();
 }
 
 void RationalNumber::simplify() {
     bool improperFraction = numerator > denominator;
-    int greatestCommonDivisor = improperFraction ? gcd(numerator, denominator) : gcd(denominator, numerator);
+    int absNumerator = abs(numerator);
+    int greatestCommonDivisor = improperFraction ? gcd(absNumerator, denominator) : gcd(denominator, absNumerator);
     numerator = numerator / greatestCommonDivisor;
     denominator = denominator / greatestCommonDivisor;
 }
+
+RationalNumber &RationalNumber::operator+=(const RationalNumber &right) {
+    int rightDenominator = right.denominator;
+    int rightNumerator = right.numerator;
+    int leftDenominator = this->denominator;
+    int leftNumerator = this->numerator;
+
+    int reconciledDenominator = rightDenominator * leftDenominator;
+    int reconciledRightNumerator = rightNumerator * leftDenominator;
+    int reconciledLeftNumerator = leftNumerator * rightDenominator;
+
+    this->setNumerator(reconciledLeftNumerator + reconciledRightNumerator);
+    this->setDenominator(reconciledDenominator);
+    simplify();
+
+    return *this;
+}
+
+RationalNumber RationalNumber::operator+(const RationalNumber &right) {
+    *this += right;
+    return *this;
+}
+
+void RationalNumber::setDenominator(int denominator) {
+    this->denominator = denominator != 0 ? abs(denominator) : 1;
+}
+
+void RationalNumber::setNumerator(int numerator) {
+    this->numerator = numerator;
+}
+
+string RationalNumber::toString() {
+    std::stringstream sstm;
+    sstm << numerator << "/" << denominator;
+    return sstm.str();
+}
+
 
 int gcd(int largerNumber, int smallerNumber) {
     if (smallerNumber == 1) {
