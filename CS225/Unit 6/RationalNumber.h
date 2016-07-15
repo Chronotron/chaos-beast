@@ -19,9 +19,16 @@ public:
     RationalNumber operator/(const RationalNumber &);
     RationalNumber &operator-=(const RationalNumber &);
     RationalNumber operator-(const RationalNumber &);
+    bool operator>(const RationalNumber &);
+    bool operator<(const RationalNumber &);
+    bool operator==(const RationalNumber &);
+    bool operator!=(const RationalNumber &);
+    bool operator>=(const RationalNumber &);
+    bool operator<=(const RationalNumber &);
 private:
     int denominator;
     int numerator;
+    int compareTo(RationalNumber);
     void setDenominator(int);
     void setNumerator(int);
     void simplify();

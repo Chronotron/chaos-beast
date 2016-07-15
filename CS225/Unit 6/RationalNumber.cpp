@@ -86,20 +86,62 @@ RationalNumber RationalNumber::operator-(const RationalNumber &right) {
 }
 
 RationalNumber RationalNumber::operator*(const RationalNumber &right) {
-    int newNumerator = this->numerator* right.numerator;
-    int newDenominator = this->denominator* right.denominator;
+    int newNumerator = this->numerator * right.numerator;
+    int newDenominator = this->denominator * right.denominator;
     return RationalNumber(newNumerator, newDenominator);
 }
 
 RationalNumber RationalNumber::operator/(const RationalNumber &right) {
     int newNumerator = this->numerator * right.denominator;
-    int newDenominator = this->denominator* right.numerator;
+    int newDenominator = this->denominator * right.numerator;
     return RationalNumber(newNumerator, newDenominator);
+}
+
+bool RationalNumber::operator>(const RationalNumber &right) {
+    return compareTo(right) == 1;
+}
+
+bool RationalNumber::operator<(const RationalNumber &right) {
+    return compareTo(right) == -1;
+}
+
+bool RationalNumber::operator==(const RationalNumber &right) {
+    return compareTo(right) == 0;
+}
+
+bool RationalNumber::operator>=(const RationalNumber &right) {
+    return *this == right || *this > right;
+}
+
+bool RationalNumber::operator<=(const RationalNumber &right) {
+    return *this == right || *this < right;
+}
+
+int RationalNumber::compareTo(RationalNumber right) {
+    int rightDenominator = right.denominator;
+    int rightNumerator = right.numerator;
+    int leftDenominator = this->denominator;
+    int leftNumerator = this->numerator;
+
+    int reconciledRightNumerator = rightNumerator * leftDenominator;
+    int reconciledLeftNumerator = leftNumerator * rightDenominator;
+
+    if (reconciledLeftNumerator > reconciledRightNumerator) {
+        return 1;
+    } else if (reconciledLeftNumerator < reconciledRightNumerator) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+bool RationalNumber::operator!=(const RationalNumber &right) {
+    return compareTo(right) != 0;
 }
 
 
 int gcd(int largerNumber, int smallerNumber) {
-    if (smallerNumber == 0) {
+    if (smallerNumber == 0 || (largerNumber - smallerNumber) < smallerNumber) {
         return 1;
     }
 
