@@ -15,6 +15,10 @@ public:
     string toString();
     RationalNumber &operator+=(const RationalNumber &);
     RationalNumber operator+(const RationalNumber &);
+    RationalNumber operator*(const RationalNumber &);
+    RationalNumber operator/(const RationalNumber &);
+    RationalNumber &operator-=(const RationalNumber &);
+    RationalNumber operator-(const RationalNumber &);
 private:
     int denominator;
     int numerator;
