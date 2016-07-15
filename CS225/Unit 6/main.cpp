@@ -4,6 +4,14 @@
 using namespace std;
 
 int main() {
+
+    cout << RationalNumber(6, 9).toString() << endl;
+    cout << RationalNumber(11, 13).toString() << endl;
+    cout << RationalNumber(7, 27).toString() << endl;
+    cout << RationalNumber(7, 28).toString() << endl;
+    cout << RationalNumber(11, 33).toString() << endl;
+    cout << RationalNumber(6, 1024).toString() << endl;
+
     RationalNumber rationalNumber(2, 4);
     cout << "Initial: " << rationalNumber.toString() << endl;
     RationalNumber rationalOtherNumber(1, 8);

@@ -141,7 +141,7 @@ bool RationalNumber::operator!=(const RationalNumber &right) {
 
 
 int gcd(int largerNumber, int smallerNumber) {
-    if (smallerNumber == 0 || (largerNumber - smallerNumber) < smallerNumber) {
+    if (smallerNumber == 0 || (largerNumber - smallerNumber) == 1) {
         return 1;
     }
 
@@ -150,8 +150,12 @@ int gcd(int largerNumber, int smallerNumber) {
     }
 
     int remainder = largerNumber % smallerNumber;
-    if (remainder == 0 || remainder == 1) {
+    if (remainder == 0) {
         return smallerNumber;
+    }
+
+    if (remainder == 1) {
+        return 1;
     }
 
     return gcd(smallerNumber, remainder);
