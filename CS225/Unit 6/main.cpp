@@ -3,6 +3,8 @@
 
 using namespace std;
 
+void expect(bool, bool);
+
 int main() {
 
     cout << RationalNumber(6, 9).toString() << endl;
@@ -11,6 +13,7 @@ int main() {
     cout << RationalNumber(7, 28).toString() << endl;
     cout << RationalNumber(11, 33).toString() << endl;
     cout << RationalNumber(6, 1024).toString() << endl;
+    cout << RationalNumber(99, 198).toString() << endl;
 
     RationalNumber rationalNumber(2, 4);
     cout << "Initial: " << rationalNumber.toString() << endl;
@@ -27,34 +30,47 @@ int main() {
     RationalNumber minus = rationalNumber - rationalNumber;
     cout << "Initial - Initial: " << minus.toString() << endl;
 
-    RationalNumber number1 = RationalNumber(1, 2);
-    RationalNumber multi = number1 * number1;
+    RationalNumber oneHalf = RationalNumber(1, 2);
+    RationalNumber multi = oneHalf * oneHalf;
     cout << "1/2 * 1/2 = " << multi.toString() << endl;
 
-    RationalNumber div = number1 / number1;
+    RationalNumber div = oneHalf / oneHalf;
     cout << "1/2 / 1/2 = " << div.toString() << endl;
 
-    bool equal = number1 == RationalNumber(2, 4);
+    bool equal = oneHalf == RationalNumber(2, 4);
+    expect(true, equal);
     cout << "1/2 == 2/4: " << equal << endl;
 
-    RationalNumber number = RationalNumber(3, 4);
-    bool notEqual = number1 == number;
+    RationalNumber threeFourths = RationalNumber(3, 4);
+    bool notEqual = oneHalf == threeFourths;
+    expect(false, notEqual);
     cout << "1/2 == 2/4: " << notEqual << endl;
 
-    bool lessThan = number1 < number;
+    bool lessThan = oneHalf < threeFourths;
+    expect(true, lessThan);
     cout << "1/2 < 3/4: " << lessThan << endl;
 
-    RationalNumber number2 = RationalNumber(2, 2);
-    bool notLessThan = number2 < number;
+    RationalNumber twoOverTwo = RationalNumber(2, 2);
+    bool notLessThan = twoOverTwo < threeFourths;
+    expect(false, notLessThan);
     cout << "2/2 < 3/4: " << notLessThan << endl;
 
-    bool lessThanOrEqual = number1 <= number;
+    bool lessThanOrEqual = oneHalf <= threeFourths;
+    expect(true, lessThanOrEqual);
     cout << "1/2 <= 3/4: " << lessThanOrEqual << endl;
 
-    lessThanOrEqual = number1 <= RationalNumber(2, 4);
+    lessThanOrEqual = oneHalf <= RationalNumber(2, 4);
+    expect(true, lessThanOrEqual);
     cout << "1/2 <= 2/4: " << lessThanOrEqual << endl;
 
-    bool notLessThanOrEqual = number2 <= number;
+    bool notLessThanOrEqual = twoOverTwo <= threeFourths;
+    expect(false, notLessThanOrEqual);
     cout << "2/2 <= 3/4: " << notLessThanOrEqual << endl;
     return 0;
+}
+
+void expect(bool expected, bool actual) {
+    if(expected != actual) {
+        throw 1;
+    }
 }
