@@ -10,9 +10,10 @@
 
 class Package {
 public:
-    Package(double, Address, Address);
+    Package(double, double, Address, Address);
 
     double calculateCost();
+
     Address getSender();
 
     Address getReceiver();
@@ -21,6 +22,7 @@ private:
     Address receiver;
     Address sender;
     double weight;
+    double costPerOunce;
 };
 
 
