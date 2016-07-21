@@ -11,6 +11,7 @@ using namespace std;
 
 class Address {
 public:
+    Address();
     Address(string,string,string,string,string);
     string getAddress();
     string getCity();

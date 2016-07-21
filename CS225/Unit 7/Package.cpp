@@ -24,6 +24,12 @@ Address Package::getSender() {
     return Address(sender);
 }
 
+Package::Package() : sender(), receiver(){
+
+}
+
+
+
 //endregion
 
 

@@ -8,10 +8,10 @@
 
 #include "Address.h"
 
-// force push
-
 class Package {
 public:
+    Package();
+
     Package(double, double, Address, Address);
 
     double calculateCost();
@@ -20,9 +20,11 @@ public:
 
     Address getReceiver();
 
-private:
+protected:
     Address receiver;
     Address sender;
+
+private:
     double weight;
     double costPerOunce;
 };
