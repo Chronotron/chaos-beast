@@ -14,11 +14,13 @@ public:
 
     Package(double, double, Address, Address);
 
-    double calculateCost();
+    virtual double calculateCost();
 
     Address getSender();
 
     Address getReceiver();
+
+    double getWeight();
 
 protected:
     Address receiver;

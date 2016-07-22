@@ -5,7 +5,7 @@
 #include "TwoDayPackage.h"
 
 TwoDayPackage::TwoDayPackage(double flatFee, double weight, double costPerOunce, Address sender, Address receiver)
-        :  Package(weight, costPerOunce, sender, receiver) {
+        : Package(weight, costPerOunce, sender, receiver) {
     this->flatFee = flatFee > 0.0 ? flatFee : 0.0;
 }
 

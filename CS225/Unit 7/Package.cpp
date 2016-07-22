@@ -28,6 +28,12 @@ Package::Package() : sender(), receiver(){
 
 }
 
+double Package::getWeight() {
+    return weight;
+}
+
+
+
 
 
 //endregion
