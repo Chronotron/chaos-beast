@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pen Order Form</title>
+
+    <style>
+
+        body {
+            font-family: Calibri, serif;
+        }
+
+        nav {
+            padding: 5px;
+            margin-left: 15px;
+        }
+
+        nav .NavigationLink {
+            font-family: "Book Antiqua", serif;
+        }
+
+        form {
+            padding: 10px 5px 20px 5px;
+            text-align: center;
+            max-width: 400px;
+            color: #45719d;
+            margin-left: 15px;
+        }
+
+        form .FormContent {
+            padding: 5px;
+            border: 1px solid #D3D3D3;
+        }
+
+        form .FormContent h1 {
+            text-decoration: underline;
+        }
+
+        form .FormControls {
+            text-align: right;
+            padding: 5px;
+            border: 1px dotted #D3D3D3;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        form#PenOrderForm .FormControls input[type=submit] {
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form#PenOrderForm .FormControls input[type=submit]:hover {
+            background-color: #45719d !important;
+            color: #FFF;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        /*
+         * Created by Paul Parker January 22, 2017
+         */
+
+        /**
+         * creates a line with a br tag at the end
+         * @param string
+         * @returns {string}
+         */
+        function appendLine(string) {
+            return string + "<br>"
+        }
+
+        /**
+         * decorates data with price information
+         * @param myData
+         */
+        function calculatePrice(myData) {
+            var price = 4.25;
+            var taxRate = 0.07;
+            var shippingRate = 0.02;
+            var orderedCount = myData.getNumberOfItems();
+
+            var unadjusted = price * orderedCount;
+            var taxExtra = unadjusted * taxRate;
+            var shippingExtra = unadjusted * shippingRate;
+
+            var totalPrice = unadjusted + taxExtra + shippingExtra;
+            myData.priceData = {
+                totalPrice: totalPrice,
+                taxes: taxExtra,
+                shipping: shippingExtra,
+                price: unadjusted,
+
+                getPrice: function () {
+                    return this._getFormatted(this.price);
+                },
+                getTotalPrice: function () {
+                    return this._getFormatted(this.totalPrice);
+                },
+                getTaxes: function () {
+                    return this._getFormatted(this.taxes);
+                },
+                getShipping: function () {
+                    return this._getFormatted(this.shipping);
+                },
+
+                _getFormatted: function (num) {
+                    return "$" + num.toFixed(2);
+                }
+            };
+
+        }
+
+        /**
+         * calculates the total and generates the user order message
+         */
+        function calculateTotal() {
+            var myData = {};
+            var customerNameElement = document.getElementById("customerName");
+            var deliveryDateElement = document.getElementById("deliveryDate");
+            var numberItemsElement = document.getElementById("numberItems");
+
+            myData.cusName = customerNameElement.value;
+            myData.delDate = deliveryDateElement.value;
+            myData.numItems = numberItemsElement.value;
+            myData.getNumberOfItems = function () {
+                return getSafeInt(this.numItems)
+            };
+
+            calculatePrice(myData);
+            messageUser(myData);
+        }
+
+        function getSafeInt(num) {
+            return parseInt(num, 10) || 0;
+        }
+
+        /**
+         * generates the user order message
+         * @param myData
+         */
+        function messageUser(myData) {
+            var message = appendLine("Thank you " + myData.cusName + " for your order");
+
+            var items = myData.getNumberOfItems() != 1 ? "items" : "item";
+            message += appendLine("You will receive " + myData.getNumberOfItems() + " " + items + " delivered to you on " + myData.delDate);
+            message += appendLine("Your price of your " + items + " is " + myData.priceData.getPrice());
+            message += appendLine("The tax charge is " + myData.priceData.getTaxes());
+            message += appendLine("The shipping charge is " + myData.priceData.getShipping());
+            message += appendLine("Your total is " + myData.priceData.getTotalPrice());
+            document.write(message);
+        }
+
+    </script>
+
+</head>
+<body>
+<nav>
+    <a class="NavigationLink" href="week1-1.html">Return to Main Page</a>
+</nav>
+<form id="PenOrderForm" name="PenOrderForm">
+    <h1>Pen Order Form</h1>
+    <div class="FormContent">
+        <p>
+            <label for="customerName">Name</label>
+            <input id="customerName" type="text" tabindex="1">
+        </p>
+        <p>
+            <label for="deliveryDate">Delivery Date</label>
+            <input id="deliveryDate" type="text" tabindex="2">
+        </p>
+        <p>
+            <label for="numberItems">Number of Items</label>
+            <input id="numberItems" type="text" tabindex="3">
+        </p>
+    </div>
+    <div class="FormControls">
+        <!--For now prevent real form submission-->
+        <input type="submit" value="Order" tabindex="3" style="background-color: #00FFFF"
+               onclick="calculateTotal();return false;">
+    </div>
+</form>
+<hr>
+<br>
+<code>
+    &copy;&nbsp;&nbsp;2017&nbsp;&nbsp;<span style="font-style: italic">Items Outlet, Inc.</span>
+</code>
+</body>
+</html>
