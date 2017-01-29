@@ -1,0 +1,129 @@
+/*Paul Parker, week2-1.css created 1/28/2017*/
+
+
+/*body*/
+body {
+    margin: 0 auto;
+    font-family: black Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    background-color: #042841;
+}
+
+/*header section*/
+header {
+    height: 100px;
+    width: 960px;
+    margin: 0 auto;
+    background-color: #d8e6b3;
+    background-image: url("../images/week2-1banner.jpg");
+    background-size: 960px 100px;
+    background-repeat: no-repeat;
+}
+
+h2 {
+    text-align: center;
+    padding-right: 225px;
+    color: white;
+    font-family: Papyrus, serif;
+    text-shadow: 2px 1px #042841;
+}
+
+.logo {
+    float: left;
+    width: 180px;
+    height: 100px;
+}
+
+.topMenu {
+    padding-right: 40px;
+    text-align: right;
+    color: #042841;
+    text-decoration: none;
+    font-size: 9pt;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.topMenu a:visited {
+    color: #141919;
+}
+
+.topMenu a:default {
+    color: #141919;
+}
+
+.topMenu a:hover {
+    color: #A69055;
+}
+
+/*main section*/
+.content {
+    width: 780px;
+    padding: 0 19px;
+    vertical-align: top;
+    display: table-cell;
+}
+
+.content h2 {
+    color: #042841;
+}
+
+.content a:default {
+    text-decoration: none;
+    color: #141919;
+}
+
+.content a:visited {
+    text-decoration: none;
+    color: #141919;
+}
+
+.content a:hover {
+    color: #A69055;
+}
+/*left aside*/
+aside {
+    vertical-align: top;
+    padding: 0;
+    display: table-cell;
+}
+
+aside p {
+    padding: 0;
+    text-align: center;
+    padding-left: 5px;
+}
+
+aside ul {
+    margin: 0;
+    padding: 10px 20px;
+    background-color: #1A5476;
+    list-style: none;
+    text-decoration: none;
+}
+
+aside a:default {
+    font-family: Verdana, Geneva, sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+aside a:visited {
+    font-family: Verdana, Geneva, sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+aside a:hover {
+    color: #CC9900;
+}
+
+/*content section*/
+
+/*footer*/
+footer {
+    width: 960px;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #508d8d;
+}

@@ -43,19 +43,53 @@
                     <a href="week1-2.html">Week 1-2</a>
                 </li>
                 <li>
-                    <a href="www.W3Schools.com">W3Schools.com</a>
+                    <a href="http://www.W3Schools.com">W3Schools.com</a>
                 </li>
             </ul>
         </nav>
         <br>
         <p>
-            Some text content?
+            Fancy navigation
         </p>
         <br>
     </aside>
     <!--insert main content-->
     <section class="content">
         <h2>Welcome to My Rummage Store</h2>
+        <fieldset>
+            <legend>Text Area Element</legend>
+            <label for="txtArea">Here is an example of a textarea</label>
+            <textarea id="txtArea"></textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Various Inputs</legend>
+            <div>
+                <label for="numberInput">This is a required number input (min 1, max 10, step 1)</label>
+                <input id="numberInput" type="number" min="1" max="10" step="1" required>
+            </div>
+            <div>
+                <label>Do you like radios?</label>
+                <div>
+                    <label>Radio 1</label>
+                    <input type="radio" value="1">
+                </div>
+                <div>
+                    <label>Radio 2</label>
+                    <input type="radio" value="2">
+                </div>
+                <div>
+                    <label>Radio 3</label>
+                    <input type="radio" value="3">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Our fantastic logo</legend>
+            <figure>
+                <img src="./../images/week2-1logo.png" alt="The Website Logo">
+            </figure>
+            <cite>This logo was made in MSPaint</cite>
+        </fieldset>
     </section>
 </div>
 <!--insert footer here-->
