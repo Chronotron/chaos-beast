@@ -20,6 +20,10 @@ header {
     background-repeat: no-repeat;
 }
 
+header h1 {
+    color: white;
+}
+
 h2 {
     text-align: center;
     padding-right: 225px;
