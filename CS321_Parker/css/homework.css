@@ -1,0 +1,27 @@
+/*Paul Parker, homework.css created 2/5/2017*/
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.jumbotron {
+    background-image: url("../images/week2-1banner.jpg");
+    color: white;
+    text-shadow: -2px 2px #1A5476;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron h1 {
+    font-weight: bold;
+}
+
+.navbar-inverse {
+    background-color: #623e5e;
+}
+
+/*product table*/
+.product-table tbody td.cell-data {
+    text-align: center;
+}

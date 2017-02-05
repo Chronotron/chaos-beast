@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://getbootstrap.com/examples/jumbotron/# -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/week2-2favicon.ico">
+
+    <title>Items Outlet, Inc.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./../css/homework.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Week 2-2</a>
+            <a class="navbar-brand" href="./week2-1.html">Week 2-1</a>
+            <a class="navbar-brand" href="./week3-1.html">Week 3-1</a>
+            <a class="navbar-brand" href="./week3-2.html">Week 3-2</a>
+            <a class="navbar-brand" href="./week3-3.html">Week 3-3</a>
+            <a class="navbar-brand" href="./home.html">Home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Items Outlet, Inc.</h1>
+        <p>The worlds #1 purveyor of items for all tastes and budgets</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn
+            more »</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="product-table table">
+                <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Manufacturer, Make, Model</th>
+                    <th>Condition</th>
+                    <th>Description</th>
+                    <th>Retail Price</th>
+                    <th>Rummage Sale Price</th>
+                    <!--Picture-->
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>© 2017 Paul Parker, Items Outlet, Inc.</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Bootstrap core JavaScript   ========== -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+<script type="application/javascript">
+
+    if (!String.prototype.format) {
+        String.prototype.format = function () {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
+        };
+    }
+
+    (function () {
+
+        function Product(name, manufacturerMakeModel, condition, description, retailPrice, rummagePrice, productCode) {
+            this.name = name;
+            this.manufacturerMakeModel = manufacturerMakeModel;
+            this.condition = condition;
+            this.description = description;
+            this.retailPrice = retailPrice;
+            this.rummagePrice = rummagePrice;
+            this.productCode = productCode;
+        }
+
+        Product.CONDITIONS = {
+            NEW: "New",
+            USED: "Used"
+        };
+
+        Product.prototype.getThumbnailUrl = function () {
+            return "../images/{0}sm.png".format(this.productCode);
+        };
+
+        Product.prototype.getImageUrl = function () {
+            return "../images/{0}.png".format(this.productCode);
+        };
+
+        Product.prototype.getFormattedRetailPrice = function () {
+            return formatPrice(this.retailPrice);
+        };
+
+        Product.prototype.getFormattedRummagePrice = function () {
+            return formatPrice(this.rummagePrice);
+        };
+
+        function formatPrice(price) {
+            return "$" + price.toFixed(2);
+        }
+
+        $(document).ready(function () {
+            var productTableBody = $(".product-table tbody");
+
+            var pens = new Product("Pens", "Pen Co., 12 pack, Fountain", Product.CONDITIONS.NEW, "Fountain pens in various colors", 2.99, 1.99, "product1");
+            var pencils = new Product("Pencils", "Pen Co., 10 pack, HB", Product.CONDITIONS.NEW, "Standard HB pencils", 3.99, 1.99, "product2");
+            var vellumPaper = new Product("Vellum Paper", "Surfaces R Us, 20 sheets, 30 weight", Product.CONDITIONS.NEW, "High quality vellum sheets suitable for calligraphy", 10.00, 7.99, "product3");
+            var draftingDesk = new Product("Drafting Desk", "Second Chance Furniture, Standard, 3' x 4'", Product.CONDITIONS.USED, "Gently used adjustable drafting desk", 150.00, 100.00, "product4");
+            var deskLamp = new Product("Desk Lamp", "Second Chance Furniture, Efficiency, 30 watt", Product.CONDITIONS.USED, "Gently used desk mountable lamp", 20.00, 12.99, "product5");
+
+            var products = [pens, pencils, vellumPaper, draftingDesk, deskLamp];
+
+            products.forEach(function (product) {
+                var row = $("<tr></tr>");
+                row.append($("<td>{0}</td>".format(product.name)));
+                row.append($("<td>{0}</td>".format(product.manufacturerMakeModel)));
+                row.append($("<td class='cell-data'>{0}</td>".format(product.condition)));
+                row.append($("<td>{0}</td>".format(product.description)));
+                row.append($("<td class='cell-data'>{0}</td>".format(product.getFormattedRetailPrice())));
+                row.append($("<td class='cell-data'>{0}</td>".format(product.getFormattedRummagePrice())));
+                row.append($("<a class='thumbnail' href='{0}' target='_blank'><img alt='{1}' src='{2}'></img></a></td>".format(product.getImageUrl(), product.name, product.getThumbnailUrl())));
+
+                productTableBody.append(row);
+            })
+
+        });
+    })();
+</script>
+
+</body>
+</html>
