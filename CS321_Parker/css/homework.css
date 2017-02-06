@@ -25,3 +25,7 @@ body {
 .product-table tbody td.cell-data {
     text-align: center;
 }
+
+.product-table thead th {
+    text-align: center;
+}

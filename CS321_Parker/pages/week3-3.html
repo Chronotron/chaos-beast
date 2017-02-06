@@ -42,6 +42,9 @@
             </button>
             <a class="navbar-brand" href="#">Week 2-2</a>
             <a class="navbar-brand" href="./week2-1.html">Week 2-1</a>
+            <a class="navbar-brand" href="./week3-1.html">Week 3-1</a>
+            <a class="navbar-brand" href="./week3-2.html">Week 3-2</a>
+            <a class="navbar-brand" href="./week3-3.html">Week 3-3</a>
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -69,34 +72,102 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
-            <p>
-                Check out these sweet pens
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
+    <form>
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset>
+                    <legend>Personal</legend>
+                    <label for="firstName">First Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="firstName" autofocus tabindex="1" required>
+                    </div>
+                    <label for="lastName">Last Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="lastName" tabindex="2" required>
+                    </div>
+                    <label for="address">Address</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="address" tabindex="3" required>
+                    </div>
+                    <label for="street">Street</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="street" tabindex="4" required>
+                    </div>
+                    <label for="city">City</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="city" tabindex="5" required>
+                    </div>
+                    <label for="postalcode">Postal Code</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="postalcode" tabindex="6" required>
+                    </div>
+                    <label for="region">Region</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="region" tabindex="7" required>
+                    </div>
+                    <label for="country">Country</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="country" tabindex="8" required>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-4">
+                <fieldset>
+                    <legend>Contact</legend>
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                        <input type="tel" class="form-control" id="phone" tabindex="9" required>
+                    </div>
+                    <label for="email">E-mail</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="email" tabindex="10" required>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-4">
+                <fieldset>
+                    <legend>Misc</legend>
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" tabindex="11" required>
+                    </div>
+                    <label for="color">Favorite Color</label>
+                    <div class="input-group">
+                        <input type="color" class="form-control" id="color" tabindex="12" required>
+                    </div>
+                    <label for="dob">Birthday</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="dob" tabindex="13" required>
+                    </div>
+                    <label for="attendedcount">Rummage Sales Attended</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="attendedcount" min="0" max="100" step="1"
+                               tabindex="14" required>
+                    </div>
+                    <label>Do you use ebay to sell your items?</label>
+                    <div>
+                        <label for="rdoYes">
+                            <input type="radio" id="rdoYes" name="ebay" aria-label="..." checked value="Yes"
+                                   tabindex="15">Yes
+                        </label>
+                        <br>
+                        <label for="rdoNo">
+                            <input type="radio" id="rdoNo" name="ebay" aria-label="..." value="No"
+                                   tabindex="16">
+                            No
+                        </label>
+                    </div>
+                    <input type="hidden" id="mysecret" value="mysecret">
+                </fieldset>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
-            <p>
-                Graphite encased in wood has never been more in style
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
+        <div class="row">
+            <div id="results" class="col-md-12"></div>
         </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-    </div>
-
+        <hr>
+        <input type="submit" class="btn btn-default" onclick="submitForm();return false;" value="Submit">
+    </form>
     <hr>
 
     <footer>
@@ -113,6 +184,55 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+
+<script type="application/javascript">
+    function getInputValue(inputId) {
+        var element = document.getElementById(inputId);
+        if (!element) {
+            return "";
+        }
+        return element.value;
+    }
+
+    function submitForm() {
+        try {
+
+            var formInfo = {
+                firstName: getInputValue("firstName"),
+                lastName: getInputValue("lastName"),
+                address: getInputValue("address"),
+                street: getInputValue("street"),
+                city: getInputValue("city"),
+                postalCode: getInputValue("postalcode"),
+                region: getInputValue("region"),
+                country: getInputValue("country"),
+                phone: getInputValue("phone"),
+                email: getInputValue("email"),
+                password: getInputValue("password"),
+                color: getInputValue("color"),
+                dob: getInputValue("dob"),
+                attendedCount: getInputValue("attendedcount"),
+                sellsOnEbay: document.getElementById("rdoYes").checked
+            };
+
+            data = "";
+            for (var prop in formInfo) {
+                data += prop + ": " + formInfo[prop] + "<br>"
+            }
+
+            var results = document.getElementById("results");
+            results.innerHTML = data;
+            $(results).css("color", formInfo["color"]);
+
+        } catch (e) {
+            alert(e.message);
+        }
+
+
+
+        return false;
+    }
+</script>
 
 </body>
 </html>
