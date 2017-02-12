@@ -34,3 +34,29 @@ body {
 .thumbnail.used h2 {
     color: #c0a16b;
 }
+
+/*hides element*/
+.hidden {
+    display: none;
+}
+
+/*style columns based on configuration*/
+.configuration-1 > div > div {
+    background-color: #bac4d7;
+}
+.configuration-2 > div > div {
+    background-color: #d1c0d7;
+}
+.configuration-3 > div > div {
+    background-color: #c4d7c9;
+}
+
+/*price styles*/
+.price:not(.retail-price) {
+    font-weight: bold;
+}
+
+.price.retail-price {
+    font-style: italic;
+    text-decoration: line-through;
+}

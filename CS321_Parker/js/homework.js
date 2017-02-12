@@ -19,6 +19,7 @@ function Product(name, manufacturerMakeModel, condition, description, retailPric
     this.retailPrice = retailPrice;
     this.rummagePrice = rummagePrice;
     this.productCode = productCode;
+    this.longDescription = "";
 }
 
 Product.CONDITIONS = {
@@ -93,10 +94,15 @@ var websiteInformation = {
 
     function loadProducts() {
         var pens = new Product("Pens", "Pen Co., 12 pack, Fountain", Product.CONDITIONS.NEW, "Fountain pens in various colors", 2.99, 1.99, "product1");
+        pens.longDescription = "High quality pens suitable for a variety of tasks. Bright and multi-colored.";
         var pencils = new Product("Pencils", "Pen Co., 10 pack, HB", Product.CONDITIONS.NEW, "Standard HB pencils", 3.99, 1.99, "product2");
+        pencils.longDescription = "A quality set of wooden standard pencils. HB Graphite suitable for note taking or artwork.";
         var vellumPaper = new Product("Vellum Paper", "Surfaces R Us, 20 sheets, 30 weight", Product.CONDITIONS.NEW, "High quality vellum sheets suitable for calligraphy", 10.00, 7.99, "product3");
+        vellumPaper.longDescription = "Quality vellum paper for the calligrapher or artist. Holds ink well and suitable for archival prints";
         var draftingDesk = new Product("Drafting Desk", "Second Chance Furniture, Standard, 3' x 4'", Product.CONDITIONS.USED, "Gently used adjustable drafting desk", 150.00, 100.00, "product4");
+        draftingDesk.longDescription = "Like New! A sturdy desk available for a reduced price.";
         var deskLamp = new Product("Desk Lamp", "Second Chance Furniture, Efficiency, 30 watt", Product.CONDITIONS.USED, "Gently used desk mountable lamp", 20.00, 12.99, "product5");
+        deskLamp.longDescription = "Like New! New LED bulbs and comes with desk mount or optional standing mount.";
 
         websiteInformation.products = [pens, pencils, vellumPaper, draftingDesk, deskLamp];
         websiteInformation.products.forEach(function (product) {

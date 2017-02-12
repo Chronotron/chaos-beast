@@ -75,14 +75,48 @@
 
 <div class="container">
 
-    <div id="no-product-found" class="alert alert-warning" style="display: none">
+    <div id="no-product-found" class="alert alert-warning hidden">
         Oops! We couldn't find the product you were looking for.
     </div>
 
-    <div id="product-information" class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
+    <div id="product-information" class="row hidden">
+        <div id="col1">
+            <div id="thumbnail-panel" class="thumbnail">
+                <img id="product-img">
+                <div class="caption">
+                    <h3 id="product-header"></h3>
+                    <p id="product-description"></p>
+                    <p><a href="#" class="btn btn-primary" role="button" onclick="configureColumnStates(1)">Expand</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="col2">
+            <div id="description-panel" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    <span class="info"></span>
+                    <p><a href="#" class="btn btn-primary" role="button" onclick="configureColumnStates(2)">Expand</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="col3">
+            <div id="order-panel" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    <span id="retail-price" class="price retail-price"></span>
+                    <span id="rummage-price" class="price"></span>
+                    <p class="make-model"></p>
+                    <p><a href="#" class="btn btn-primary" role="button" onclick="configureColumnStates(3)">Expand</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <hr>
@@ -106,19 +140,117 @@
 
 <script type="application/javascript">
 
+    var columnState = {
+        configuration: 1,
+        col1: 4,
+        col2: 4,
+        col3: 4,
+
+        getColumnClass: function (column) {
+            var col = this[column];
+            if (!col) {
+                return "";
+            }
+
+            return "col-md-{0}".format(col);
+        },
+        setColumnConfiguration: function (configuration) {
+            this.configuration = configuration || 1;
+            switch (configuration) {
+                case 1:
+                    this.col1 = 6;
+                    this.col2 = 4;
+                    this.col3 = 2;
+                    break;
+                case 2:
+                    this.col1 = 4;
+                    this.col2 = 6;
+                    this.col3 = 2;
+                    break;
+                case 3:
+                    this.col1 = 4;
+                    this.col2 = 4;
+                    this.col3 = 4;
+                    break;
+            }
+        }
+    };
+
+    function configureColumnStates(configuration) {
+        var $product = $("#product-information");
+        $product.removeClass("configuration-{0}".format(columnState.configuration));
+        configuration = configuration || 1;
+        columnState.setColumnConfiguration(configuration);
+        $product.addClass("configuration-{0}".format(configuration));
+        setColumn("col1");
+        setColumn("col2");
+        setColumn("col3");
+    }
+
+    function setColumn(colId) {
+        var jelColumn = $("#{0}".format(colId));
+        jelColumn.removeClass("col-md-2");
+        jelColumn.removeClass("col-md-4");
+        jelColumn.removeClass("col-md-8");
+        jelColumn.addClass(columnState.getColumnClass(colId));
+    }
+
     (function () {
 
-        $(document).ready(function () {
+        function configureOrderInformation(product) {
+            var orderPanel = $('#order-panel');
+            var orderTitle = orderPanel.find('.panel-title');
+            var retailPrice = orderPanel.find("#retail-price");
+            retailPrice.text(product.getFormattedRetailPrice());
+            var rummagePrice = orderPanel.find("#rummage-price");
+            rummagePrice.text(product.getFormattedRummagePrice());
+            if (product.isUsed()) {
+                orderTitle.addClass("used");
+                orderTitle.text(Product.CONDITIONS.USED);
+            } else {
+                orderTitle.text(Product.CONDITIONS.NEW);
+            }
+        }
+
+        function configureImageInformation(product) {
+            var productImage = $('#product-img');
+            productImage.attr("src", product.getImageUrl());
+            productImage.attr("alt", product.name);
+
+            var productHeader = $('#product-header');
+            productHeader.text(product.name);
+
+            var productDescription = $('#product-description');
+            productDescription.text(product.description);
+        }
+
+        function loadProduct() {
             var product = websiteInformation.getQueriedProduct() || websiteInformation.products[0];
 
             // handle no product found
             if (!product) {
-                $("#no-product-found").css("display", "block");
+                $("#no-product-found").removeClass("hidden");
                 return;
             }
 
+            $("#product-information").removeClass("hidden");
 
+            configureImageInformation(product);
 
+            var descriptionPanel = $('#description-panel');
+            var descriptionTitle = descriptionPanel.find('.panel-title');
+            descriptionTitle.text();
+            var descriptionInfo = descriptionPanel.find('.info');
+            descriptionInfo.text(product.longDescription);
+            var descriptionMakeModel = descriptionPanel.find('.make-model');
+            descriptionMakeModel.text(product.manufacturerMakeModel);
+
+            configureOrderInformation(product);
+        }
+
+        $(document).ready(function () {
+            loadProduct();
+            configureColumnStates();
         });
 
     })();
