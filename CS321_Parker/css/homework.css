@@ -29,3 +29,8 @@ body {
 .product-table thead th {
     text-align: center;
 }
+
+/*highlights used product thumbnail names*/
+.thumbnail.used h2 {
+    color: #c0a16b;
+}

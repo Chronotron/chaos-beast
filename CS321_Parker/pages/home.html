@@ -1,10 +1,136 @@
 <!DOCTYPE html>
+<!-- saved from url=(0044)http://getbootstrap.com/examples/jumbotron/# -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/week2-2favicon.ico">
+
+    <title>Items Outlet, Inc.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="./week2-2_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./../css/homework.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
 </head>
+
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./week2-1.html">Week 2-1</a>
+            <a class="navbar-brand" href="./week2-2.html">Week 2-2</a>
+            <a class="navbar-brand" href="./week3-1.html">Week 3-1</a>
+            <a class="navbar-brand" href="./week3-2.html">Week 3-2</a>
+            <a class="navbar-brand" href="./week3-3.html">Week 3-3</a>
+            <a class="navbar-brand" href="./week4-1.html">Week 4-1</a>
+            <a class="navbar-brand" href="./home.html">Home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Items Outlet, Inc.</h1>
+        <p>The worlds #1 purveyor of items for all tastes and budgets</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h2>Todays Spotlight</h2>
+                    <p id="spotlight-name"></p>
+                    <a id="spotlight-link" href="#"><img id="spotlight-img"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>© 2017 Paul Parker, Items Outlet, Inc.</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Bootstrap core JavaScript   ========== -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
+<script src="../js/homework.js"></script>
+
+<script type="application/javascript">
+    (function () {
+        $(document).ready(function () {
+            var spotlightProduct = websiteInformation.getRandomProduct();
+            if (!spotlightProduct) {
+                return;
+            }
+            var jelName = $("#spotlight-name");
+            var jelLink = $("#spotlight-link");
+            var jelImg = $("#spotlight-img");
+            var jelThumbnail = $(".thumbnail");
+
+            jelName.html(spotlightProduct.name);
+            jelLink.attr("href", "./week4-1.html?productCode={0}".format(spotlightProduct.productCode));
+            jelImg.attr("src", spotlightProduct.getImageUrl());
+            jelImg.attr("alt", spotlightProduct.description);
+
+            if(spotlightProduct.isUsed()) {
+                jelThumbnail.addClass("used");
+            }
+
+        });
+    })();
+</script>
 
 </body>
 </html>

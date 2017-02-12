@@ -74,32 +74,15 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
-            <p>
-                Check out these sweet pens
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
-            <p>
-                Graphite encased in wood has never been more in style
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
+
+    <div id="no-product-found" class="alert alert-warning" style="display: none">
+        Oops! We couldn't find the product you were looking for.
+    </div>
+
+    <div id="product-information" class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
     </div>
 
     <hr>
@@ -121,6 +104,26 @@
 <script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
 <script src="../js/homework.js"></script>
 
+<script type="application/javascript">
+
+    (function () {
+
+        $(document).ready(function () {
+            var product = websiteInformation.getQueriedProduct() || websiteInformation.products[0];
+
+            // handle no product found
+            if (!product) {
+                $("#no-product-found").css("display", "block");
+                return;
+            }
+
+
+
+        });
+
+    })();
+
+</script>
 
 </body>
 </html>
