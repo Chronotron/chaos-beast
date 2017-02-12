@@ -40,7 +40,7 @@ body {
     display: none;
 }
 
-/*style columns based on configuration*/
+/*style columns based on configuration. targets the first div of the first div for the given configuration*/
 .configuration-1 > div > div {
     background-color: #bac4d7;
 }
