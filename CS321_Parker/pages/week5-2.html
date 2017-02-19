@@ -16,9 +16,6 @@
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./week2-2_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="./../css/homework.css" rel="stylesheet">
 
@@ -28,6 +25,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="../js/homework.js"></script>
 
 </head>
 
@@ -43,14 +41,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="#">Week 2-2</a>
             <a class="navbar-brand" href="./week2-1.html">Week 2-1</a>
-            <a class="navbar-brand" href="./week2-2.html">Week 2-2</a>
             <a class="navbar-brand" href="./week3-1.html">Week 3-1</a>
             <a class="navbar-brand" href="./week3-2.html">Week 3-2</a>
             <a class="navbar-brand" href="./week3-3.html">Week 3-3</a>
-            <a class="navbar-brand" href="./week4-1.html">Week 4-1</a>
-            <a class="navbar-brand" href="./week5-1.html">Week 5-1</a>
-            <a class="navbar-brand" href="./week5-2.html">Week 5-2</a>
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -72,38 +67,22 @@
     <div class="container">
         <h1>Items Outlet, Inc.</h1>
         <p>The worlds #1 purveyor of items for all tastes and budgets</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn
+            more »</a></p>
     </div>
 </div>
 
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
-            <p>
-                Check out these sweet pens
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
-            <p>
-                Graphite encased in wood has never been more in style
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
+        <div id="product-container" class="col-md-12">
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success" onclick="addData()">Add</button>
+        </div>
+    </div>
     <hr>
 
     <footer>
@@ -119,10 +98,87 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
-<script src="../js/homework.js"></script>
 
+
+<script type="application/javascript">
+
+    function createTable() {
+        var $table = $("<table id='product-table' class='product-table'></table>");
+        $table.css("width", "960px");
+        $table.css("border", "10px solid lightslategray");
+        $table.attr("summary", "This product list shows what is available at our rummage sale!");
+        $("#product-container").append($table);
+    }
+    function createHeader() {
+        var thead = $('<thead class="productHead"></thead>');
+        var $tr = $('<tr id="prodHeaderRow"></tr>');
+        thead.append($tr);
+//       </th> <!--Picture--> <th></th>
+        headers = [
+            "",
+            "",
+            "Product Name",
+            "Manufacturer, Make, Model",
+            "Condition",
+            "Description",
+            "Retail Price",
+            "Rummage Sale Price",
+            ""
+        ];
+
+        headers.forEach(function (header) {
+            $tr.append($('<th>{0}</th>'.format(header)));
+        });
+
+        $("#product-table").append(thead);
+    }
+
+    function createCaption() {
+        var caption = $('<caption>We have a broad range of products available</caption>');
+        $("#product-table").append(caption);
+    }
+
+    function createBody() {
+        var tbody = $('<tbody id="product-table-body"></tbody>');
+        $("#product-table").append(tbody);
+    }
+
+    function createFooter() {
+        var tfoot = $('' +
+            '<tfoot id="product-table-footer">' +
+            '<tr id="prodFooterRow" class="productFoot">' +
+            '<td colspan="9">All sales are final</td>' +
+            '</tr>' +
+            '</tfoot>');
+        $("#product-table").append(tfoot);
+    }
+
+    function addData() {
+        var product = websiteInformation.getRandomProduct();
+        var productTableBody = $('#product-table-body');
+        var row = $("<tr></tr>");
+        row.append($("<td><a href='#'>Buy</a></td>"));
+        row.append($("<td><a href='#'><span class='like'></span></a></td>"));
+        row.append($("<td>{0}</td>".format(product.name)));
+        row.append($("<td>{0}</td>".format(product.manufacturerMakeModel)));
+        row.append($("<td class='cell-data'>{0}</td>".format(product.condition)));
+        row.append($("<td>{0}</td>".format(product.description)));
+        row.append($("<td class='cell-data price retail-price'>{0}</td>".format(product.getFormattedRetailPrice())));
+        row.append($("<td class='cell-data price'>{0}</td>".format(product.getFormattedRummagePrice())));
+        row.append($("<a class='thumbnail' href='{0}' target='_blank'><img alt='{1}' src='{2}'></img></a></td>".format(product.getImageUrl(), product.name, product.getThumbnailUrl())));
+
+        productTableBody.append(row);
+    }
+
+    $(document).ready(function () {
+        createTable();
+        createHeader();
+        createCaption();
+        createBody();
+        createFooter();
+        addData();
+    });
+</script>
 
 </body>
 </html>

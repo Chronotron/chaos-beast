@@ -30,6 +30,16 @@ body {
     text-align: center;
 }
 
+.product-table caption {
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.product-table td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 /*highlights used product thumbnail names*/
 .thumbnail.used h2 {
     color: #c0a16b;
@@ -59,4 +69,21 @@ body {
 .price.retail-price {
     font-style: italic;
     text-decoration: line-through;
+    color: red;
+}
+
+/*table values*/
+.Value {
+    margin-left: 5px;
+}
+
+/*icons*/
+
+.like {
+    color: red;
+    font-size: 14px;
+}
+
+.like::before {
+    content: '\2665';
 }

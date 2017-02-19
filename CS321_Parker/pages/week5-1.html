@@ -29,6 +29,10 @@
     <![endif]-->
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../js/homework.js"></script>
+    <script src="../js/week5.js"></script>
+
 </head>
 
 <body>
@@ -54,14 +58,14 @@
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right">
+            <form id="loginForm" class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input id="txtUserName" type="text" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input id="txtPassword" type="password" placeholder="Password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
+                <button type="submit" class="btn btn-success" onclick="signIn()">Sign in</button>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
@@ -78,30 +82,7 @@
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
-            <p>
-                Check out these sweet pens
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
-            <p>
-                Graphite encased in wood has never been more in style
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
+        <div id="results" class="col-md-12"></div>
     </div>
 
     <hr>
@@ -116,12 +97,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Bootstrap core JavaScript   ========== -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
-<script src="../js/homework.js"></script>
 
 
 </body>
