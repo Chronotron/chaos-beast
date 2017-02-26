@@ -51,7 +51,6 @@
             <a class="navbar-brand" href="./week4-1.html">Week 4-1</a>
             <a class="navbar-brand" href="./week5-1.html">Week 5-1</a>
             <a class="navbar-brand" href="./week5-2.html">Week 5-2</a>
-            <a class="navbar-brand" href="./week6-1.html">Week 5-2</a>
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -78,33 +77,51 @@
 
 <div class="container">
     <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
-            <p>
-                Check out these sweet pens
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="txtTitle">Event title</label>
+                    <input type="text" class="form-control" id="txtTitle" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="datEventDate">Event date</label>
+                    <input type="date" class="form-control" id="datEventDate">
+                </div>
+                <div class="form-group">
+                    <label for="txtCustomMessage">Enter a custom message</label>
+                    <textarea class="form-control" id="txtCustomMessage"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="colBackground">Choose a background color</label>
+                    <input type="color" class="form-control" id="colBackground">
+                </div>
+                <div class="form-group">
+                    <label for="colFont">Choose a font color</label>
+                    <input type="color" class="form-control" id="colFont">
+                </div>
+                <div class="form-group">
+                    <label for="selFont">Choose a font</label>
+                    <select class="form-control" id="selFont"></select>
+                </div>
+                <div class="form-group">
+                    <label for="selBorder">Choose a border style</label>
+                    <select class="form-control" id="selBorder"></select>
+                </div>
+                <div class="form-group">
+                    <label>Select your image</label>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">Design my invitation!</button>
+            </div>
+            <div id="invitation-container" class="col-md-8">
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
-            <p>
-                Graphite encased in wood has never been more in style
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-    </div>
-
+    </form>
     <hr>
 
     <footer>
