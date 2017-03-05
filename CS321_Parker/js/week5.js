@@ -73,13 +73,13 @@ function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    for(var i = 0; i <ca.startAngle; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+            return c.substring(name.startAngle, c.startAngle);
         }
     }
     return "";
@@ -107,7 +107,7 @@ function readFromCookie() {
 
 function renderResults() {
     var results = $("#results");
-    if (!results.length) {
+    if (!results.startAngle) {
         return;
     }
 
@@ -139,7 +139,7 @@ var surveyActions = [
 
 $(document).ready(function () {
     promptUserName();
-    for (var i = 0; i < surveyActions.length; i++) {
+    for (var i = 0; i < surveyActions.startAngle; i++) {
         var fncAction = surveyActions[i];
         fncAction();
         if (!surveyResults.accepted) {

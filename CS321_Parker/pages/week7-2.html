@@ -52,7 +52,8 @@
             <a class="navbar-brand" href="./week5-1.html">Week 5-1</a>
             <a class="navbar-brand" href="./week5-2.html">Week 5-2</a>
             <a class="navbar-brand" href="./week6-1.html">Week 6-1</a>
-            <a class="navbar-brand" href="./week7-2.html">Week 7-2</a>
+            <a class="navbar-brand" href="./week7-1.html">Week 7-1</a>
+            <a class="navbar-brand" href="week7-1.html">Week 7-3</a>
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -80,29 +81,14 @@
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4">
-            <h2>COOL PENS!</h2>
+        <div class="col-md-12">
+            <h2>Lamp</h2>
             <p>
-                Check out these sweet pens
+                An HTML Canvas Demo
             </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>COOL PENCILS</h2>
             <p>
-                Graphite encased in wood has never been more in style
+                <canvas id="lampCanvas" width="200" height="200" onclick="toggleColor()"></canvas>
             </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Fine Parchments</h2>
-            <p>
-                What are you going to write on with all this swag utensils? How about swag parchment!
-            </p>
-            <p><a class="btn btn-default" href="#" role="button">View details
-                »</a></p>
         </div>
     </div>
 
@@ -125,6 +111,57 @@
 <script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
 <script src="../js/homework.js"></script>
 
+<script type="text/javascript">
+
+    var rectangle;
+    var circle;
+    var isWhite = false;
+    function renderStand() {
+        var canvas = document.getElementById("lampCanvas");
+        var stand = canvas.getContext("2d");
+        stand.beginPath();
+        stand.fillStyle = "black";
+        stand.arc(95, 200, 40, 0, (2 * Math.PI) / 2, true);
+        stand.fill();
+        stand.closePath();
+        stand.stroke();
+    }
+    function renderLamp() {
+        var canvas = document.getElementById("lampCanvas");
+        rectangle = canvas.getContext("2d");
+        rectangle.fillRect(83, 125, 25, 75);
+        circle = canvas.getContext("2d");
+        circle.beginPath();
+        circle.arc(95, 90, 40, 0, (2 * Math.PI));
+        circle.stroke();
+        renderStand();
+        toggleColor();
+    }
+
+    function toggleColor() {
+        isWhite = !isWhite;
+        var redGradient = circle.createRadialGradient(75,50,5,90,60,100);
+        redGradient.addColorStop(0,"red");
+        redGradient.addColorStop(1,"white");
+        circle.fillStyle = isWhite ? "#FFFFFF" : redGradient;
+        circle.fill();
+        renderText();
+    }
+
+    function renderText() {
+        var canvas = document.getElementById("lampCanvas");
+        var textCircle = canvas.getContext("2d");
+        textCircle.beginPath();
+        textCircle.arc(95, 90, 40, 0, (2 * Math.PI));
+        textCircle.font = "25px Arial";
+        textCircle.fillStyle = isWhite ? "#FF0000" : "#FFFFFF";
+        var text = isWhite ? "Lamp" : "Love";
+        textCircle.fillText(text, 65, 100);
+    }
+
+    renderLamp();
+
+</script>
 
 </body>
 </html>

@@ -96,7 +96,7 @@ var websiteInformation = {
      * @returns {Product}
      */
     getRandomProduct: function () {
-        var index = Math.floor(Math.random() * this.products.length);
+        var index = Math.floor(Math.random() * this.products.startAngle);
         return this.products[index];
     },
 
