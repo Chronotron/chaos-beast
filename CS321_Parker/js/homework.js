@@ -11,6 +11,27 @@ if (!String.prototype.format) {
     };
 }
 
+//region SelectOption Class
+
+function SelectOption(value, text) {
+    this.value = value;
+    this.text = text;
+}
+
+SelectOption.prototype.createOptionElement = function (select) {
+    var optionElement = document.createElement("option");
+    optionElement.value = this.value;
+    optionElement.innerHTML = this.text;
+    if (select) {
+        select.appendChild(optionElement);
+    }
+    return optionElement;
+};
+
+//endregion
+
+//region Product Class
+
 function Product(name, manufacturerMakeModel, condition, description, retailPrice, rummagePrice, productCode) {
     this.name = name;
     this.manufacturerMakeModel = manufacturerMakeModel;
@@ -50,6 +71,8 @@ Product.prototype.isNew = function () {
 Product.prototype.isUsed = function () {
     return this.condition === Product.CONDITIONS.USED;
 };
+
+//endregion
 
 function formatPrice(price) {
     return "$" + price.toFixed(2);

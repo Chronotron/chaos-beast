@@ -110,13 +110,9 @@
                 </div>
                 <div class="form-group">
                     <label>Select your image</label>
+                    <div id="image-container"></div>
                 </div>
-                <div class="form-group">
-                    <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-default">Design my invitation!</button>
+                <button type="submit" onclick="designInvitation();return false" class="btn btn-default">Design my invitation!</button>
             </div>
             <div id="invitation-container" class="col-md-8">
             </div>
@@ -141,6 +137,96 @@
 <script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
 <script src="../js/homework.js"></script>
 
+<script type="text/javascript">
+
+    function createImageRadioOption(product, i) {
+        var label = $('<label class="radio-inline"></label>');
+        var radio = $('<input type="radio" name="inlineRadioOptions" id="opt{0}" value="{1}">'.format(product.name, product.getThumbnailUrl()));
+        if (i === 0) {
+            radio.attr("checked", "true");
+        }
+        label.append(radio);
+        label.append($('<img alt="{0}" src="{1}">'.format(product.name, product.getThumbnailUrl())));
+        return label;
+    }
+
+    function getSelectValue(selId) {
+        var select = $("#" + selId);
+        return select.val();
+    }
+
+    function getRadioValue(name) {
+        return $("input[type=radio][name={0}]:checked".format(name)).val();
+    }
+
+    function populateStyles() {
+        var styleSelect = document.getElementById("selBorder");
+        var solid = new SelectOption("solid", "Solid");
+        var dotted = new SelectOption("dotted", "Dotted");
+        var solidTopDottedSides = new SelectOption("solid dotted", "Solid Top, Dotted Sides");
+        var dottedTopSolidSides = new SelectOption("dotted solid", "Dotted Top, Solid Sides");
+        solid.createOptionElement(styleSelect);
+        dotted.createOptionElement(styleSelect);
+        solidTopDottedSides.createOptionElement(styleSelect);
+        dottedTopSolidSides.createOptionElement(styleSelect);
+    }
+
+    function populateFonts() {
+        var fontSelect = document.getElementById("selFont");
+        var comicSans = new SelectOption('"Comic Sans MS", cursive, sans-serif', "Comic Sans");
+        var arial = new SelectOption('Arial, Helvetica, sans-serif', "Arial/Helvetica");
+        var arialBlack = new SelectOption('"Arial Black", Gadget, sans-serif', "Arial Black Gadget");
+
+        comicSans.createOptionElement(fontSelect);
+        arial.createOptionElement(fontSelect);
+        arialBlack.createOptionElement(fontSelect);
+    }
+
+    function populateImages() {
+        var selectedProducts = websiteInformation.products.slice(0, 4);
+        var imageContainer = document.getElementById("image-container");
+        selectedProducts.forEach(function (product, i) {
+            var radioOption = createImageRadioOption(product, i);
+            $(imageContainer).append(radioOption);
+        })
+    }
+
+    function designInvitation() {
+        var invitation = {
+            title: document.getElementById("txtTitle").value,
+            eventDate: new Date(document.getElementById("datEventDate").value),
+            message: document.getElementById("txtCustomMessage").value,
+            backgroundColor: document.getElementById("colBackground").value,
+            fontColor: document.getElementById("colFont").value,
+            font: getSelectValue("selFont"),
+            borderStyle: getSelectValue("selBorder"),
+            imageUrl: getRadioValue("inlineRadioOptions")
+        };
+
+        var invitationContainer = $("#invitation-container");
+        invitationContainer.empty();
+        var invitationBody = $('<div class="InvitationBody"></div>');
+        invitationContainer.append(invitationBody);
+
+        invitationBody.css("border-width", "4px");
+        invitationBody.css("border-style", invitation.borderStyle);
+        invitationBody.css("border-color", invitation.fontColor);
+        invitationBody.css("color", invitation.fontColor);
+        invitationBody.css("background-color", invitation.backgroundColor);
+        invitationBody.css("font-family", invitation.font);
+
+        invitationBody.append('<div class="InvitationHeading">Save the Date</div>');
+        invitationBody.append('<div class="InvitationTitle">{0}</div>'.format(invitation.title));
+        invitationBody.append('<div class="InvitationDate">{0}</div>'.format(invitation.eventDate.toLocaleDateString()));
+        invitationBody.append('<div class="InvitationMessage">{0}</div>'.format(invitation.message));
+        invitationBody.append('<div class="InvitationImage"><img src="{0}"></div>'.format(invitation.imageUrl));
+    }
+
+    populateFonts();
+    populateImages();
+    populateStyles();
+
+</script>
 
 </body>
 </html>

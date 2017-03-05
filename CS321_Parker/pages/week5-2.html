@@ -165,7 +165,7 @@
         row.append($("<td>{0}</td>".format(product.description)));
         row.append($("<td class='cell-data price retail-price'>{0}</td>".format(product.getFormattedRetailPrice())));
         row.append($("<td class='cell-data price'>{0}</td>".format(product.getFormattedRummagePrice())));
-        row.append($("<a class='thumbnail' href='{0}' target='_blank'><img alt='{1}' src='{2}'></img></a></td>".format(product.getImageUrl(), product.name, product.getThumbnailUrl())));
+        row.append($("<a class='thumbnail' href='{0}' target='_blank'><img alt='{1}' src='{2}'></a></td>".format(product.getImageUrl(), product.name, product.getThumbnailUrl())));
 
         productTableBody.append(row);
     }

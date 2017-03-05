@@ -87,3 +87,16 @@ body {
 .like::before {
     content: '\2665';
 }
+
+/*Invitation Styles*/
+
+.InvitationBody {
+    padding: 10px;
+    text-align: center;
+}
+
+.InvitationBody .InvitationHeading {
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    margin-bottom: 5px;
+}
