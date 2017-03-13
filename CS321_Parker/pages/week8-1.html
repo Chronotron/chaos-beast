@@ -52,9 +52,7 @@
             <a class="navbar-brand" href="./week5-1.html">Week 5-1</a>
             <a class="navbar-brand" href="./week5-2.html">Week 5-2</a>
             <a class="navbar-brand" href="./week6-1.html">Week 6-1</a>
-            <a class="navbar-brand" href="./week7-1.html">Week 7-1</a>
             <a class="navbar-brand" href="./week7-2.html">Week 7-2</a>
-            <a class="navbar-brand" href="./week8-1.html">Week 8-1</a>
             <a class="navbar-brand" href="./home.html">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -80,16 +78,63 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h2>Todays Spotlight</h2>
-                    <p id="spotlight-name"></p>
-                    <a id="spotlight-link" href="#"><img id="spotlight-img"></a>
-                </div>
+        <div class="col-md-12">
+            <h2>Original Image</h2>
+            <img src="../images/product4.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Scrambled Image</h2>
+            <table class="scrambled">
+                <tr>
+                    <td>
+                        <img id="1a" src="../images/piece3.png" draggable="true"
+                             ondragstart="drag(event)">
+                    </td>
+                    <td>
+                        <img id="1b" src="../images/piece2.png" draggable="true"
+                             ondragstart="drag(event)">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img id="2a" src="../images/piece4.png" draggable="true"
+                             ondragstart="drag(event)">
+                    </td>
+                    <td>
+                        <img id="2b" src="../images/piece1.png" draggable="true"
+                             ondragstart="drag(event)">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <h2>Puzzle Image</h2>
+                <table class="solved">
+                    <tr>
+                        <td>
+                            <img id="solved1a" src="../images/placeholder.png" ondrop="drop(event)"
+                                 ondragover="allowDrop(event)">
+                        </td>
+                        <td>
+                            <img id="solved1b" src="../images/placeholder.png" ondrop="drop(event)"
+                                 ondragover="allowDrop(event)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img id="solved2a" src="../images/placeholder.png" ondrop="drop(event)"
+                                 ondragover="allowDrop(event)">
+                        </td>
+                        <td>
+                            <img id="solved2b" src="../images/placeholder.png" ondrop="drop(event)"
+                                 ondragover="allowDrop(event)">
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -113,29 +158,54 @@
 <script src="./week2-2_files/ie10-viewport-bug-workaround.js.download"></script>
 <script src="../js/homework.js"></script>
 
-<script type="application/javascript">
-    (function () {
-        $(document).ready(function () {
-            var spotlightProduct = websiteInformation.getRandomProduct();
-            if (!spotlightProduct) {
-                return;
-            }
-            var jelName = $("#spotlight-name");
-            var jelLink = $("#spotlight-link");
-            var jelImg = $("#spotlight-img");
-            var jelThumbnail = $(".thumbnail");
 
-            jelName.html(spotlightProduct.name);
-            jelLink.attr("href", "./week4-1.html?productCode={0}".format(spotlightProduct.productCode));
-            jelImg.attr("src", spotlightProduct.getImageUrl());
-            jelImg.attr("alt", spotlightProduct.description);
+<script type="text/javascript">
 
-            if(spotlightProduct.isUsed()) {
-                jelThumbnail.addClass("used");
-            }
+    var solvedPuzzle = {
+        solved1a: "2b",
+        solved1b: "1b",
+        solved2a: "1a",
+        solved2b: "2a"
+    };
 
-        });
-    })();
+    var workingPuzzle = {
+        solved1a: "",
+        solved1b: "",
+        solved2a: "",
+        solved2b: ""
+    };
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    var solved = false;
+    function validateSolved() {
+        solved = solvedPuzzle.solved1a === workingPuzzle.solved1a;
+        solved &= solvedPuzzle.solved1b === workingPuzzle.solved1b;
+        solved &= solvedPuzzle.solved2a === workingPuzzle.solved2a;
+        solved &= solvedPuzzle.solved2b === workingPuzzle.solved2b;
+        if (solved) {
+            alert("Congratulations! You Win!");
+        }
+    }
+
+    function drop(ev) {
+        if (solved) {
+            return;
+        }
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var target = ev.target;
+        target.src = document.getElementById(data).src;
+        workingPuzzle[target.id] = data;
+        validateSolved();
+    }
+
 </script>
 
 </body>
