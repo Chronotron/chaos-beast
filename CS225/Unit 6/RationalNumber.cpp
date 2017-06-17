@@ -3,7 +3,6 @@
 //
 
 #include "RationalNumber.h"
-#include <cstdlib>
 #include <sstream>
 
 int gcd(int, int);
@@ -139,14 +138,13 @@ bool RationalNumber::operator!=(const RationalNumber &right) {
     return compareTo(right) != 0;
 }
 
-
 int gcd(int largerNumber, int smallerNumber) {
     if (smallerNumber == 0 || (largerNumber - smallerNumber) == 1) {
         return 1;
     }
 
     if (smallerNumber == 1) {
-        return smallerNumber;
+        return 1;
     }
 
     int remainder = largerNumber % smallerNumber;
