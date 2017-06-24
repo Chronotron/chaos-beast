@@ -96,6 +96,10 @@ def mode(args):
     modes_desc = ", ".join('val: {}'.format(m['val']) for m in modes)
     return 'TYPE: {}, COUNT: {} :: {}'.format(modal_type, mode_count, modes_desc)
 
+def pop_standard_deviation_comp(args):
+    values = _convert_args(args)
+    return _pop_standard_deviation_comp(values)
+
 def relative_frequency(args):
     def c_f(v, i, values):
         return  v / sum(values)
@@ -124,6 +128,20 @@ def standard_deviation_comp(args):
 def stat_range(args):
     values = _convert_args(args)
     return _stat_range(values)
+
+def variance(args):
+    values = _convert_args(args)
+    return _variance(values)
+
+def variance_pop(args):
+    values = _convert_args(args)
+    return _variance_pop(values)
+
+def z_score(args):
+    pass
+
+def z_score_pop(args):
+    pass
 
 def _convert_args(args, sort=True):
     values = [float(v) for v in args]
@@ -168,6 +186,26 @@ def _standard_deviation_comp(values):
     right_side = math.pow(sum_x, 2)
     return math.sqrt((left_side - right_side) / denominator)
 
+def _pop_standard_deviation_comp(values):
+    val_range = _stat_range(values)
+    mu = _mu(values)
+    sum_x_power_2 = _power_sum(values)
+    left_side = sum_x_power_2 / val_range
+    right_side = math.pow(mu, 2)
+    return math.sqrt(left_side - right_side)
+
+def _mu(values):
+    val_range = _stat_range(values)
+    sum_x = sum(values)
+    return sum_x / val_range
+
+def _variance(values):
+    return math.pow(_standard_deviation_comp(values), 2)
+
+def _variance_pop(values):
+    return math.pow(_pop_standard_deviation_comp(values), 2)
+
+
 stat_functions = {
     'cb': class_boundary,
     'class-boundary': class_boundary,
@@ -181,6 +219,8 @@ stat_functions = {
     'mp': midpoint,
     'midpoint': midpoint,
     'midrange': midrange,
+    'psdc': pop_standard_deviation_comp,
+    'pop-standard-deviation-comp': pop_standard_deviation_comp,
     'range': stat_range,
     'rf': relative_frequency,
     'relative-frequency': relative_frequency,
@@ -188,6 +228,10 @@ stat_functions = {
     'standard-deviation-comp': standard_deviation_comp,
     'trm': trimmed_mean,
     'trimmed-mean': trimmed_mean,
+    'var': variance,
+    'variance': variance,
+    'varp': variance_pop,
+    'variance-pop': variance_pop,
 }
 
 if __name__ == '__main__':
