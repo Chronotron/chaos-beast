@@ -3,6 +3,8 @@ import sys
 import math
 
 
+# region Classes
+
 class FrequencyChart(object):
     def __init__(self, args):
         self.groups = [FrequencyGroup(r) for r in args]
@@ -44,6 +46,10 @@ class FrequencyGroup(object):
     pass
 
 
+# endregion
+
+# region Functions
+
 def cheb_theorem(args):
     deviations = float(args[0])
     return 1.0 - 1.0 / (deviations ** 2)
@@ -75,8 +81,14 @@ def empirical_rule(args):
 def percentile(args):
     return _find_fractile(float(args[0]), 100, float(args[1]))
 
+
+def quartile(args):
+    return _find_fractile(float(args[0]), 4, float(args[1]))
+
+
 def percentile_value(args):
     return _percentile_value(float(args[0]), float(args[1]))
+
 
 def grouped_standard_deviation(args):
     return FrequencyChart(args).standard_deviation()
@@ -146,14 +158,15 @@ def mode(args):
     values = _convert_args(args)
     count_map = {}
     for val in values:
-        if val not in count_map:
-            count_map[val] = 1
+        key = str(val)
+        if key not in count_map:
+            count_map[key] = 1
         else:
-            count_map[val] += 1
+            count_map[key] += 1
 
     mappings = []
     for key in count_map:
-        mappings.append({'val': key, 'count': count_map[key]})
+        mappings.append({'val': float(key), 'count': count_map[key]})
 
     mappings = sorted(mappings, key=lambda m: m['count'], reverse=True)
     modes = []
@@ -163,7 +176,7 @@ def mode(args):
         map = mappings[i]
         modes.append(map)
         mode_count = map['count']
-        if i >= mappings_length or mode_count != mappings[i + 1]['count']:
+        if i + 1 >= mappings_length or mode_count != mappings[i + 1]['count']:
             break
 
     modal_type = 'Single'
@@ -236,6 +249,10 @@ def z_score_pop(args):
     pass
 
 
+# endregion
+
+# region Helper Functions
+
 def _convert_args(args, sort=True):
     values = [float(v) for v in args]
     if not sort:
@@ -278,6 +295,7 @@ def _parse_freqeuncy_group(raw):
 
 def _percentile_value(valuesLess, totalValues, parts=100):
     return valuesLess / totalValues * parts
+
 
 def _find_fractile(subscript, parts, samplesize):
     return math.ceil((subscript / parts) * samplesize)
@@ -342,44 +360,4 @@ def _variance_pop(values):
 def _z_score(value, mean_value, sd):
     return (value - mean_value) / sd
 
-
-stat_functions = {
-    'cb': class_boundary,
-    'class-boundary': class_boundary,
-    'cf': cumulative_frequency,
-    'cheb-theorem': cheb_theorem,
-    'cumulative-frequency': cumulative_frequency,
-    'empirical-rule': empirical_rule,
-    'gmean': grouped_mean,
-    'grouped-mean': grouped_mean,
-    'gsd': grouped_standard_deviation,
-    'grouped-standard-deviation': grouped_standard_deviation,
-    'mean': mean,
-    'median': median,
-    'median-class': median_class,
-    'median-value': median_value,
-    'mode': mode,
-    'mp': midpoint,
-    'midpoint': midpoint,
-    'midrange': midrange,
-    'percentile': percentile,
-    'percentile-value': percentile_value,
-    'psdc': pop_standard_deviation_comp,
-    'pop-standard-deviation-comp': pop_standard_deviation_comp,
-    'range': stat_range,
-    'rf': relative_frequency,
-    'relative-frequency': relative_frequency,
-    'sdc': standard_deviation_comp,
-    'standard-deviation-comp': standard_deviation_comp,
-    'trm': trimmed_mean,
-    'trimmed-mean': trimmed_mean,
-    'var': variance,
-    'variance': variance,
-    'varp': variance_pop,
-    'variance-pop': variance_pop,
-    'z-score': z_score,
-}
-
-if __name__ == '__main__':
-    action = sys.argv[1]
-    print(stat_functions[action](sys.argv[2:]))
+# endregion
