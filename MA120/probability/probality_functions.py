@@ -4,6 +4,7 @@ import math
 
 
 class Probability(Fraction, object):
+
     def probability(self):
         return 1 - self.relative_probability()
 

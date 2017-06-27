@@ -1,7 +1,7 @@
-from statistics.statistical_functions import *
+from statistics import statistical_functions
+
 
 # region Functions
-from statistics import statistical_functions
 
 
 def cheb_theorem(args):
