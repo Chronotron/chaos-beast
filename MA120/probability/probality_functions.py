@@ -20,7 +20,7 @@ def relative_probability(success, total):
 
 
 def combination(objects, selections):
-    return math.factorial(objects) / math.factorial(objects - selections) * math.factorial(selections)
+    return math.factorial(objects) / (math.factorial(objects - selections) * math.factorial(selections))
 
 
 def permutation(objects, selections):
