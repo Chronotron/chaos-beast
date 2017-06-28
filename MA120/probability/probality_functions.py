@@ -6,10 +6,10 @@ import math
 class Probability(Fraction, object):
 
     def probability(self):
-        return 1 - self.relative_probability()
+        return 1.0 - self.relative_probability()
 
     def relative_probability(self):
-        return self.numerator / self.denominator
+        return float(self.numerator) / float(self.denominator)
 
 
 def probability(success, total):
@@ -26,3 +26,17 @@ def combination(objects, selections):
 
 def permutation(objects, selections):
     return math.factorial(objects) / math.factorial(objects - selections)
+
+
+def add_probability(probabilities):
+    fraction = sum(probabilities)
+    return _from_fraction(fraction)
+
+
+def subtract_probability(left, right):
+    left_right = left - right
+    return _from_fraction(left_right)
+
+
+def _from_fraction(fraction):
+    return Probability(fraction.numerator, fraction.denominator)
