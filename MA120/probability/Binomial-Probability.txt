@@ -1,0 +1,7 @@
+P(S) = probability of success.  The numerical value is p, so P(S) = p.
+P(F) = probability of failure.  The numerical value is q, so P(F) = q.
+n = the number of trials.
+p = the probability of success in one of the n trials
+q = the probability of failure in one of the n trials
+X = the number of successes in n trials
+P(X) = the probability of getting exactly X successes among the n trials
