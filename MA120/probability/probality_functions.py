@@ -14,6 +14,20 @@ class Probability(Fraction, object):
 def combination(objects, selections):
     return math.factorial(objects) / (math.factorial(objects - selections) * math.factorial(selections))
 
+def expected_value(cost=0.0, prize=0.0, success=0.0):
+    failure = 1.0 - success
+    failureCost = cost * failure
+    netProfit = prize - cost
+    successCost = netProfit * success
+    return  failureCost + successCost
+
+
+def independent_probability(chance, trials):
+    currentChance = chance
+    for i in range(trials - 1):
+        currentChance = currentChance * chance
+
+    return currentChance
 
 def mean():
     pass
