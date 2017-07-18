@@ -17,8 +17,9 @@
 
     angular.module('characterSheet').component('characterSheet', {
         template: '' +
-        '<div>' +
+        '<div class="character-sheet">' +
         '<character-info character="$ctrl.character"></character-info>' +
+        '<hr>' +
         '<stat-block stats="$ctrl.character.stats"></stat-block>' +
         '</div>',
         bindings: {
@@ -36,10 +37,10 @@
     angular.module('characterSheet').component('statBlock', {
         controller: StatBlockController,
         template: '' +
-        '<div ng-repeat="stat in $ctrl.stats">' +
-        '<label for="stat{{stat.name}}" ng-bind="stat.name"></label>' +
+        '<div class="stat-block" ng-repeat="stat in $ctrl.stats">' +
+        '<label class="stat-name" for="stat{{stat.name}}" ng-bind="stat.name"></label>' +
         '<input id="stat{{stat.name}}" type="number" ng-model="stat.value">' +
-        '<label>Mod: {{$ctrl.calculateMod(stat.value)}}</label>' +
+        '<label class="stat-mod">Mod: {{$ctrl.calculateMod(stat.value)}}</label>' +
         '</div>',
         bindings: {
             stats: '='
