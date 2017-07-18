@@ -1,26 +1,31 @@
+@import "../../css/colors";
 
-.character-sheet {
-  margin: 0 10px;
-  padding: 10px;
-  background-color: #ebebeb;
+.character-form {
 
-  .stat-block {
-    margin: 5px 0;
-    display: flex;
-    justify-content: flex-start;
+  .character-sheet {
+    margin: 0 10px;
+    padding: 10px;
+    background-color: $defaultBackground;
 
-    .stat-name, .stat-mod {
-      min-width: 40px;
-    }
+    .stat-block {
+      margin: 5px 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
 
-    .stat-name {
-      text-align: right;
-      padding-right: 5px;
-    }
+      .stat-name, .stat-mod {
+        min-width: 40px;
+      }
 
-    .stat-mod {
-      text-align: left;
-      padding-left: 5px;
+      .stat-name {
+        text-align: right;
+        padding-right: 5px;
+      }
+
+      .stat-mod {
+        text-align: left;
+        padding-left: 5px;
+      }
     }
   }
 }
