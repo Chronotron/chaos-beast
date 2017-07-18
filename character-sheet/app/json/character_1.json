@@ -1,0 +1,11 @@
+{
+  "name": "Henry Smelter",
+  "stats": [
+    {"name": "STR", "value": 12},
+    {"name": "DEX", "value": 12},
+    {"name": "CON", "value": 12},
+    {"name": "INT", "value": 12},
+    {"name": "WIS", "value": 12},
+    {"name": "CHA", "value": 8}
+  ]
+}
