@@ -1,3 +1,19 @@
+var arrayUtil = {
+
+    removeObj: function (array, object) {
+        var index = -1;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] === object) {
+                index = i;
+                break;
+            }
+        }
+
+        array.splice(index, 1);
+    }
+
+};
+
 (function () {
     angular.module('characterSheet', [
         'ngRoute'
@@ -28,6 +44,8 @@
         '<character-info character="$ctrl.character"></character-info>' +
         '<hr>' +
         '<stat-block stats="$ctrl.character.stats"></stat-block>' +
+        '<hr>' +
+        '<character-inventory inventory="$ctrl.character.inventory"></character-inventory>' +
         '</div>' +
         '</form>',
         bindings: {
@@ -36,6 +54,7 @@
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
+
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
@@ -61,6 +80,44 @@
         }
     });
 
+    angular.module('characterSheet').component('characterInventory', {
+        template: '' +
+        '<div class="character-inventory table">' +
+        '<character-item class="table-row" ng-repeat="item in $ctrl.inventory.items" item="item" inventory="$ctrl.inventory"></character-item>' +
+        '</div>',
+        bindings: {
+            inventory: '='
+        }
+    });
+
+    angular.module('characterSheet').component('characterItem', {
+        controller: CharacterItemController,
+        template: '' +
+        '<label class="table-cell" ng-bind="$ctrl.item.name"></label>' +
+        '<label class="table-cell" ng-bind="$ctrl.item.desc"></label>' +
+        '<label class="table-cell">' +
+        '<button type="button" class="character-item-remove" ng-click="$ctrl.removeItem()">X</button>' +
+        '</label>',
+        bindings: {
+            inventory: '=',
+            item: '='
+        }
+    });
+
+    function CharacterItemController() {
+        var $ctrl = this;
+
+        $ctrl.removeItem = removeItem;
+
+        function removeItem() {
+            if (!$ctrl.inventory) {
+                return;
+            }
+
+            arrayUtil.removeObj($ctrl.inventory.items, $ctrl.item)
+        }
+    }
+
     angular.module('characterSheet').component('statBlock', {
         controller: StatBlockController,
         template: '' +
@@ -80,7 +137,7 @@
         $ctrl.calculateMod = calculateMod;
 
         function calculateMod(value) {
-            if(!value) {
+            if (!value) {
                 return 0;
             }
 
@@ -95,6 +152,7 @@
     angular.module('characterSheet').service('CharacterService', CharacterService);
 
     CharacterService.$inject = ['$http', '$q'];
+
     function CharacterService($http, $q) {
         var service = this;
 
@@ -105,7 +163,7 @@
 
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
-            if(character) {
+            if (character) {
                 var deferred = $q.defer();
                 deferred.resolve(character);
                 return deferred.promise;
@@ -113,7 +171,7 @@
             var url = 'json/character_{0}.json'.format(id);
             return $http.get(url).then(function (response) {
                 character = response.data;
-                if(character) {
+                if (character) {
                     characterIdMap[character.id] = character;
                 }
                 return angular.copy(character);

@@ -39,6 +39,14 @@ form input[type=text], form input[type=number] {
   form input[type=text].ng-invalid, form input[type=number].ng-invalid {
     background-color: #ff5735; }
 
+.table {
+  display: table; }
+  .table .table-row {
+    display: table-row; }
+    .table .table-row .table-cell {
+      display: table-cell;
+      padding: 3px 5px 3px 3px; }
+
 * {
   color: #2e2d39; }
 

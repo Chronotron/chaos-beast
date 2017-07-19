@@ -2,11 +2,45 @@
   "id": 1,
   "name": "Henry Smelter",
   "stats": [
-    {"name": "STR", "value": 12},
-    {"name": "DEX", "value": 12},
-    {"name": "CON", "value": 12},
-    {"name": "INT", "value": 12},
-    {"name": "WIS", "value": 12},
-    {"name": "CHA", "value": 8}
-  ]
+    {
+      "name": "STR",
+      "value": 12
+    },
+    {
+      "name": "DEX",
+      "value": 12
+    },
+    {
+      "name": "CON",
+      "value": 12
+    },
+    {
+      "name": "INT",
+      "value": 12
+    },
+    {
+      "name": "WIS",
+      "value": 12
+    },
+    {
+      "name": "CHA",
+      "value": 8
+    }
+  ],
+  "inventory": {
+    "items": [
+      {
+        "name": "kitten",
+        "desc": "A small gray fluffy kitten to aid in dangerous times",
+        "type": "Misc",
+        "weight": 2.0
+      },
+      {
+        "name": "kitten",
+        "desc": "A black and white kitten",
+        "type": "Misc",
+        "weight": 2.0
+      }
+    ]
+  }
 }
