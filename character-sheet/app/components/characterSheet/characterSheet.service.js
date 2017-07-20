@@ -29,7 +29,11 @@
         }
 
         function saveCharacter(character) {
+            character.lastUpdated = new Date().toISOString();
             characterIdMap[character.id] = angular.copy(character);
+            var deferred = $q.defer();
+            deferred.resolve(character);
+            return deferred.promise;
         }
 
     }

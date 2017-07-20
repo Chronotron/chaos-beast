@@ -25,9 +25,10 @@
         }
 
         function getTotalWeight() {
-            return arrayUtil.sum($ctrl.inventory.items, function (item) {
+            var sum = arrayUtil.sum($ctrl.inventory.items, function (item) {
                 return item.weight * item.count;
             });
+            return (Math.round(sum * 100) / 100).toFixed(2);
         }
 
     }

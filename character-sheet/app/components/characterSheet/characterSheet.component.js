@@ -4,6 +4,7 @@
         template: '' +
         '<form name="characterForm" class="character-form" ng-submit="$ctrl.saveCharacter()">' +
         '<div class="form-inputs">' +
+        '<label class="last-updated" ng-if="$ctrl.character.lastUpdated">Last Saved: {{$ctrl.character.lastUpdated | date : "medium" }}</label>' +
         '<button>Save</button>' +
         '<button type="button" ng-click="$ctrl.cancel()">Cancel</button>' +
         '</div>' +
@@ -27,12 +28,14 @@
         $ctrl.cancel = cancel;
         $ctrl.saveCharacter = saveCharacter;
 
-        function saveCharacter() {
-            CharacterService.saveCharacter($ctrl.character);
-        }
-
         function cancel() {
             CharacterService.getCharacter($ctrl.character.id).then(function (character) {
+                $ctrl.character = character;
+            });
+        }
+
+        function saveCharacter() {
+            CharacterService.saveCharacter($ctrl.character).then(function (character) {
                 $ctrl.character = character;
             });
         }

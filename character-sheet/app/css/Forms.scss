@@ -1,12 +1,6 @@
 form {
 
-  .form-inputs {
-    text-align: right;
-    padding: 5px;
-    margin: 5px;
-  }
-
-  input:not([type=checkbox]) {
+  @mixin inputStyles() {
     padding: 7px 10px 5px 10px;
     display: inline-block;
     border-top: none;
@@ -14,11 +8,44 @@ form {
     border-right: none;
     border-bottom: 1px solid $borderColor;
     box-sizing: border-box;
+  }
 
+  .form-inputs {
+    text-align: right;
+    padding: 5px;
+    margin: 5px;
+  }
 
+  .last-updated {
+    font-size: 0.7rem;
+    margin-right: 5px;
+    color: $mutedText;
+  }
+
+  input:not([type=checkbox]) {
+    @include inputStyles();
+
+    &.xshort-text {
+      max-width: 70px;
+    }
+
+    &.short-text {
+      max-width: 90px;
+    }
+
+    &.med-text {
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     &.ng-invalid {
       background-color: $errorColor;
     }
+  }
+
+  select {
+    @include inputStyles();
   }
 }

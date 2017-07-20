@@ -13,5 +13,6 @@ $errorColor: #ff5735;
 
 $borderColor: darken($defaultBackground, 10);
 $removeColor: $errorColor;
+$mutedText: lighten($defaultTextColor, 20);
 
 //endregion
