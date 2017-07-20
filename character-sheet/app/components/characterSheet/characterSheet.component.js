@@ -13,9 +13,9 @@
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
-        //region Public Interface
-
         var weapons = [];
+
+        //region Public Interface
 
         $ctrl.cancel = cancel;
         $ctrl.getCharacter = getCharacter;

@@ -16,44 +16,6 @@ button {
   button:not([type=button]), button.confirm-btn {
     background-color: #45719d; }
 
-.die-results-container {
-  padding: 20px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: #d4d4d4 0 3px 2px 1px;
-  background-color: white; }
-  .die-results-container .die-roll-options {
-    text-align: right; }
-
-.character-form .character-sheet {
-  margin: 0 10px;
-  padding: 10px;
-  background-color: #ebebeb;
-  border-bottom: 2px solid #d2d2d2; }
-  .character-form .character-sheet .character-inventory {
-    width: 100%; }
-  .character-form .character-sheet .content-block {
-    display: flex; }
-    .character-form .character-sheet .content-block .content-item-double {
-      flex-grow: 2; }
-  .character-form .character-sheet .inventory-controls {
-    margin-bottom: 5px; }
-  .character-form .character-sheet .stat-block {
-    margin: 5px 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center; }
-    .character-form .character-sheet .stat-block .stat-name, .character-form .character-sheet .stat-block .stat-mod {
-      min-width: 40px; }
-    .character-form .character-sheet .stat-block .stat-name {
-      text-align: right;
-      padding-right: 5px; }
-    .character-form .character-sheet .stat-block .stat-mod {
-      text-align: left;
-      padding-left: 5px; }
-
 form .phrase {
   margin: auto 5px; }
 form .form-inputs {
@@ -112,6 +74,44 @@ form select {
         color: #454456; }
   .table .table-caption {
     display: table-caption; }
+
+.die-results-container {
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: #d4d4d4 0 3px 2px 1px;
+  background-color: white; }
+  .die-results-container .die-roll-options {
+    text-align: right; }
+
+.character-form .character-sheet {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: #ebebeb;
+  border-bottom: 2px solid #d2d2d2; }
+  .character-form .character-sheet .character-inventory {
+    width: 100%; }
+  .character-form .character-sheet .content-block {
+    display: flex; }
+    .character-form .character-sheet .content-block .content-item-double {
+      flex-grow: 2; }
+  .character-form .character-sheet .inventory-controls {
+    margin-bottom: 5px; }
+  .character-form .character-sheet .stat-block {
+    margin: 5px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+    .character-form .character-sheet .stat-block .stat-name, .character-form .character-sheet .stat-block .stat-mod {
+      min-width: 40px; }
+    .character-form .character-sheet .stat-block .stat-name {
+      text-align: right;
+      padding-right: 5px; }
+    .character-form .character-sheet .stat-block .stat-mod {
+      text-align: left;
+      padding-left: 5px; }
 
 * {
   color: #2e2d39; }

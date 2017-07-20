@@ -88,7 +88,7 @@ function getStatTypes() {
  * @property {string} type
  */
 function CharacterItem() {
-    this.count = 0;
+    this.count = 1;
     this.desc = '';
     this.name = '';
     this.options = null;
@@ -540,9 +540,9 @@ function WeaponOptions() {
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
-        //region Public Interface
-
         var weapons = [];
+
+        //region Public Interface
 
         $ctrl.cancel = cancel;
         $ctrl.getCharacter = getCharacter;

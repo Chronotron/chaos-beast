@@ -7,7 +7,7 @@
  * @property {string} type
  */
 function CharacterItem() {
-    this.count = 0;
+    this.count = 1;
     this.desc = '';
     this.name = '';
     this.options = null;
