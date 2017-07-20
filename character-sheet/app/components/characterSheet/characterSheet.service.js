@@ -86,6 +86,7 @@
         function saveCharacter(character) {
             character.lastUpdated = new Date().toISOString();
             characterIdMap[character.id] = angular.copy(character);
+            createCharacterOptions();
             return resolveCharacter(character);
         }
 

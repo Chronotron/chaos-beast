@@ -163,10 +163,16 @@ function WeaponOptions() {
         var characterIdMap = {};
         var characterOptions = [];
 
+        //region Public Interface
+
         service.getCharacter = getCharacter;
         service.getCharacterOptions = getCharacterOptions;
         service.getInformation = getInformation;
         service.saveCharacter = saveCharacter;
+
+        //endregion
+
+        //region Behavior
 
         function createCharacterOptions() {
             characterOptions.length = 0;
@@ -234,8 +240,11 @@ function WeaponOptions() {
         function saveCharacter(character) {
             character.lastUpdated = new Date().toISOString();
             characterIdMap[character.id] = angular.copy(character);
+            createCharacterOptions();
             return resolveCharacter(character);
         }
+
+        //endregion
 
     }
 
@@ -274,8 +283,14 @@ function WeaponOptions() {
     function CharacterInventoryController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.addItem = addItem;
         $ctrl.getTotalWeight = getTotalWeight;
+
+        //endregion
+
+        //region Behavior
 
         function addItem() {
             $ctrl.inventory.items.unshift(new CharacterItem());
@@ -291,6 +306,8 @@ function WeaponOptions() {
             });
             return (Math.round(sum * 100) / 100).toFixed(2);
         }
+
+        //endregion
 
     }
 
@@ -312,7 +329,13 @@ function WeaponOptions() {
     function StatBlockController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.calculateMod = calculateMod;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * @param value
@@ -321,6 +344,8 @@ function WeaponOptions() {
         function calculateMod(value) {
             return statModifiers.calculateMod(value);
         }
+
+        //endregion
     }
 
 })();
@@ -362,10 +387,16 @@ function WeaponOptions() {
     function WeaponBlockController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.statTypes = getStatTypes();
 
         $ctrl.getStat = getStat;
         $ctrl.getStatMod = getStatMod;
+
+        //endregion
+
+        //region Behavior
 
         function getStat(options) {
             return arrayUtil.find($ctrl.stats, function (stat) {
@@ -392,6 +423,8 @@ function WeaponOptions() {
             var sign = calculatedMod >= 0 ? '+' : '-';
             return '{0} {1}'.format(sign, Math.abs(calculatedMod));
         }
+
+        //endregion
     }
 })();(function () {
     angular.module('characterSheet').component('weaponDie', {
@@ -413,10 +446,16 @@ function WeaponOptions() {
     function WeaponDieController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.results = '';
         $ctrl.showResults = false;
 
         $ctrl.roll = roll;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * generates and shows roll results
@@ -466,6 +505,8 @@ function WeaponOptions() {
             return value ? '{0} [{1}]'.format(value, name) : '';
         }
 
+        //endregion
+
     }
 })();(function () {
     angular.module('characterSheet').component('characterItem', {
@@ -488,10 +529,16 @@ function WeaponOptions() {
     function CharacterItemController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.itemTypes = CharacterItem.getTypes();
 
         $ctrl.onTypeChange = onTypeChange;
         $ctrl.removeItem = removeItem;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * configures options when type changes
@@ -512,6 +559,8 @@ function WeaponOptions() {
 
             arrayUtil.removeObj($ctrl.inventory.items, $ctrl.item)
         }
+
+        //endregion
     }
 
 })();
@@ -549,6 +598,8 @@ function WeaponOptions() {
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
+        //region Public Interface
+
         var weapons = [];
 
         $ctrl.cancel = cancel;
@@ -556,6 +607,10 @@ function WeaponOptions() {
         $ctrl.getCharacterOptions = getCharacterOptions;
         $ctrl.getWeapons = getWeapons;
         $ctrl.saveCharacter = saveCharacter;
+
+        //endregion
+
+        //region Behavior
 
         function cancel() {
             getCharacter();
@@ -587,6 +642,8 @@ function WeaponOptions() {
         function setCharacter(character) {
             $ctrl.character = character;
         }
+
+        //endregion
 
     }
 
