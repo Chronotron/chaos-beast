@@ -8,6 +8,9 @@ form {
     border-right: none;
     border-bottom: 1px solid $borderColor;
     box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .phrase {
@@ -38,10 +41,7 @@ form {
     }
 
     &.med-text {
-      max-width: 200px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      width: 100%;
     }
 
     &.ng-invalid {
