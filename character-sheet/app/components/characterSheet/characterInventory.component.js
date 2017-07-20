@@ -24,8 +24,14 @@
     function CharacterInventoryController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.addItem = addItem;
         $ctrl.getTotalWeight = getTotalWeight;
+
+        //endregion
+
+        //region Behavior
 
         function addItem() {
             $ctrl.inventory.items.unshift(new CharacterItem());
@@ -41,6 +47,8 @@
             });
             return (Math.round(sum * 100) / 100).toFixed(2);
         }
+
+        //endregion
 
     }
 

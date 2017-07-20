@@ -15,7 +15,13 @@
     function StatBlockController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.calculateMod = calculateMod;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * @param value
@@ -24,6 +30,8 @@
         function calculateMod(value) {
             return statModifiers.calculateMod(value);
         }
+
+        //endregion
     }
 
 })();

@@ -19,10 +19,16 @@
     function CharacterItemController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.itemTypes = CharacterItem.getTypes();
 
         $ctrl.onTypeChange = onTypeChange;
         $ctrl.removeItem = removeItem;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * configures options when type changes
@@ -43,6 +49,8 @@
 
             arrayUtil.removeObj($ctrl.inventory.items, $ctrl.item)
         }
+
+        //endregion
     }
 
 })();

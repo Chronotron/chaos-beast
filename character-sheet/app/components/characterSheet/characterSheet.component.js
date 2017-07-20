@@ -32,6 +32,8 @@
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
+        //region Public Interface
+
         var weapons = [];
 
         $ctrl.cancel = cancel;
@@ -39,6 +41,10 @@
         $ctrl.getCharacterOptions = getCharacterOptions;
         $ctrl.getWeapons = getWeapons;
         $ctrl.saveCharacter = saveCharacter;
+
+        //endregion
+
+        //region Behavior
 
         function cancel() {
             getCharacter();
@@ -70,6 +76,8 @@
         function setCharacter(character) {
             $ctrl.character = character;
         }
+
+        //endregion
 
     }
 

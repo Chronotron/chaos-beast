@@ -36,10 +36,16 @@
     function WeaponBlockController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.statTypes = getStatTypes();
 
         $ctrl.getStat = getStat;
         $ctrl.getStatMod = getStatMod;
+
+        //endregion
+
+        //region Behavior
 
         function getStat(options) {
             return arrayUtil.find($ctrl.stats, function (stat) {
@@ -66,5 +72,7 @@
             var sign = calculatedMod >= 0 ? '+' : '-';
             return '{0} {1}'.format(sign, Math.abs(calculatedMod));
         }
+
+        //endregion
     }
 })();

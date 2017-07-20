@@ -9,10 +9,16 @@
         var characterIdMap = {};
         var characterOptions = [];
 
+        //region Public Interface
+
         service.getCharacter = getCharacter;
         service.getCharacterOptions = getCharacterOptions;
         service.getInformation = getInformation;
         service.saveCharacter = saveCharacter;
+
+        //endregion
+
+        //region Behavior
 
         function createCharacterOptions() {
             characterOptions.length = 0;
@@ -82,6 +88,8 @@
             characterIdMap[character.id] = angular.copy(character);
             return resolveCharacter(character);
         }
+
+        //endregion
 
     }
 

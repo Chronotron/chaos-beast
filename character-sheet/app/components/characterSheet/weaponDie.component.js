@@ -18,10 +18,16 @@
     function WeaponDieController() {
         var $ctrl = this;
 
+        //region Public Interface
+
         $ctrl.results = '';
         $ctrl.showResults = false;
 
         $ctrl.roll = roll;
+
+        //endregion
+
+        //region Behavior
 
         /**
          * generates and shows roll results
@@ -70,6 +76,8 @@
         function getCalculationDescription(value, name) {
             return value ? '{0} [{1}]'.format(value, name) : '';
         }
+
+        //endregion
 
     }
 })();
