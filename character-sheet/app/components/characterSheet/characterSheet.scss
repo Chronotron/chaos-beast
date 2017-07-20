@@ -6,6 +6,11 @@
     margin: 0 10px;
     padding: 10px;
     background-color: $defaultBackground;
+    border-bottom: 2px solid $borderColor;
+
+    .character-inventory {
+      width: 100%;
+    }
 
     .content-block {
       display: flex;

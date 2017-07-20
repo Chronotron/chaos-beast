@@ -31,14 +31,14 @@
   "inventory": {
     "items": [
       {
-        "name": "kitten",
+        "name": "Kitten",
         "desc": "A small gray fluffy kitten to aid in dangerous times",
         "type": "Misc",
         "count": 1,
         "weight": 2.0
       },
       {
-        "name": "kitten",
+        "name": "Backup-Kitten",
         "desc": "A black and white kitten",
         "type": "Misc",
         "count": 1,

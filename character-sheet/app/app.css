@@ -28,7 +28,10 @@ button {
 .character-form .character-sheet {
   margin: 0 10px;
   padding: 10px;
-  background-color: #ebebeb; }
+  background-color: #ebebeb;
+  border-bottom: 2px solid #d2d2d2; }
+  .character-form .character-sheet .character-inventory {
+    width: 100%; }
   .character-form .character-sheet .content-block {
     display: flex; }
     .character-form .character-sheet .content-block .content-item-double {
@@ -66,16 +69,16 @@ form input:not([type=checkbox]) {
   border-left: none;
   border-right: none;
   border-bottom: 1px solid #d2d2d2;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
   form input:not([type=checkbox]).xshort-text {
     max-width: 70px; }
   form input:not([type=checkbox]).short-text {
     max-width: 90px; }
   form input:not([type=checkbox]).med-text {
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; }
+    width: 100%; }
   form input:not([type=checkbox]).ng-invalid {
     background-color: #ff5735; }
 form select {
@@ -85,7 +88,10 @@ form select {
   border-left: none;
   border-right: none;
   border-bottom: 1px solid #d2d2d2;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 .table {
   display: table; }
@@ -96,6 +102,8 @@ form select {
     .table .table-row .table-cell, .table .table-row .table-header {
       display: table-cell;
       padding: 3px 5px 3px 3px; }
+      .table .table-row .table-cell.fill, .table .table-row .table-header.fill {
+        width: 100%; }
       .table .table-row .table-cell.empty-table, .table .table-row .table-header.empty-table {
         font-style: italic;
         font-size: 0.7rem;
