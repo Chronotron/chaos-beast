@@ -24,6 +24,8 @@ button {
   transform: translate(-50%, -50%);
   box-shadow: #d4d4d4 0 3px 2px 1px;
   background-color: white; }
+  .die-results-container .die-roll-options {
+    text-align: right; }
 
 .character-form .character-sheet {
   margin: 0 10px;

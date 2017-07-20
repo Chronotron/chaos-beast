@@ -1,6 +1,14 @@
+/**
+ *
+ * @param {number} count
+ * @param {number} sides
+ * @constructor
+ * @property {number} count
+ * @property {number} sides
+ */
 function Die(count, sides) {
-    this.count = Math.floor(count || 1);
-    this.sides = Math.floor(sides || 6);
+    this.count = Math.ceil(count || 1);
+    this.sides = Math.ceil(sides || 6);
 }
 
 Die.prototype.roll = function () {

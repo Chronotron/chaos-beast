@@ -31,6 +31,10 @@
             $ctrl.inventory.items.unshift(new CharacterItem());
         }
 
+        /**
+         * returns the formatted total weight of all items in the inventory
+         * @returns {string}
+         */
         function getTotalWeight() {
             var sum = arrayUtil.sum($ctrl.inventory.items, function (item) {
                 return item.weight * item.count;

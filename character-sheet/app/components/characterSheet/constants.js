@@ -7,6 +7,10 @@ var statTypes = {
     CHA: 'CHA'
 };
 
+/**
+ * @param enumeration
+ * @returns {Array}
+ */
 function getEnumerationToArray(enumeration) {
     var types = [];
     for (var prop in enumeration) {

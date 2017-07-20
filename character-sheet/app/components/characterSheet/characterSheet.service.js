@@ -11,6 +11,10 @@
         service.getCharacter = getCharacter;
         service.saveCharacter = saveCharacter;
 
+        /**
+         * @param id
+         * @return Promise
+         */
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
             if (character) {
@@ -26,6 +30,11 @@
             });
         }
 
+        /**
+         *
+         * @param character
+         * @return Promise
+         */
         function resolveCharacter(character) {
             var deferred = $q.defer();
             deferred.resolve(character);

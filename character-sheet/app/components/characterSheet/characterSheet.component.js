@@ -25,7 +25,6 @@
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
-
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 

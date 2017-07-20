@@ -24,6 +24,9 @@
         $ctrl.onTypeChange = onTypeChange;
         $ctrl.removeItem = removeItem;
 
+        /**
+         * configures options when type changes
+         */
         function onTypeChange() {
             var item = $ctrl.item;
             if (!item.type === CharacterItem.types.WEAPON) {

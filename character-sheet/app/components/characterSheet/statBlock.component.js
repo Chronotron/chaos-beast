@@ -17,6 +17,10 @@
 
         $ctrl.calculateMod = calculateMod;
 
+        /**
+         * @param value
+         * @return {*|number}
+         */
         function calculateMod(value) {
             return statModifiers.calculateMod(value);
         }

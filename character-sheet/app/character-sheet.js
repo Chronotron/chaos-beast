@@ -50,6 +50,10 @@ var statTypes = {
     CHA: 'CHA'
 };
 
+/**
+ * @param enumeration
+ * @returns {Array}
+ */
 function getEnumerationToArray(enumeration) {
     var types = [];
     for (var prop in enumeration) {
@@ -64,6 +68,10 @@ function getEnumerationToArray(enumeration) {
 function getStatTypes() {
     return getEnumerationToArray(statTypes);
 }var statModifiers = {
+    /**
+     * @param value
+     * @return {number}
+     */
     calculateMod: function (value) {
         if (!value) {
             return 0;
@@ -71,13 +79,21 @@ function getStatTypes() {
 
         return Math.floor((value - 10) / 2);
     }
-};function CharacterItem() {
+};/**
+ * @constructor
+ * @property {number} count
+ * @property {number} weight
+ * @property {string} desc
+ * @property {string} name
+ * @property {string} type
+ */
+function CharacterItem() {
     this.count = 0;
     this.desc = '';
     this.name = '';
+    this.options = null;
     this.type = CharacterItem.types.MISC;
     this.weight = 0.1;
-    this.options = null;
 }
 
 CharacterItem.types = {
@@ -85,12 +101,23 @@ CharacterItem.types = {
     WEAPON: "Weapon"
 };
 
+/**
+ * @returns {Array}
+ */
 CharacterItem.getTypes = function () {
     return getEnumerationToArray(CharacterItem.types);
 };
+/**
+ *
+ * @param {number} count
+ * @param {number} sides
+ * @constructor
+ * @property {number} count
+ * @property {number} sides
+ */
 function Die(count, sides) {
-    this.count = Math.floor(count || 1);
-    this.sides = Math.floor(sides || 6);
+    this.count = Math.ceil(count || 1);
+    this.sides = Math.ceil(sides || 6);
 }
 
 Die.prototype.roll = function () {
@@ -101,10 +128,16 @@ Die.prototype.roll = function () {
         total += Math.floor(Math.random() * (max - min + 1)) + min;
     }
     return total;
-};function WeaponOptions() {
-    this.statType = statTypes.STR;
+};/**
+ * @constructor
+ * @property {Die} die
+ * @property {number} modifier
+ * @property {string} statType
+ */
+function WeaponOptions() {
     this.die = new Die();
     this.modifier = 0;
+    this.statType = statTypes.STR;
 }(function () {
     angular.module('characterSheet', [
         'ngRoute'
@@ -118,7 +151,6 @@ Die.prototype.roll = function () {
             }
         });
     }]);
-
 })();
 (function () {
     angular.module('characterSheet').service('CharacterService', CharacterService);
@@ -133,6 +165,10 @@ Die.prototype.roll = function () {
         service.getCharacter = getCharacter;
         service.saveCharacter = saveCharacter;
 
+        /**
+         * @param id
+         * @return Promise
+         */
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
             if (character) {
@@ -148,6 +184,11 @@ Die.prototype.roll = function () {
             });
         }
 
+        /**
+         *
+         * @param character
+         * @return Promise
+         */
         function resolveCharacter(character) {
             var deferred = $q.defer();
             deferred.resolve(character);
@@ -204,6 +245,10 @@ Die.prototype.roll = function () {
             $ctrl.inventory.items.unshift(new CharacterItem());
         }
 
+        /**
+         * returns the formatted total weight of all items in the inventory
+         * @returns {string}
+         */
         function getTotalWeight() {
             var sum = arrayUtil.sum($ctrl.inventory.items, function (item) {
                 return item.weight * item.count;
@@ -233,6 +278,10 @@ Die.prototype.roll = function () {
 
         $ctrl.calculateMod = calculateMod;
 
+        /**
+         * @param value
+         * @return {*|number}
+         */
         function calculateMod(value) {
             return statModifiers.calculateMod(value);
         }
@@ -288,6 +337,11 @@ Die.prototype.roll = function () {
             });
         }
 
+        /**
+         * gets a formatted stat modifier
+         * @param options
+         * @return {string}
+         */
         function getStatMod(options) {
             var stat = getStat(options);
             if(!stat) {
@@ -299,7 +353,8 @@ Die.prototype.roll = function () {
                 return '';
             }
 
-            return '+ {0}'.format(calculatedMod);
+            var sign = calculatedMod >= 0 ? '+' : '-';
+            return '{0} {1}'.format(sign, Math.abs(calculatedMod));
         }
     }
 })();(function () {
@@ -308,8 +363,10 @@ Die.prototype.roll = function () {
         template: '<button type="button" class="die-btn" ng-click="$ctrl.roll()">Roll</button>' +
         '<div class="die-results-container" ng-show="$ctrl.showResults">' +
         '<p class="die-results" ng-bind="$ctrl.results"></p>' +
+        '<p class="die-roll-options">' +
         '<button type="button" class="confirm-btn" ng-click="$ctrl.roll()">Re-Roll</button>' +
         '<button type="button" ng-click="$ctrl.showResults = false">Close</button>' +
+        '</p>' +
         '</div>',
         bindings: {
             stat: '<',
@@ -325,6 +382,9 @@ Die.prototype.roll = function () {
 
         $ctrl.roll = roll;
 
+        /**
+         * generates and shows roll results
+         */
         function roll() {
             $ctrl.results = '';
             var stat = $ctrl.stat;
@@ -360,6 +420,12 @@ Die.prototype.roll = function () {
             $ctrl.showResults = true;
         }
 
+        /**
+         * gets a formatted description of a modifier to the roll
+         * @param value
+         * @param name
+         * @return {string}
+         */
         function getCalculationDescription(value, name) {
             return value ? '{0} [{1}]'.format(value, name) : '';
         }
@@ -391,6 +457,9 @@ Die.prototype.roll = function () {
         $ctrl.onTypeChange = onTypeChange;
         $ctrl.removeItem = removeItem;
 
+        /**
+         * configures options when type changes
+         */
         function onTypeChange() {
             var item = $ctrl.item;
             if (!item.type === CharacterItem.types.WEAPON) {
@@ -437,7 +506,6 @@ Die.prototype.roll = function () {
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
-
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 

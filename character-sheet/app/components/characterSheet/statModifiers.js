@@ -1,4 +1,8 @@
 var statModifiers = {
+    /**
+     * @param value
+     * @return {number}
+     */
     calculateMod: function (value) {
         if (!value) {
             return 0;

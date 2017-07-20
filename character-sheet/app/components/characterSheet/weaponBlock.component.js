@@ -47,6 +47,11 @@
             });
         }
 
+        /**
+         * gets a formatted stat modifier
+         * @param options
+         * @return {string}
+         */
         function getStatMod(options) {
             var stat = getStat(options);
             if(!stat) {
@@ -58,7 +63,8 @@
                 return '';
             }
 
-            return '+ {0}'.format(calculatedMod);
+            var sign = calculatedMod >= 0 ? '+' : '-';
+            return '{0} {1}'.format(sign, Math.abs(calculatedMod));
         }
     }
 })();

@@ -4,8 +4,10 @@
         template: '<button type="button" class="die-btn" ng-click="$ctrl.roll()">Roll</button>' +
         '<div class="die-results-container" ng-show="$ctrl.showResults">' +
         '<p class="die-results" ng-bind="$ctrl.results"></p>' +
+        '<p class="die-roll-options">' +
         '<button type="button" class="confirm-btn" ng-click="$ctrl.roll()">Re-Roll</button>' +
         '<button type="button" ng-click="$ctrl.showResults = false">Close</button>' +
+        '</p>' +
         '</div>',
         bindings: {
             stat: '<',
@@ -21,6 +23,9 @@
 
         $ctrl.roll = roll;
 
+        /**
+         * generates and shows roll results
+         */
         function roll() {
             $ctrl.results = '';
             var stat = $ctrl.stat;
@@ -56,6 +61,12 @@
             $ctrl.showResults = true;
         }
 
+        /**
+         * gets a formatted description of a modifier to the roll
+         * @param value
+         * @param name
+         * @return {string}
+         */
         function getCalculationDescription(value, name) {
             return value ? '{0} [{1}]'.format(value, name) : '';
         }
