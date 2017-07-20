@@ -37,7 +37,7 @@ var arrayUtil = {
         template: '' +
         '<form name="characterForm" class="character-form" ng-submit="$ctrl.saveCharacter()">' +
         '<div class="form-inputs">' +
-        '<button type="submit">Save</button>' +
+        '<button>Save</button>' +
         '<button type="button" ng-click="$ctrl.cancel()">Cancel</button>' +
         '</div>' +
         '<div class="character-sheet">' +
@@ -74,7 +74,7 @@ var arrayUtil = {
     }
 
     angular.module('characterSheet').component('characterInfo', {
-        template: '<label for="characterName">Name: </label><input id="characterName" type="text" ng-model="$ctrl.character.name">',
+        template: '<label for="characterName">Name: </label><input id="characterName" ng-model="$ctrl.character.name">',
         bindings: {
             character: '='
         }
