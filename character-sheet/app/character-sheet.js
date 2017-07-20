@@ -251,7 +251,7 @@ function WeaponOptions() {
 })();
 (function () {
     angular.module('characterSheet').component('characterInfo', {
-        template: '<label for="characterName">Name: </label><input id="characterName" ng-model="$ctrl.character.name">',
+        template: '<label for="characterName">Name: </label><input id="characterName" ng-model="$ctrl.character.name" ng-maxlength="200">',
         bindings: {
             character: '='
         }
@@ -260,21 +260,7 @@ function WeaponOptions() {
 (function () {
     angular.module('characterSheet').component('characterInventory', {
         controller: CharacterInventoryController,
-        template: '' +
-        '<div class="inventory-controls">' +
-        '<button class="add-btn" type="button" ng-click="$ctrl.addItem()">+</button>' +
-        '</div>' +
-        '<div class="character-inventory table">' +
-        '<div class="table-row">' +
-        '<span class="table-header">Name</span>' +
-        '<span class="table-header">Desc</span>' +
-        '<span class="table-header">Type</span>' +
-        '<span class="table-header">No.</span>' +
-        '<span class="table-header">Weight</span>' +
-        '</div>' +
-        '<character-item class="table-row" ng-repeat="item in $ctrl.inventory.items" item="item" inventory="$ctrl.inventory"></character-item>' +
-        '<div class="table-caption">Total Weight: {{$ctrl.getTotalWeight()}}</div>' +
-        '</div>',
+        templateUrl: 'components/characterSheet/characterInventory/characterInventory.component.html',
         bindings: {
             inventory: '='
         }
@@ -352,32 +338,7 @@ function WeaponOptions() {
 (function () {
     angular.module('characterSheet').component('weaponBlock', {
         controller: WeaponBlockController,
-        template: '' +
-        '<div class="table weapon-block">' +
-        '<div class="table-row">' +
-        '<label class="table-header">Name</label>' +
-        '<label class="table-header">Stat</label>' +
-        '<label class="table-header">Damage</label>' +
-        '</div>' +
-        '<div class="table-row" ng-hide="$ctrl.weapons.length">' +
-        '<label class="table-cell empty-table">No Weapons</label>' +
-        '</div>' +
-        '<div class="table-row" ng-repeat="weapon in $ctrl.weapons">' +
-        '<label class="table-cell" ng-bind="weapon.name"></label>' +
-        '<label>' +
-        '<select ng-model="weapon.options.statType" ng-options="statType for statType in $ctrl.statTypes"></select>' +
-        '</label>' +
-        '<label class="table-cell">' +
-        '<input type="number" class="xshort-text" min="1" max="100" ng-model="weapon.options.die.count">' +
-        '<label class="phrase">d</label>' +
-        '<input type="number" class="xshort-text" min="1" max="100" ng-model="weapon.options.die.sides">' +
-        '<label class="phrase">+</label>' +
-        '<input type="number" class="xshort-text" min="0" max="100" ng-model="weapon.options.modifier">' +
-        '<label class="phrase" ng-bind="$ctrl.getStatMod(weapon.options)"></label>' +
-        '</label>' +
-        '<label class="table-cell"><weapon-die weapon="weapon" stat="$ctrl.getStat(weapon.options)"></weapon-die></label>' +
-        '</div>' +
-        '</div>',
+        templateUrl: 'components/characterSheet/weaponBlock/weaponBlock.component.html',
         bindings: {
             stats: '<',
             weapons: '<'
@@ -567,26 +528,7 @@ function WeaponOptions() {
 (function () {
     angular.module('characterSheet').component('characterSheet', {
         controller: CharacterSheetController,
-        template: '<div class="error-message" ng-if="!$ctrl.character"">An error occurred retrieving the requested information</div>' +
-        '<form name="characterForm" class="character-form" ng-submit="$ctrl.saveCharacter()" ng-if="$ctrl.character">' +
-        '<div class="form-inputs">' +
-        '<select ng-model="$ctrl.selectedId" ng-options="option.id as option.name for option in $ctrl.getCharacterOptions()"' +
-        ' ng-change="$ctrl.getCharacter($ctrl.selectedId)"></select>' +
-        '<label class="last-updated" ng-if="$ctrl.character.lastUpdated">Last Saved: {{$ctrl.character.lastUpdated | date : "medium" }}</label>' +
-        '<button>Save</button>' +
-        '<button type="button" ng-click="$ctrl.cancel()">Cancel</button>' +
-        '</div>' +
-        '<div class="character-sheet">' +
-        '<character-info character="$ctrl.character"></character-info>' +
-        '<hr>' +
-        '<div class="content-block">' +
-        '<stat-block class="content-item-double" stats="$ctrl.character.stats"></stat-block>' +
-        '<weapon-block class="content-item" stats="$ctrl.character.stats" weapons="$ctrl.getWeapons()"></weapon-block>' +
-        '</div>' +
-        '<hr>' +
-        '<character-inventory inventory="$ctrl.character.inventory"></character-inventory>' +
-        '</div>' +
-        '</form>',
+        templateUrl: 'components/characterSheet/characterSheet.component.html',
         bindings: {
             character: '=',
             selectedId: '='
