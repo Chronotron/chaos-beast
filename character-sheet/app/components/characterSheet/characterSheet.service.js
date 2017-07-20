@@ -14,8 +14,7 @@
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
             if (character) {
-                resolveCharacter(character);
-                return;
+                return resolveCharacter(character);
             }
             var url = 'json/character_{0}.json'.format(id);
             return $http.get(url).then(function (response) {
