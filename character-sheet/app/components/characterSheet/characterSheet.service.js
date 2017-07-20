@@ -14,9 +14,8 @@
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
             if (character) {
-                var deferred = $q.defer();
-                deferred.resolve(character);
-                return deferred.promise;
+                resolveCharacter(character);
+                return;
             }
             var url = 'json/character_{0}.json'.format(id);
             return $http.get(url).then(function (response) {
@@ -28,12 +27,16 @@
             });
         }
 
-        function saveCharacter(character) {
-            character.lastUpdated = new Date().toISOString();
-            characterIdMap[character.id] = angular.copy(character);
+        function resolveCharacter(character) {
             var deferred = $q.defer();
             deferred.resolve(character);
             return deferred.promise;
+        }
+
+        function saveCharacter(character) {
+            character.lastUpdated = new Date().toISOString();
+            characterIdMap[character.id] = angular.copy(character);
+            return resolveCharacter(character);
         }
 
     }
