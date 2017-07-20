@@ -33,12 +33,14 @@
         "name": "kitten",
         "desc": "A small gray fluffy kitten to aid in dangerous times",
         "type": "Misc",
+        "count": 1,
         "weight": 2.0
       },
       {
         "name": "kitten",
         "desc": "A black and white kitten",
         "type": "Misc",
+        "count": 1,
         "weight": 2.0
       }
     ]

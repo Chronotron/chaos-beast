@@ -10,13 +10,21 @@ var arrayUtil = {
         }
 
         array.splice(index, 1);
+    },
+
+    sum: function (array, opt_interpreter, initialValue) {
+        initialValue = initialValue || 0;
+        return array.reduce(function (total, num) {
+            return (total || 0) + (opt_interpreter ? opt_interpreter(num) : num);
+        }, initialValue);
     }
 
 };
 
 function CharacterItem() {
-    this.name = '';
+    this.count = 0;
     this.desc = '';
+    this.name = '';
     this.type = CharacterItem.types.MISC;
     this.weight = 0.1;
 }
@@ -24,6 +32,17 @@ function CharacterItem() {
 CharacterItem.types = {
     MISC: "Misc",
     WEAPON: "Weapon"
+};
+
+CharacterItem.getTypes = function () {
+    var types = [];
+    for (var prop in CharacterItem.types) {
+        if (!CharacterItem.types.hasOwnProperty(prop)) {
+            continue;
+        }
+        types.push(CharacterItem.types[prop]);
+    }
+    return types
 };
 (function () {
     angular.module('characterSheet', [
@@ -38,7 +57,7 @@ CharacterItem.types = {
             }
         });
 
-        $routeProvider.otherwise({redirectTo: '/view1'});
+        $routeProvider.otherwise({redirectTo: '/Character/1'});
     }]);
 
 })();
@@ -96,6 +115,7 @@ CharacterItem.types = {
         '</div>' +
         '<div class="character-inventory table">' +
         '<character-item class="table-row" ng-repeat="item in $ctrl.inventory.items" item="item" inventory="$ctrl.inventory"></character-item>' +
+        '<div class="table-caption">Total Weight: {{$ctrl.getTotalWeight()}}</div>' +
         '</div>',
         bindings: {
             inventory: '='
@@ -106,9 +126,16 @@ CharacterItem.types = {
         var $ctrl = this;
 
         $ctrl.addItem = addItem;
+        $ctrl.getTotalWeight = getTotalWeight;
 
         function addItem() {
             $ctrl.inventory.items.unshift(new CharacterItem());
+        }
+
+        function getTotalWeight() {
+            return arrayUtil.sum($ctrl.inventory.items, function (item) {
+                return item.weight * item.count;
+            });
         }
 
     }
@@ -147,8 +174,9 @@ CharacterItem.types = {
     angular.module('characterSheet').component('characterItem', {
         controller: CharacterItemController,
         template: '' +
-        '<span class="table-cell"><input ng-model="$ctrl.item.name" title="{{$ctrl.item.name}}"></span>' +
-        '<span class="table-cell"><input ng-model="$ctrl.item.desc" title="{{$ctrl.item.desc}}"></span>' +
+        '<span class="table-cell"><input class="short-text" ng-model="$ctrl.item.name" title="{{$ctrl.item.name}}" ng-maxlength="25"></span>' +
+        '<span class="table-cell"><input class="med-text" ng-model="$ctrl.item.desc" title="{{$ctrl.item.desc}}" ng-maxlength="100"></span>' +
+        '<span class="table-cell"><select ng-model="$ctrl.item.type" ng-options="itemType for itemType in $ctrl.itemTypes"></select></span>' +
         '<span class="table-cell">' +
         '<button type="button" class="remove-btn" ng-click="$ctrl.removeItem()">X</button>' +
         '</span>',
@@ -160,6 +188,8 @@ CharacterItem.types = {
 
     function CharacterItemController() {
         var $ctrl = this;
+
+        $ctrl.itemTypes = CharacterItem.getTypes();
 
         $ctrl.removeItem = removeItem;
 

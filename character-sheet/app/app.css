@@ -48,8 +48,23 @@ form input:not([type=checkbox]) {
   border-right: none;
   border-bottom: 1px solid #d2d2d2;
   box-sizing: border-box; }
+  form input:not([type=checkbox]).short-text {
+    max-width: 75px; }
+  form input:not([type=checkbox]).med-text {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   form input:not([type=checkbox]).ng-invalid {
     background-color: #ff5735; }
+form select {
+  padding: 7px 10px 5px 10px;
+  display: inline-block;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d2d2d2;
+  box-sizing: border-box; }
 
 .table {
   display: table; }
@@ -58,6 +73,8 @@ form input:not([type=checkbox]) {
     .table .table-row .table-cell {
       display: table-cell;
       padding: 3px 5px 3px 3px; }
+  .table .table-caption {
+    display: table-caption; }
 
 * {
   color: #2e2d39; }

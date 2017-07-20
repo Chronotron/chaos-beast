@@ -2,8 +2,9 @@
     angular.module('characterSheet').component('characterItem', {
         controller: CharacterItemController,
         template: '' +
-        '<span class="table-cell"><input ng-model="$ctrl.item.name" title="{{$ctrl.item.name}}"></span>' +
-        '<span class="table-cell"><input ng-model="$ctrl.item.desc" title="{{$ctrl.item.desc}}"></span>' +
+        '<span class="table-cell"><input class="short-text" ng-model="$ctrl.item.name" title="{{$ctrl.item.name}}" ng-maxlength="25"></span>' +
+        '<span class="table-cell"><input class="med-text" ng-model="$ctrl.item.desc" title="{{$ctrl.item.desc}}" ng-maxlength="100"></span>' +
+        '<span class="table-cell"><select ng-model="$ctrl.item.type" ng-options="itemType for itemType in $ctrl.itemTypes"></select></span>' +
         '<span class="table-cell">' +
         '<button type="button" class="remove-btn" ng-click="$ctrl.removeItem()">X</button>' +
         '</span>',
@@ -15,6 +16,8 @@
 
     function CharacterItemController() {
         var $ctrl = this;
+
+        $ctrl.itemTypes = CharacterItem.getTypes();
 
         $ctrl.removeItem = removeItem;
 

@@ -11,7 +11,7 @@
             }
         });
 
-        $routeProvider.otherwise({redirectTo: '/view1'});
+        $routeProvider.otherwise({redirectTo: '/Character/1'});
     }]);
 
 })();
