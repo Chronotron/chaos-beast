@@ -76,7 +76,7 @@ form select {
   display: table; }
   .table .table-row {
     display: table-row; }
-    .table .table-row .table-cell {
+    .table .table-row .table-cell, .table .table-row .table-header {
       display: table-cell;
       padding: 3px 5px 3px 3px; }
   .table .table-caption {

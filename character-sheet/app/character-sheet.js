@@ -77,9 +77,7 @@ CharacterItem.getTypes = function () {
         function getCharacter(id) {
             var character = angular.copy(characterIdMap[id]);
             if (character) {
-                var deferred = $q.defer();
-                deferred.resolve(character);
-                return deferred.promise;
+                return resolveCharacter(character);
             }
             var url = 'json/character_{0}.json'.format(id);
             return $http.get(url).then(function (response) {
@@ -91,12 +89,16 @@ CharacterItem.getTypes = function () {
             });
         }
 
-        function saveCharacter(character) {
-            character.lastUpdated = new Date().toISOString();
-            characterIdMap[character.id] = angular.copy(character);
+        function resolveCharacter(character) {
             var deferred = $q.defer();
             deferred.resolve(character);
             return deferred.promise;
+        }
+
+        function saveCharacter(character) {
+            character.lastUpdated = new Date().toISOString();
+            characterIdMap[character.id] = angular.copy(character);
+            return resolveCharacter(character);
         }
 
     }
@@ -118,6 +120,13 @@ CharacterItem.getTypes = function () {
         '<button class="add-btn" type="button" ng-click="$ctrl.addItem()">+</button>' +
         '</div>' +
         '<div class="character-inventory table">' +
+        '<div class="table-row">' +
+        '<span class="table-header">Name</span>' +
+        '<span class="table-header">Desc</span>' +
+        '<span class="table-header">Type</span>' +
+        '<span class="table-header">No.</span>' +
+        '<span class="table-header">Weight</span>' +
+        '</div>' +
         '<character-item class="table-row" ng-repeat="item in $ctrl.inventory.items" item="item" inventory="$ctrl.inventory"></character-item>' +
         '<div class="table-caption">Total Weight: {{$ctrl.getTotalWeight()}}</div>' +
         '</div>',
