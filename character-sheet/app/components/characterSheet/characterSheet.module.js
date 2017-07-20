@@ -3,10 +3,10 @@
         'ngRoute'
     ]).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/Character/:id', {
-            template: '<character-sheet character="$resolve.character"></character-sheet>',
+            template: '<character-sheet character="$resolve.information.character" selected-id="$resolve.information.selectedId"></character-sheet>',
             resolve: {
-                character: function (CharacterService, $route) {
-                    return CharacterService.getCharacter($route.current.params.id);
+                information: function (CharacterService, $route) {
+                    return CharacterService.getInformation($route.current.params.id);
                 }
             }
         });

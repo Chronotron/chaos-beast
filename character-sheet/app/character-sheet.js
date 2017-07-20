@@ -143,10 +143,10 @@ function WeaponOptions() {
         'ngRoute'
     ]).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/Character/:id', {
-            template: '<character-sheet character="$resolve.character"></character-sheet>',
+            template: '<character-sheet character="$resolve.information.character" selected-id="$resolve.information.selectedId"></character-sheet>',
             resolve: {
-                character: function (CharacterService, $route) {
-                    return CharacterService.getCharacter($route.current.params.id);
+                information: function (CharacterService, $route) {
+                    return CharacterService.getInformation($route.current.params.id);
                 }
             }
         });
@@ -161,15 +161,29 @@ function WeaponOptions() {
         var service = this;
 
         var characterIdMap = {};
+        var characterOptions = [];
 
         service.getCharacter = getCharacter;
+        service.getCharacterOptions = getCharacterOptions;
+        service.getInformation = getInformation;
         service.saveCharacter = saveCharacter;
+
+        function createCharacterOptions() {
+            characterOptions.length = 0;
+
+            var henry = characterIdMap['1'] || {id: '1', name: 'Henry Smelter'};
+            var alton = characterIdMap['2'] || {id: '2', name: 'Alton Spoons'};
+
+            characterOptions.push(henry);
+            characterOptions.push(alton);
+        }
 
         /**
          * @param id
          * @return Promise
          */
         function getCharacter(id) {
+            createCharacterOptions();
             var character = angular.copy(characterIdMap[id]);
             if (character) {
                 return resolveCharacter(character);
@@ -181,6 +195,28 @@ function WeaponOptions() {
                     characterIdMap[character.id] = character;
                 }
                 return angular.copy(character);
+            }, function (error) {
+                console.error(error.message);
+                return null;
+            });
+        }
+
+        function getCharacterOptions() {
+            return characterOptions;
+        }
+
+        /**
+         * gets the initial information for a view
+         * @param id
+         * @return Promise
+         */
+        function getInformation(id) {
+            var information = {
+                selectedId: id
+            };
+            return getCharacter(id).then(function (character) {
+                information.character = character;
+                return information;
             });
         }
 
@@ -482,9 +518,11 @@ function WeaponOptions() {
 (function () {
     angular.module('characterSheet').component('characterSheet', {
         controller: CharacterSheetController,
-        template: '' +
-        '<form name="characterForm" class="character-form" ng-submit="$ctrl.saveCharacter()">' +
+        template: '<div class="error-message" ng-if="!$ctrl.character"">An error occurred retrieving the requested information</div>' +
+        '<form name="characterForm" class="character-form" ng-submit="$ctrl.saveCharacter()" ng-if="$ctrl.character">' +
         '<div class="form-inputs">' +
+        '<select ng-model="$ctrl.selectedId" ng-options="option.id as option.name for option in $ctrl.getCharacterOptions()"' +
+        ' ng-change="$ctrl.getCharacter($ctrl.selectedId)"></select>' +
         '<label class="last-updated" ng-if="$ctrl.character.lastUpdated">Last Saved: {{$ctrl.character.lastUpdated | date : "medium" }}</label>' +
         '<button>Save</button>' +
         '<button type="button" ng-click="$ctrl.cancel()">Cancel</button>' +
@@ -501,24 +539,35 @@ function WeaponOptions() {
         '</div>' +
         '</form>',
         bindings: {
-            character: '='
+            character: '=',
+            selectedId: '='
         }
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
+
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
         var weapons = [];
 
         $ctrl.cancel = cancel;
+        $ctrl.getCharacter = getCharacter;
+        $ctrl.getCharacterOptions = getCharacterOptions;
         $ctrl.getWeapons = getWeapons;
         $ctrl.saveCharacter = saveCharacter;
 
         function cancel() {
-            CharacterService.getCharacter($ctrl.character.id).then(function (character) {
-                $ctrl.character = character;
-            });
+            getCharacter();
+        }
+
+        function getCharacter(id) {
+            id = id || $ctrl.character.id;
+            CharacterService.getCharacter(id).then(setCharacter);
+        }
+
+        function getCharacterOptions() {
+            return CharacterService.getCharacterOptions();
         }
 
         function getWeapons() {
@@ -532,9 +581,11 @@ function WeaponOptions() {
         }
 
         function saveCharacter() {
-            CharacterService.saveCharacter($ctrl.character).then(function (character) {
-                $ctrl.character = character;
-            });
+            CharacterService.saveCharacter($ctrl.character).then(setCharacter);
+        }
+
+        function setCharacter(character) {
+            $ctrl.character = character;
         }
 
     }
