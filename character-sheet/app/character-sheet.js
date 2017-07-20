@@ -89,9 +89,19 @@ CharacterItem.getTypes = function () {
     return getEnumerationToArray(CharacterItem.types);
 };
 function Die(count, sides) {
-    this.count = count || 1;
-    this.sides = sides || 6;
-}function WeaponOptions() {
+    this.count = Math.floor(count || 1);
+    this.sides = Math.floor(sides || 6);
+}
+
+Die.prototype.roll = function () {
+    var total = 0;
+    var min = 1;
+    var max = Math.floor(this.sides);
+    for (var i = 0; i < this.count; i++) {
+        total += Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    return total;
+};function WeaponOptions() {
     this.statType = statTypes.STR;
     this.die = new Die();
     this.modifier = 0;
@@ -255,6 +265,7 @@ function Die(count, sides) {
         '<input type="number" class="xshort-text" min="0" max="100" ng-model="weapon.options.modifier">' +
         '<label class="phrase" ng-bind="$ctrl.getStatMod(weapon.options)"></label>' +
         '</label>' +
+        '<label class="table-cell"><weapon-die weapon="weapon" stat="$ctrl.getStat(weapon.options)"></weapon-die></label>' +
         '</div>' +
         '</div>',
         bindings: {
@@ -268,13 +279,17 @@ function Die(count, sides) {
 
         $ctrl.statTypes = getStatTypes();
 
+        $ctrl.getStat = getStat;
         $ctrl.getStatMod = getStatMod;
 
-        function getStatMod(options) {
-            var stat = arrayUtil.find($ctrl.stats, function (stat) {
+        function getStat(options) {
+            return arrayUtil.find($ctrl.stats, function (stat) {
                 return stat.name === options.statType;
             });
+        }
 
+        function getStatMod(options) {
+            var stat = getStat(options);
             if(!stat) {
                 return '';
             }
@@ -286,6 +301,69 @@ function Die(count, sides) {
 
             return '+ {0}'.format(calculatedMod);
         }
+    }
+})();(function () {
+    angular.module('characterSheet').component('weaponDie', {
+        controller: WeaponDieController,
+        template: '<button type="button" class="die-btn" ng-click="$ctrl.roll()">Roll</button>' +
+        '<div class="die-results-container" ng-show="$ctrl.showResults">' +
+        '<p class="die-results" ng-bind="$ctrl.results"></p>' +
+        '<button type="button" class="confirm-btn" ng-click="$ctrl.roll()">Re-Roll</button>' +
+        '<button type="button" ng-click="$ctrl.showResults = false">Close</button>' +
+        '</div>',
+        bindings: {
+            stat: '<',
+            weapon: '<'
+        }
+    });
+
+    function WeaponDieController() {
+        var $ctrl = this;
+
+        $ctrl.results = '';
+        $ctrl.showResults = false;
+
+        $ctrl.roll = roll;
+
+        function roll() {
+            $ctrl.results = '';
+            var stat = $ctrl.stat;
+            var weapon = $ctrl.weapon;
+
+            if(!stat || !weapon) {
+                return;
+            }
+
+            var results = Die.prototype.roll.call(weapon.options.die);
+            var calculatedMod = statModifiers.calculateMod(stat.value);
+            var weaponMod = weapon.options.modifier;
+            var total = results + calculatedMod + weaponMod;
+
+            var weaponModDesc = getCalculationDescription(weaponMod, 'Bonus');
+            var calculatedModDesc = getCalculationDescription(calculatedMod, $ctrl.stat.name);
+            var calculation = '';
+
+            var calculations = [results];
+            if(weaponModDesc) {
+                calculations.push(weaponModDesc);
+            }
+
+            if(calculatedModDesc) {
+                calculations.push(calculatedModDesc);
+            }
+
+            if(calculations.length > 1) {
+                calculation = ' ({0})'.format(calculations.join(' + '));
+            }
+
+            $ctrl.results = '{0}: {1} damage{2}'.format(weapon.name, total, calculation);
+            $ctrl.showResults = true;
+        }
+
+        function getCalculationDescription(value, name) {
+            return value ? '{0} [{1}]'.format(value, name) : '';
+        }
+
     }
 })();(function () {
     angular.module('characterSheet').component('characterItem', {

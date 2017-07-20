@@ -24,6 +24,7 @@
         '<input type="number" class="xshort-text" min="0" max="100" ng-model="weapon.options.modifier">' +
         '<label class="phrase" ng-bind="$ctrl.getStatMod(weapon.options)"></label>' +
         '</label>' +
+        '<label class="table-cell"><weapon-die weapon="weapon" stat="$ctrl.getStat(weapon.options)"></weapon-die></label>' +
         '</div>' +
         '</div>',
         bindings: {
@@ -37,13 +38,17 @@
 
         $ctrl.statTypes = getStatTypes();
 
+        $ctrl.getStat = getStat;
         $ctrl.getStatMod = getStatMod;
 
-        function getStatMod(options) {
-            var stat = arrayUtil.find($ctrl.stats, function (stat) {
+        function getStat(options) {
+            return arrayUtil.find($ctrl.stats, function (stat) {
                 return stat.name === options.statType;
             });
+        }
 
+        function getStatMod(options) {
+            var stat = getStat(options);
             if(!stat) {
                 return '';
             }

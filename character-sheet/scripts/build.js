@@ -13,6 +13,7 @@ concat([
     'app/components/characterSheet/characterInventory.component.js',
     'app/components/characterSheet/statBlock.component.js',
     'app/components/characterSheet/weaponBlock.component.js',
+    'app/components/characterSheet/weaponDie.component.js',
     'app/components/characterSheet/characterItem.component.js',
     'app/components/characterSheet/characterSheet.component.js'
 ], 'app/character-sheet.js', function (err) {

@@ -13,8 +13,17 @@ button {
     font-size: 1.2rem; }
   button.remove-btn {
     background-color: #ff5735; }
-  button:not([type=button]) {
+  button:not([type=button]), button .confirm-btn {
     background-color: #45719d; }
+
+.die-results-container {
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: #d4d4d4 0 3px 2px 1px;
+  background-color: white; }
 
 .character-form .character-sheet {
   margin: 0 10px;
