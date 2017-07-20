@@ -1,5 +1,16 @@
 var arrayUtil = {
 
+    find: function (array, test) {
+        for (var i = 0; i < array.length; i++) {
+            var obj = array[i];
+            if(test(obj, i, array)) {
+                return obj;
+            }
+        }
+
+        return null;
+    },
+
     removeObj: function (array, object) {
         var index = -1;
         for (var i = 0; i < array.length; i++) {
@@ -20,4 +31,13 @@ var arrayUtil = {
     }
 
 };
+
+if (!String.prototype.format) {
+    String.prototype.format = function () {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] !== 'undefined' ? args[number] : match;
+        });
+    };
+}
 

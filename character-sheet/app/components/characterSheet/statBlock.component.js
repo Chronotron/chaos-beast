@@ -18,11 +18,7 @@
         $ctrl.calculateMod = calculateMod;
 
         function calculateMod(value) {
-            if (!value) {
-                return 0;
-            }
-
-            return Math.floor((value - 10) / 2);
+            return statModifiers.calculateMod(value);
         }
     }
 

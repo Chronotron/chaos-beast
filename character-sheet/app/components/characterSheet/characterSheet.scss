@@ -5,6 +5,14 @@
     padding: 10px;
     background-color: $defaultBackground;
 
+    .content-block {
+      display: flex;
+
+      .content-item-double {
+        flex-grow: 2;
+      }
+    }
+
     .inventory-controls {
       margin-bottom: 5px;
     }

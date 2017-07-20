@@ -20,6 +20,10 @@ button {
   margin: 0 10px;
   padding: 10px;
   background-color: #ebebeb; }
+  .character-form .character-sheet .content-block {
+    display: flex; }
+    .character-form .character-sheet .content-block .content-item-double {
+      flex-grow: 2; }
   .character-form .character-sheet .inventory-controls {
     margin-bottom: 5px; }
   .character-form .character-sheet .stat-block {
@@ -36,6 +40,8 @@ button {
       text-align: left;
       padding-left: 5px; }
 
+form .phrase {
+  margin: auto 5px; }
 form .form-inputs {
   text-align: right;
   padding: 5px;
@@ -74,11 +80,17 @@ form select {
 
 .table {
   display: table; }
+  .table .table-header-group {
+    display: table-header-group; }
   .table .table-row {
     display: table-row; }
     .table .table-row .table-cell, .table .table-row .table-header {
       display: table-cell;
       padding: 3px 5px 3px 3px; }
+      .table .table-row .table-cell.empty-table, .table .table-row .table-header.empty-table {
+        font-style: italic;
+        font-size: 0.7rem;
+        color: #454456; }
   .table .table-caption {
     display: table-caption; }
 

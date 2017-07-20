@@ -11,7 +11,10 @@
         '<div class="character-sheet">' +
         '<character-info character="$ctrl.character"></character-info>' +
         '<hr>' +
-        '<stat-block stats="$ctrl.character.stats"></stat-block>' +
+        '<div class="content-block">' +
+        '<stat-block class="content-item-double" stats="$ctrl.character.stats"></stat-block>' +
+        '<weapon-block class="content-item" stats="$ctrl.character.stats" weapons="$ctrl.getWeapons()"></weapon-block>' +
+        '</div>' +
         '<hr>' +
         '<character-inventory inventory="$ctrl.character.inventory"></character-inventory>' +
         '</div>' +
@@ -22,16 +25,30 @@
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
+
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
+        var weapons = [];
+
         $ctrl.cancel = cancel;
+        $ctrl.getWeapons = getWeapons;
         $ctrl.saveCharacter = saveCharacter;
 
         function cancel() {
             CharacterService.getCharacter($ctrl.character.id).then(function (character) {
                 $ctrl.character = character;
             });
+        }
+
+        function getWeapons() {
+            weapons.length = 0;
+            $ctrl.character.inventory.items.forEach(function (item) {
+                if (item.type === CharacterItem.types.WEAPON) {
+                    weapons.push(item);
+                }
+            });
+            return weapons;
         }
 
         function saveCharacter() {

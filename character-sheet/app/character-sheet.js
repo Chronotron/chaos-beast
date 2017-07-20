@@ -1,5 +1,16 @@
 var arrayUtil = {
 
+    find: function (array, test) {
+        for (var i = 0; i < array.length; i++) {
+            var obj = array[i];
+            if(test(obj, i, array)) {
+                return obj;
+            }
+        }
+
+        return null;
+    },
+
     removeObj: function (array, object) {
         var index = -1;
         for (var i = 0; i < array.length; i++) {
@@ -21,12 +32,52 @@ var arrayUtil = {
 
 };
 
-function CharacterItem() {
+if (!String.prototype.format) {
+    String.prototype.format = function () {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] !== 'undefined' ? args[number] : match;
+        });
+    };
+}
+
+var statTypes = {
+    STR: 'STR',
+    DEX: 'DEX',
+    CON: 'CON',
+    INT: 'INT',
+    WIS: 'WIS',
+    CHA: 'CHA'
+};
+
+function getEnumerationToArray(enumeration) {
+    var types = [];
+    for (var prop in enumeration) {
+        if (!enumeration.hasOwnProperty(prop)) {
+            continue;
+        }
+        types.push(enumeration[prop]);
+    }
+    return types
+}
+
+function getStatTypes() {
+    return getEnumerationToArray(statTypes);
+}var statModifiers = {
+    calculateMod: function (value) {
+        if (!value) {
+            return 0;
+        }
+
+        return Math.floor((value - 10) / 2);
+    }
+};function CharacterItem() {
     this.count = 0;
     this.desc = '';
     this.name = '';
     this.type = CharacterItem.types.MISC;
     this.weight = 0.1;
+    this.options = null;
 }
 
 CharacterItem.types = {
@@ -35,16 +86,16 @@ CharacterItem.types = {
 };
 
 CharacterItem.getTypes = function () {
-    var types = [];
-    for (var prop in CharacterItem.types) {
-        if (!CharacterItem.types.hasOwnProperty(prop)) {
-            continue;
-        }
-        types.push(CharacterItem.types[prop]);
-    }
-    return types
+    return getEnumerationToArray(CharacterItem.types);
 };
-(function () {
+function Die(count, sides) {
+    this.count = count || 1;
+    this.sides = sides || 6;
+}function WeaponOptions() {
+    this.statType = statTypes.STR;
+    this.die = new Die();
+    this.modifier = 0;
+}(function () {
     angular.module('characterSheet', [
         'ngRoute'
     ]).config(['$routeProvider', function ($routeProvider) {
@@ -56,8 +107,6 @@ CharacterItem.getTypes = function () {
                 }
             }
         });
-
-        $routeProvider.otherwise({redirectTo: '/Character/1'});
     }]);
 
 })();
@@ -175,22 +224,76 @@ CharacterItem.getTypes = function () {
         $ctrl.calculateMod = calculateMod;
 
         function calculateMod(value) {
-            if (!value) {
-                return 0;
-            }
-
-            return Math.floor((value - 10) / 2);
+            return statModifiers.calculateMod(value);
         }
     }
 
 })();
 (function () {
+    angular.module('characterSheet').component('weaponBlock', {
+        controller: WeaponBlockController,
+        template: '' +
+        '<div class="table weapon-block">' +
+        '<div class="table-row">' +
+        '<label class="table-header">Name</label>' +
+        '<label class="table-header">Stat</label>' +
+        '<label class="table-header">Damage</label>' +
+        '</div>' +
+        '<div class="table-row" ng-hide="$ctrl.weapons.length">' +
+        '<label class="table-cell empty-table">No Weapons</label>' +
+        '</div>' +
+        '<div class="table-row" ng-repeat="weapon in $ctrl.weapons">' +
+        '<label class="table-cell" ng-bind="weapon.name"></label>' +
+        '<label>' +
+        '<select ng-model="weapon.options.statType" ng-options="statType for statType in $ctrl.statTypes"></select>' +
+        '</label>' +
+        '<label class="table-cell">' +
+        '<input type="number" class="xshort-text" min="1" max="100" ng-model="weapon.options.die.count">' +
+        '<label class="phrase">d</label>' +
+        '<input type="number" class="xshort-text" min="1" max="100" ng-model="weapon.options.die.sides">' +
+        '<label class="phrase">+</label>' +
+        '<input type="number" class="xshort-text" min="0" max="100" ng-model="weapon.options.modifier">' +
+        '<label class="phrase" ng-bind="$ctrl.getStatMod(weapon.options)"></label>' +
+        '</label>' +
+        '</div>' +
+        '</div>',
+        bindings: {
+            stats: '<',
+            weapons: '<'
+        }
+    });
+
+    function WeaponBlockController() {
+        var $ctrl = this;
+
+        $ctrl.statTypes = getStatTypes();
+
+        $ctrl.getStatMod = getStatMod;
+
+        function getStatMod(options) {
+            var stat = arrayUtil.find($ctrl.stats, function (stat) {
+                return stat.name === options.statType;
+            });
+
+            if(!stat) {
+                return '';
+            }
+
+            var calculatedMod = statModifiers.calculateMod(stat.value);
+            if(!calculatedMod) {
+                return '';
+            }
+
+            return '+ {0}'.format(calculatedMod);
+        }
+    }
+})();(function () {
     angular.module('characterSheet').component('characterItem', {
         controller: CharacterItemController,
         template: '' +
         '<span class="table-cell"><input class="short-text" ng-model="$ctrl.item.name" title="{{$ctrl.item.name}}" ng-maxlength="25"></span>' +
         '<span class="table-cell"><input class="med-text" ng-model="$ctrl.item.desc" title="{{$ctrl.item.desc}}" ng-maxlength="100"></span>' +
-        '<span class="table-cell"><select ng-model="$ctrl.item.type" ng-options="itemType for itemType in $ctrl.itemTypes"></select></span>' +
+        '<span class="table-cell"><select ng-model="$ctrl.item.type" ng-options="itemType for itemType in $ctrl.itemTypes" ng-change="$ctrl.onTypeChange()"></select></span>' +
         '<span class="table-cell"><input type="number" class="xshort-text" ng-model="$ctrl.item.count" min="0" max="999" step="1"></span>' +
         '<span class="table-cell"><input type="number" class="xshort-text" ng-model="$ctrl.item.weight" min="0" max="999" step="0.01"></span>' +
         '<span class="table-cell">' +
@@ -207,7 +310,17 @@ CharacterItem.getTypes = function () {
 
         $ctrl.itemTypes = CharacterItem.getTypes();
 
+        $ctrl.onTypeChange = onTypeChange;
         $ctrl.removeItem = removeItem;
+
+        function onTypeChange() {
+            var item = $ctrl.item;
+            if (!item.type === CharacterItem.types.WEAPON) {
+                item.options = null;
+                return;
+            }
+            item.options = new WeaponOptions();
+        }
 
         function removeItem() {
             if (!$ctrl.inventory) {
@@ -232,7 +345,10 @@ CharacterItem.getTypes = function () {
         '<div class="character-sheet">' +
         '<character-info character="$ctrl.character"></character-info>' +
         '<hr>' +
-        '<stat-block stats="$ctrl.character.stats"></stat-block>' +
+        '<div class="content-block">' +
+        '<stat-block class="content-item-double" stats="$ctrl.character.stats"></stat-block>' +
+        '<weapon-block class="content-item" stats="$ctrl.character.stats" weapons="$ctrl.getWeapons()"></weapon-block>' +
+        '</div>' +
         '<hr>' +
         '<character-inventory inventory="$ctrl.character.inventory"></character-inventory>' +
         '</div>' +
@@ -243,16 +359,30 @@ CharacterItem.getTypes = function () {
     });
 
     CharacterSheetController.$inject = ['CharacterService'];
+
     function CharacterSheetController(CharacterService) {
         var $ctrl = this;
 
+        var weapons = [];
+
         $ctrl.cancel = cancel;
+        $ctrl.getWeapons = getWeapons;
         $ctrl.saveCharacter = saveCharacter;
 
         function cancel() {
             CharacterService.getCharacter($ctrl.character.id).then(function (character) {
                 $ctrl.character = character;
             });
+        }
+
+        function getWeapons() {
+            weapons.length = 0;
+            $ctrl.character.inventory.items.forEach(function (item) {
+                if (item.type === CharacterItem.types.WEAPON) {
+                    weapons.push(item);
+                }
+            });
+            return weapons;
         }
 
         function saveCharacter() {

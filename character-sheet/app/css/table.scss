@@ -2,12 +2,22 @@
 .table {
   display: table;
 
+  .table-header-group {
+    display: table-header-group;
+  }
+
   .table-row {
     display: table-row;
 
     .table-cell, .table-header {
       display: table-cell;
       padding: 3px 5px 3px 3px;
+
+      &.empty-table {
+        font-style: italic;
+        font-size: 0.7rem;
+        color: lighten($defaultTextColor, 10);
+      }
     }
   }
 

@@ -10,8 +10,6 @@
                 }
             }
         });
-
-        $routeProvider.otherwise({redirectTo: '/Character/1'});
     }]);
 
 })();
