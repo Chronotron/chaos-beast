@@ -1,0 +1,8 @@
+.table {
+  display: table; }
+  .table .table-row {
+    display: table-row; }
+    .table .table-row .table-cell {
+      display: table-caption; }
+
+/*# sourceMappingURL=table.css.map */

@@ -1,6 +1,7 @@
 //region Base Colors
 
-$buttonColor: #959595;
+$addColor: #6fc042;
+$buttonColor: #989898;
 $confirmButtonColor: #45719d;
 $defaultBackground: #ebebeb;
 $defaultTextColor: #2e2d39;
@@ -11,5 +12,6 @@ $errorColor: #ff5735;
 //region Derived Colors
 
 $borderColor: darken($defaultBackground, 10);
+$removeColor: $errorColor;
 
 //endregion

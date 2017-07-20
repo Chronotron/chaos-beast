@@ -5,6 +5,10 @@
     padding: 10px;
     background-color: $defaultBackground;
 
+    .inventory-controls {
+      margin-bottom: 5px;
+    }
+
     .stat-block {
       margin: 5px 0;
       display: flex;

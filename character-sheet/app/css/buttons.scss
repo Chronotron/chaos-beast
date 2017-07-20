@@ -1,0 +1,25 @@
+button {
+  margin-right: 5px;
+  background-color: $buttonColor;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 2px solid $borderColor;
+
+  &.add-btn {
+    background-color: $addColor;
+    font-size: 1.2rem;
+  }
+
+  &.remove-btn {
+    background-color: $removeColor;
+  }
+
+  &:not([type=button]) {
+    background-color: $confirmButtonColor;
+  }
+}
+
