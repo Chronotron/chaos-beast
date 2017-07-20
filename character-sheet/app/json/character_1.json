@@ -9,11 +9,11 @@
     },
     {
       "name": "DEX",
-      "value": 12
+      "value": 10
     },
     {
       "name": "CON",
-      "value": 12
+      "value": 16
     },
     {
       "name": "INT",
@@ -21,7 +21,7 @@
     },
     {
       "name": "WIS",
-      "value": 12
+      "value": 18
     },
     {
       "name": "CHA",

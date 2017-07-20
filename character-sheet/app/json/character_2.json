@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "name": "Alton Spoons",
+  "lastUpdated": null,
+  "stats": [
+    {
+      "name": "STR",
+      "value": 10
+    },
+    {
+      "name": "DEX",
+      "value": 14
+    },
+    {
+      "name": "CON",
+      "value": 10
+    },
+    {
+      "name": "INT",
+      "value": 18
+    },
+    {
+      "name": "WIS",
+      "value": 16
+    },
+    {
+      "name": "CHA",
+      "value": 14
+    }
+  ],
+  "inventory": {
+    "items": [
+      {
+        "name": "Necromancer's Staff",
+        "desc": "A rather gauche looking staff with a skull on top",
+        "type": "Weapon",
+        "count": 1,
+        "weight": 10.0,
+        "options": {
+          "die": {"count": 1, "sides": 6},
+          "modifier": 0,
+          "statType": "STR"
+        }
+      }
+    ]
+  }
+}

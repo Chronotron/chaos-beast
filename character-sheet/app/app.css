@@ -13,7 +13,7 @@ button {
     font-size: 1.2rem; }
   button.remove-btn {
     background-color: #ff5735; }
-  button:not([type=button]), button .confirm-btn {
+  button:not([type=button]), button.confirm-btn {
     background-color: #45719d; }
 
 .die-results-container {
