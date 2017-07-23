@@ -50,8 +50,36 @@ class FrequencyGroup(object):
 
 # region Functions
 
-def lower_bound(value):
-    return value - 0.5
+def alpha_to_table(cl, precision=2):
+    percent = 1.0 - cl
+    percent = percent / precision
+    return 1.0 - percent
+
+
+def bound(value, r, direction=1):
+    return value + (r * direction)
+
+
+def find_fractile(subscript, parts, samplesize):
+    return math.ceil((subscript / parts) * samplesize)
+
+
+def find_sample_size(z, precision, error):
+    return (z ** 2) * precision / (error ** 2)
+
+
+def lower_bound(value, r=0.5):
+    return bound(value, r, -1)
+
+
+def margin_error(z_alpha, p, n):
+    q = 1.0 - p
+    inner = (p * q) / n
+    return z_alpha * math.sqrt(inner)
+
+
+def margin_error_t(t_alpha, n, s):
+    return t_alpha * (s / math.sqrt(n))
 
 
 def mean(values):
@@ -78,6 +106,12 @@ def midpoint(values):
     return (lower_bound(values[0]) + upper_bound(values[1])) / 2
 
 
+def mu(values):
+    val_range = stat_range(values)
+    sum_x = sum(values)
+    return sum_x / val_range
+
+
 def parse_freqeuncy_group(raw):
     return FrequencyGroup(raw)
 
@@ -86,8 +120,21 @@ def percentile_value(valuesLess, totalValues, parts=100):
     return valuesLess / totalValues * parts
 
 
-def find_fractile(subscript, parts, samplesize):
-    return math.ceil((subscript / parts) * samplesize)
+def pop_standard_deviation_comp(values):
+    val_range = stat_range(values)
+    _mu = mu(values)
+    sum_x_power_2 = power_sum(values)
+    left_side = sum_x_power_2 / val_range
+    right_side = math.pow(_mu, 2)
+    return math.sqrt(left_side - right_side)
+
+
+def range_rule_thumb(hi, lo):
+    return (hi - lo) / 4.0
+
+
+def required_sample_size(z_alpha, s, e):
+    return ((z_alpha * s) / e) ** 2
 
 
 def power_sum(values, power=2):
@@ -119,23 +166,8 @@ def standard_deviation_comp(values):
     return math.sqrt(left_and_right / bottom())
 
 
-def pop_standard_deviation_comp(values):
-    val_range = stat_range(values)
-    _mu = mu(values)
-    sum_x_power_2 = power_sum(values)
-    left_side = sum_x_power_2 / val_range
-    right_side = math.pow(_mu, 2)
-    return math.sqrt(left_side - right_side)
-
-
-def mu(values):
-    val_range = _stat_range(values)
-    sum_x = sum(values)
-    return sum_x / val_range
-
-
-def upper_bound(value):
-    return value + 0.5
+def upper_bound(value, r=0.5):
+    return bound(value, r)
 
 
 def variance(values):
